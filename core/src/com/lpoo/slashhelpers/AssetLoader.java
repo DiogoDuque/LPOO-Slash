@@ -3,6 +3,7 @@ package com.lpoo.slashhelpers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Texture.TextureFilter;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 /**
@@ -12,8 +13,10 @@ public class AssetLoader {
 
     public static Texture texture;
     public static TextureRegion ball, grass;
+    public static Sprite ballTest;
 
     public static void load() {
+        ballTest=new Sprite(new Texture("orange.png"));
         texture = new Texture(Gdx.files.internal("texture.png"));
         texture.setFilter(TextureFilter.Nearest, TextureFilter.Nearest);
 
