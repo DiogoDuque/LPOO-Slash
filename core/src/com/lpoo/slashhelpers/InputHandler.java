@@ -3,15 +3,17 @@ package com.lpoo.slashhelpers;
 import com.badlogic.gdx.InputProcessor;
 import com.lpoo.gameobjects.Ball;
 
+import java.util.ArrayList;
+
 /**
  * Created by Diogo on 27-04-2016.
  */
 public class InputHandler implements InputProcessor {
-    private Ball ball;
+    private ArrayList<Ball> balls;
 
-    public InputHandler(Ball ball)
+    public InputHandler(ArrayList<Ball> balls)
     {
-        this.ball=ball;
+        this.balls=balls;
     }
 
     @Override

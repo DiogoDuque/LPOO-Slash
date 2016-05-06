@@ -8,7 +8,17 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.lpoo.gameworld.GameRenderer;
 
 /**
- * Created by Diogo on 05-05-2016.
+ * Created with 4 vertices with this structure:
+ * +-------------------------
+ * |          5 |
+ * |    (Pt1)   |   (Pt4)
+ * |  5         |        95
+ * |------------+-----------      Centro(50.5,50.5)
+ * |            |
+ * |    (Pt2)   |   (Pt3)
+ * |         95 |
+ * In order to create something that "ressembles" a box and to avoid more complex calculations,
+ * the vertices must be created in different quadrants.
  */
 public class GameArea {
 

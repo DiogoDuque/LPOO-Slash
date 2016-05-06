@@ -17,8 +17,6 @@ public class Ball {
     private BodyDef bodyDef;
     private Body body;
 
-    private int radius;
-
     /**
      * Constructor.
      * @param xPos x component of the ball's position.
@@ -26,9 +24,7 @@ public class Ball {
      * @param radius radius of the ball.
      * @param world World in which this ball was created.
      */
-    public Ball(float xPos, float yPos, int radius, World world) {
-        this.radius = radius;
-
+    public Ball(float xPos, float yPos, World world) {
         //criar body
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody; //é dinamico (sofre acao de forcas)
@@ -54,20 +50,10 @@ public class Ball {
      */
     private void setRandomMovement()
     {
-        //handle the values of the x and y components of velocity
-        float velocity = 30;
         Random rand = new Random();
-        float vx = velocity*rand.nextFloat();
-        float vy=(float)Math.sqrt(Math.pow(velocity,2) - Math.pow(vx,2));
-        //handles the sector for which to send the ball
-        int direction = rand.nextInt(4);
-        switch(direction)
-        {
-            case 0: bodyDef.linearVelocity.set(vx,vy); break;
-            case 1: bodyDef.linearVelocity.set(-vx,vy); break;
-            case 2: bodyDef.linearVelocity.set(vx,-vy); break;
-            case 3: bodyDef.linearVelocity.set(-vx,-vy); break;
-        }
+        double rad = 2*Math.PI*rand.nextFloat();
+        float x=(float)Math.cos(rad), y=(float)Math.sin(rad);
+        bodyDef.linearVelocity.set(velocity*x,velocity*y);
     }
 
     /**
@@ -83,14 +69,15 @@ public class Ball {
     public float getY() { return bodyDef.position.y; }
 
     /**
-     *
+     * The conversion is made using GameRenderer.resizeY().
      * @return ball's radius.
      */
-    public int getRadius() { return radius; }
+    public static float getRadius() { return GameRenderer.resizeY(radius); }
 
     /**
      *
      * @return ball's Body.
      */
     public Body getBody() {return body;}
+
 }
