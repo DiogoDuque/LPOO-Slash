@@ -16,6 +16,7 @@ import java.util.Random;
 public class Ball {
     private BodyDef bodyDef;
     private Body body;
+    private final static int radius = 1;
 
     /**
      * Constructor.
@@ -50,6 +51,7 @@ public class Ball {
      */
     private void setRandomMovement()
     {
+        float velocity = 60;
         Random rand = new Random();
         double rad = 2*Math.PI*rand.nextFloat();
         float x=(float)Math.cos(rad), y=(float)Math.sin(rad);

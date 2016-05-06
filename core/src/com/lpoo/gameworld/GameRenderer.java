@@ -12,6 +12,8 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.lpoo.gameobjects.Ball;
 import com.lpoo.gameobjects.GameArea;
 
+import java.util.ArrayList;
+
 /**
  * Created by Diogo on 26-04-2016.
  */
@@ -22,7 +24,7 @@ public class GameRenderer {
     private SpriteBatch batcher;
 
     private GameWorld myWorld;
-    private Ball ball;
+    private ArrayList<Ball> balls;
     private GameArea gameArea;
 
     Box2DDebugRenderer debugRenderer;
@@ -32,7 +34,8 @@ public class GameRenderer {
         myWorld = world;
         cam = new OrthographicCamera();
         cam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        ball = myWorld.getBall();
+        //cam.setToOrtho(true, 176, 100);
+        balls = myWorld.getBalls();
         gameArea=myWorld.getGameArea();
 
         batcher = new SpriteBatch();
@@ -67,15 +70,16 @@ public class GameRenderer {
         }
 
         //Draw ball
-        shapeRenderer.circle(ball.getBody().getPosition().x, ball.getBody().getPosition().y, ball.getRadius());
+        for(int i=0; i<balls.size(); i++)
+            shapeRenderer.circle(balls.get(i).getBody().getPosition().x, balls.get(i).getBody().getPosition().y, Ball.getRadius());
 
         // End ShapeRenderer
         shapeRenderer.end();
 
         // Begin SpriteBatch
-        /*batcher.setProjectionMatrix(cam.combined);
+        batcher.setProjectionMatrix(cam.combined);
         debugMatrix = batcher.getProjectionMatrix().cpy().scale(resizeX(1),resizeY(1),1);
-        batcher.begin();
+        /*batcher.begin();
 
         // The ball needs transparency, so we enable that again.
         batcher.enableBlending();
@@ -85,10 +89,9 @@ public class GameRenderer {
                 ball.getX()*dims.x/100, ball.getY()*dims.y/100, ball.getRadius()*dims.x/100, ball.getRadius()*dims.y/100);
 
         // End SpriteBatch
-        batcher.end();
+        batcher.end();*/
 
-        debugRenderer.render(myWorld.getWorld(), debugMatrix);
-*/    }
+    }
 
     public static Vector2 resize(Vector2 vec)
     {

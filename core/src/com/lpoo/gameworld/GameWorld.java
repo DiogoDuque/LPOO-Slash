@@ -34,6 +34,9 @@ public class GameWorld {
         for(int i=0; i<n; i++)
         {
             //(x,y) entre [5,5] e [95,95]
+            float x=rand.nextInt(91)+5;
+            float y=rand.nextInt(91)+5;
+            /*Vector2[] pts = gameArea.getPoints();
             //verificar se ultrapassa alguma linha
             if(y<=50) //baixo
             {
@@ -78,8 +81,10 @@ public class GameWorld {
                     i--;
                     continue;
                 }
+            }//*/
             //se passou em todas as verificacoes, pode ser criado o objeto
             balls.add(new Ball(x, y, world));
+            System.out.println("Ball: x="+x+", y="+y);
         }
     }
 
