@@ -19,6 +19,13 @@ public class Ball {
 
     private int radius;
 
+    /**
+     * Constructor.
+     * @param xPos x component of the ball's position.
+     * @param yPos y component of the ball's position.
+     * @param radius radius of the ball.
+     * @param world World in which this ball was created.
+     */
     public Ball(float xPos, float yPos, int radius, World world) {
         this.radius = radius;
 
@@ -42,12 +49,17 @@ public class Ball {
 
     }
 
+    /**
+     * Will set the ball with a linearVelocity of 20 in a random direction
+     */
     private void setRandomMovement()
     {
+        //handle the values of the x and y components of velocity
         float velocity = 30;
         Random rand = new Random();
         float vx = velocity*rand.nextFloat();
         float vy=(float)Math.sqrt(Math.pow(velocity,2) - Math.pow(vx,2));
+        //handles the sector for which to send the ball
         int direction = rand.nextInt(4);
         switch(direction)
         {
@@ -58,11 +70,27 @@ public class Ball {
         }
     }
 
+    /**
+     *
+     * @return x component of the ball's position.
+     */
     public float getX() { return bodyDef.position.x; }
 
+    /**
+     *
+     * @return y component of the ball's position.
+     */
     public float getY() { return bodyDef.position.y; }
 
+    /**
+     *
+     * @return ball's radius.
+     */
     public int getRadius() { return radius; }
 
+    /**
+     *
+     * @return ball's Body.
+     */
     public Body getBody() {return body;}
 }
