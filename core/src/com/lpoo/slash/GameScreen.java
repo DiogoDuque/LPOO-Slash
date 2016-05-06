@@ -29,7 +29,7 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         runTime += delta;
-        //world.update(delta);
+        world.update(delta);
         renderer.render(runTime);
     }
 

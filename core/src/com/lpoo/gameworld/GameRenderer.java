@@ -45,8 +45,7 @@ public class GameRenderer {
 
     public void render(float runTime) {
         cam.update();
-        myWorld.getWorld().step(1f/60f, 6, 2);
-        ball.getBody().applyTorque(0,true);
+
         // Fill the entire screen with black, to prevent potential flickering.
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

@@ -1,6 +1,5 @@
 package com.lpoo.gameobjects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -8,6 +7,8 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.lpoo.gameworld.GameRenderer;
+
+import java.util.Random;
 
 /**
  * Created by Diogo on 26-04-2016.
@@ -25,7 +26,7 @@ public class Ball {
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody; //é dinamico (sofre acao de forcas)
         bodyDef.position.set(GameRenderer.resize(new Vector2(xPos,yPos)));
-        bodyDef.linearVelocity.set(-20,0);
+        setRandomMovement();
         body = world.createBody(bodyDef);
 
         //criar forma de caixa...
@@ -41,12 +42,20 @@ public class Ball {
 
     }
 
-    /*public void update(float delta) {
-        position.add(velocity.cpy().scl(delta));
-    }*/
-
-    public void onClick() {
-        Gdx.app.log("Ball","OnClick");
+    private void setRandomMovement()
+    {
+        float velocity = 30;
+        Random rand = new Random();
+        float vx = velocity*rand.nextFloat();
+        float vy=(float)Math.sqrt(Math.pow(velocity,2) - Math.pow(vx,2));
+        int direction = rand.nextInt(4);
+        switch(direction)
+        {
+            case 0: bodyDef.linearVelocity.set(vx,vy); break;
+            case 1: bodyDef.linearVelocity.set(-vx,vy); break;
+            case 2: bodyDef.linearVelocity.set(vx,-vy); break;
+            case 3: bodyDef.linearVelocity.set(-vx,-vy); break;
+        }
     }
 
     public float getX() { return bodyDef.position.x; }

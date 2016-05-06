@@ -24,8 +24,8 @@ public class GameWorld {
     }
 
     public void update(float delta) {
-        //ball.update(delta);
-        System.out.println("Ball - update called");
+        world.step(1f/60f, 6, 2);
+        ball.getBody().applyTorque(0,true);
     }
 
     public Ball getBall() {
