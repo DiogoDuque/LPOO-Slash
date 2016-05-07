@@ -31,7 +31,7 @@ public class GameArea {
         points[1]=GameRenderer.resize(p2);
         points[2]=GameRenderer.resize(p3);
         points[3]=GameRenderer.resize(p4);
-        System.out.println("p1="+points[0]+", p2="+points[1]+", p3="+points[2]+", p4="+points[3]);
+        System.out.println("GameArea::GameArea() - GameArea has vertices: p1="+points[0]+", p2="+points[1]+", p3="+points[2]+", p4="+points[3]);
 
         for(int i=0; i<4; i++) {
             Vector2 a,b;
@@ -50,7 +50,6 @@ public class GameArea {
             groundBox.setAsBox((float)distancePTP/2, 1);
             groundBody.setTransform(midPoint,(float)angle);
             groundBody.createFixture(groundBox, 0);
-            System.out.println("p"+i+": midPoint="+midPoint);
         }
     }
 

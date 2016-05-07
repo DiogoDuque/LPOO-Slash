@@ -22,7 +22,7 @@ public class GameWorld {
         Vector2 pt1=new Vector2(20,20),pt2=new Vector2(30,90),pt3=new Vector2(80,80),pt4=new Vector2(70,10);
         gameArea = new GameArea(pt1,pt2,pt3,pt4,world);
         balls = new ArrayList<Ball>();
-        createBalls(1);
+        createBalls(3);
     }
 
     /**
@@ -31,60 +31,33 @@ public class GameWorld {
     private void createBalls(int n)
     {
         Random rand = new Random();
+        Vector2[] pts = gameArea.getPoints();
+        Vector2 pt1=pts[0],pt2=pts[1],pt3=pts[2],pt4=pts[3];
         for(int i=0; i<n; i++)
         {
-            //(x,y) entre [5,5] e [95,95]
-            float x=rand.nextInt(91)+5;
-            float y=rand.nextInt(91)+5;
-            /*Vector2[] pts = gameArea.getPoints();
-            //verificar se ultrapassa alguma linha
-            if(y<=50) //baixo
-            {
-                float m = (pts[1].y-pts[2].y)/(pts[1].x-pts[2].x);
-                float b = pts[1].y - m*pts[1].x;
-                float yLimit = m*x+b;
-                if(y+Ball.getRadius()<=yLimit) //verificacao se passa o limite superior
-                {
-                    i--;
-                    continue;
-                }
-            }
-            else //cima
-            {
-                float m = (pts[0].y-pts[3].y)/(pts[0].x-pts[3].x);
-                float b = pts[0].y - m*pts[0].x;
-                float yLimit = m*x+b;
-                if(y-Ball.getRadius()>=yLimit)
-                {
-                    i--;
-                    continue;
-                }
-            }
-            if(x<=50) //esquerda
-            {
-                float m = (pts[0].y-pts[1].y)/(pts[0].x-pts[1].x);
-                float b = pts[0].y - m*pts[0].x;
-                float xLimit = (y-b)/m;
-                if(x-Ball.getRadius()<=xLimit)
-                {
-                    i--;
-                    continue;
-                }
-            }
-            else //direita
-            {
-                float m = (pts[2].y-pts[3].y)/(pts[2].x-pts[3].x);
-                float b = pts[2].y - m*pts[2].x;
-                float xLimit = (y-b)/m;
-                if(x+Ball.getRadius()>=xLimit)
-                {
-                    i--;
-                    continue;
-                }
-            }//*/
-            //se passou em todas as verificacoes, pode ser criado o objeto
+            float xMin,xMax,yMin,yMax;
+
+            if(pt1.x>pt2.x) //esq
+                xMin=pt1.x;
+            else xMin=pt2.x;
+
+            if(pt3.x<pt4.x) //dir
+                xMax=pt3.x;
+            else xMax=pt4.x;
+
+            if(pt1.y>pt4.y) //cima
+                yMin=pt1.y;
+            else yMin=pt4.y;
+
+            if(pt2.y<pt3.y) //baixo
+                yMax=pt2.y;
+            else yMax=pt3.y;
+
+            float x=(xMax-xMin)*rand.nextFloat()+xMin;
+            float y=(yMax-yMin)*rand.nextFloat()+yMin;
+
             balls.add(new Ball(x, y, world));
-            System.out.println("Ball: x="+x+", y="+y);
+            System.out.println("GameWorld::createBalls() - Ball created at ("+x+","+y+")");
         }
     }
 

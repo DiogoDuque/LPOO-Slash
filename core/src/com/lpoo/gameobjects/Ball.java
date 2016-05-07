@@ -17,25 +17,25 @@ public class Ball {
     private BodyDef bodyDef;
     private Body body;
     private final static int radius = 1;
+    private final static float velocity = 100;
 
     /**
      * Constructor.
      * @param xPos x component of the ball's position.
      * @param yPos y component of the ball's position.
-     * @param radius radius of the ball.
      * @param world World in which this ball was created.
      */
     public Ball(float xPos, float yPos, World world) {
         //criar body
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody; //é dinamico (sofre acao de forcas)
-        bodyDef.position.set(GameRenderer.resize(new Vector2(xPos,yPos)));
+        bodyDef.position.set(new Vector2(xPos,yPos));
         setRandomMovement();
         body = world.createBody(bodyDef);
 
         //criar forma de caixa...
         PolygonShape dynamicBox = new PolygonShape();
-        dynamicBox.setAsBox(radius,radius);
+        dynamicBox.setAsBox(GameRenderer.resizeY(radius),GameRenderer.resizeY(radius));
         //...e criar uma fixture atraves dessa forma
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = dynamicBox;
@@ -47,11 +47,10 @@ public class Ball {
     }
 
     /**
-     * Will set the ball with a linearVelocity of 20 in a random direction
+     * Will set the ball with a linearVelocity of 'velocity' in a random direction
      */
     private void setRandomMovement()
     {
-        float velocity = 60;
         Random rand = new Random();
         double rad = 2*Math.PI*rand.nextFloat();
         float x=(float)Math.cos(rad), y=(float)Math.sin(rad);
