@@ -6,7 +6,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.lpoo.gameworld.GameRenderer;
 
 /**
  * Created by Diogo on 09-05-2016.
@@ -15,8 +14,8 @@ public class Slasher {
     private Vector2 position;
     private BodyDef bodyDef;
     private Body body;
-    private final static int radius = 1;
-    private final static float velocity = 100;
+    private final static float radius = 2.5f;
+    private final static float velocity = 10;
 
 
     public Slasher(Vector2 pos) {
@@ -24,6 +23,10 @@ public class Slasher {
         bodyDef=null;
         position=pos;
     }
+
+    public Vector2 getPosition() {return position;}
+
+    public float getRadius() {return velocity;}
 
     //usar quando iniciar o movimento do slasher
     private void startedMoving(World world)
@@ -36,7 +39,7 @@ public class Slasher {
 
         //criar forma de caixa...
         PolygonShape dynamicBox = new PolygonShape();
-        dynamicBox.setAsBox(GameRenderer.resizeY(radius),GameRenderer.resizeY(radius));
+        dynamicBox.setAsBox(radius,radius);
         //...e criar uma fixture atraves dessa forma
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = dynamicBox;

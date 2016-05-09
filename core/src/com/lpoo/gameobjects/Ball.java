@@ -15,8 +15,8 @@ import java.util.Random;
 public class Ball {
     private BodyDef bodyDef;
     private Body body;
-    private final static int radius = 4;
-    private final static float velocity = 60;
+    private final static float radius = 2.5f;
+    private final static float velocity = 20;
 
     /**
      * Constructor.

@@ -21,7 +21,7 @@ public class GameWorld {
     public GameWorld() {
         //todos os objetos criados devem ter coordenadas entre (0,0) e (176,100), por razoes de scaling para o ecra
         world = new World(new Vector2(0, 0), false); //mundo
-        Vector2 pt1=new Vector2(20,20),pt2=new Vector2(30,90),pt3=new Vector2(80,80),pt4=new Vector2(70,10);
+        Vector2 pt1=new Vector2(40,40),pt2=new Vector2(60,180),pt3=new Vector2(160,160),pt4=new Vector2(140,20);
         gameArea = new GameArea(pt1,pt2,pt3,pt4,world);
         slasher = new Slasher(pt3);
         balls = new ArrayList<Ball>();
@@ -66,12 +66,10 @@ public class GameWorld {
 
     public void update(float delta) {
         world.step(1f/60f, 6, 2);
+
+        //update balls
         for(int i=0; i<balls.size(); i++)
             balls.get(i).getBody().applyTorque(0,true);
-    }
-
-    public ArrayList<Ball> getBalls() {
-        return balls;
     }
 
     public World getWorld() {
@@ -79,4 +77,10 @@ public class GameWorld {
     }
 
     public GameArea getGameArea() {return gameArea;}
+
+    public Slasher getSlasher() {return slasher;}
+
+    public ArrayList<Ball> getBalls() {
+        return balls;
+    }
 }

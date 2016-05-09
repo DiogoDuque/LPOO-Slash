@@ -11,6 +11,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.lpoo.gameobjects.Ball;
 import com.lpoo.gameobjects.GameArea;
+import com.lpoo.gameobjects.Slasher;
 
 import java.util.ArrayList;
 
@@ -24,8 +25,9 @@ public class GameRenderer {
     private SpriteBatch batcher;
 
     private GameWorld myWorld;
-    private ArrayList<Ball> balls;
     private GameArea gameArea;
+    private Slasher slasher;
+    private ArrayList<Ball> balls;
 
     Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
@@ -33,10 +35,11 @@ public class GameRenderer {
     public GameRenderer(GameWorld world) {
         myWorld = world;
         cam = new OrthographicCamera();
-        cam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        //cam.setToOrtho(true, 176, 100);
+        //cam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        cam.setToOrtho(true, 352, 200);
+        gameArea = myWorld.getGameArea();
+        slasher = myWorld.getSlasher();
         balls = myWorld.getBalls();
-        gameArea=myWorld.getGameArea();
 
         batcher = new SpriteBatch();
         batcher.setProjectionMatrix(cam.combined); // Attach batcher to camera
@@ -69,40 +72,21 @@ public class GameRenderer {
             shapeRenderer.line(a.x,a.y,b.x,b.y);
         }
 
-        //Draw ball
+        //Draw Slasher
+        shapeRenderer.setColor(255 / 255.0f, 255 / 255.0f, 0 / 255.0f, 1);
+        Vector2 slasherPos = slasher.getPosition();
+        shapeRenderer.circle(slasherPos.x,slasherPos.y,Ball.getRadius());
+
+        //Draw Balls
+        shapeRenderer.setColor(255 / 255.0f, 255 / 255.0f, 255 / 255.0f, 1); //same color as gameArea
         for(int i=0; i<balls.size(); i++)
             shapeRenderer.circle(balls.get(i).getBody().getPosition().x, balls.get(i).getBody().getPosition().y, Ball.getRadius());
 
         // End ShapeRenderer
         shapeRenderer.end();
 
-        // Begin SpriteBatch
+        /*// Begin SpriteBatch
         batcher.setProjectionMatrix(cam.combined);
-        debugMatrix = batcher.getProjectionMatrix().cpy().scale(resizeX(1),resizeY(1),1);
-        /*batcher.begin();
-
-        // The ball needs transparency, so we enable that again.
-        batcher.enableBlending();
-
-        // Pass in the runTime variable to get the current frame.
-        batcher.draw(AssetLoader.ballTest,
-                ball.getX()*dims.x/100, ball.getY()*dims.y/100, ball.getRadius()*dims.x/100, ball.getRadius()*dims.y/100);
-
-        // End SpriteBatch
-        batcher.end();*/
-
-    }
-
-    public static Vector2 resize(Vector2 vec)
-    {
-        return new Vector2(resizeX(vec.x),resizeY(vec.y));
-    }
-
-    public static float resizeX (float x) {
-        return x*Gdx.graphics.getWidth()/176;
-    }
-
-    public static float resizeY (float y) {
-        return y*Gdx.graphics.getHeight()/100;
+        debugMatrix = batcher.getProjectionMatrix().cpy().scale(resizeX(1),resizeY(1),1);*/
     }
 }

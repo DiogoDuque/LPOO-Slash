@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.lpoo.gameworld.GameRenderer;
 
 /**
  * Created with 4 vertices with this structure:
@@ -27,10 +26,10 @@ public class GameArea {
     public GameArea(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, World world)
     {
         points = new Vector2[4];
-        points[0]=GameRenderer.resize(p1);
-        points[1]=GameRenderer.resize(p2);
-        points[2]=GameRenderer.resize(p3);
-        points[3]=GameRenderer.resize(p4);
+        points[0]=p1;
+        points[1]=p2;
+        points[2]=p3;
+        points[3]=p4;
         System.out.println("GameArea::GameArea() - GameArea has vertices: p1="+points[0]+", p2="+points[1]+", p3="+points[2]+", p4="+points[3]);
 
         for(int i=0; i<4; i++) {
