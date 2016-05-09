@@ -6,7 +6,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-import com.lpoo.gameworld.GameRenderer;
 
 import java.util.Random;
 
@@ -16,8 +15,8 @@ import java.util.Random;
 public class Ball {
     private BodyDef bodyDef;
     private Body body;
-    private final static int radius = 1;
-    private final static float velocity = 100;
+    private final static int radius = 4;
+    private final static float velocity = 60;
 
     /**
      * Constructor.
@@ -35,7 +34,7 @@ public class Ball {
 
         //criar forma de caixa...
         PolygonShape dynamicBox = new PolygonShape();
-        dynamicBox.setAsBox(GameRenderer.resizeY(radius),GameRenderer.resizeY(radius));
+        dynamicBox.setAsBox(radius,radius);
         //...e criar uma fixture atraves dessa forma
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = dynamicBox;
@@ -73,7 +72,7 @@ public class Ball {
      * The conversion is made using GameRenderer.resizeY().
      * @return ball's radius.
      */
-    public static float getRadius() { return GameRenderer.resizeY(radius); }
+    public static float getRadius() { return radius; }
 
     /**
      *

@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.lpoo.gameobjects.Ball;
 import com.lpoo.gameobjects.GameArea;
+import com.lpoo.gameobjects.Slasher;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,6 +15,7 @@ import java.util.Random;
 public class GameWorld {
     private World world;
     private GameArea gameArea;
+    private Slasher slasher;
     private ArrayList<Ball> balls;
 
     public GameWorld() {
@@ -21,6 +23,7 @@ public class GameWorld {
         world = new World(new Vector2(0, 0), false); //mundo
         Vector2 pt1=new Vector2(20,20),pt2=new Vector2(30,90),pt3=new Vector2(80,80),pt4=new Vector2(70,10);
         gameArea = new GameArea(pt1,pt2,pt3,pt4,world);
+        slasher = new Slasher(pt3);
         balls = new ArrayList<Ball>();
         createBalls(3);
     }
