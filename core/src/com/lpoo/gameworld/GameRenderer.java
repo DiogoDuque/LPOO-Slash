@@ -32,11 +32,11 @@ public class GameRenderer {
     Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
 
-    public GameRenderer(GameWorld world) {
+    public GameRenderer(GameWorld world, Vector2 dimensions) {
         myWorld = world;
         cam = new OrthographicCamera();
         //cam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        cam.setToOrtho(true, 352, 200);
+        cam.setToOrtho(true, dimensions.x, dimensions.y);
         gameArea = myWorld.getGameArea();
         slasher = myWorld.getSlasher();
         balls = myWorld.getBalls();
@@ -74,8 +74,15 @@ public class GameRenderer {
 
         //Draw Slasher
         shapeRenderer.setColor(255 / 255.0f, 255 / 255.0f, 0 / 255.0f, 1);
-        Vector2 slasherPos = slasher.getPosition();
+        Vector2 slasherPos = slasher.getPosition(), fingerPos = slasher.getFinger();
         shapeRenderer.circle(slasherPos.x,slasherPos.y,Ball.getRadius());
+        if(fingerPos!=null)
+        {
+            //draw future Slasher
+            shapeRenderer.circle(fingerPos.x,fingerPos.y,Ball.getRadius());
+            //draw line
+            shapeRenderer.line(slasherPos.x,slasherPos.y,fingerPos.x,fingerPos.y);
+        }
 
         //Draw Balls
         shapeRenderer.setColor(255 / 255.0f, 255 / 255.0f, 255 / 255.0f, 1); //same color as gameArea

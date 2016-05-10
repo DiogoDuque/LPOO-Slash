@@ -6,12 +6,14 @@ package com.lpoo.slash;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.math.Vector2;
 import com.lpoo.gameworld.GameRenderer;
 import com.lpoo.gameworld.GameWorld;
 import com.lpoo.slashhelpers.InputHandler;
 
 public class GameScreen implements Screen {
 
+    static private Vector2 screenDimensions;
     private GameWorld world;
     private GameRenderer renderer;
     private float runTime;
@@ -21,9 +23,18 @@ public class GameScreen implements Screen {
                             ", screenHeight = " + Gdx.graphics.getHeight());
 
         world = new GameWorld();
-        renderer = new GameRenderer(world);
 
-        Gdx.input.setInputProcessor(new InputHandler(world.getBalls()));
+        screenDimensions = new Vector2(352,200);
+        renderer = new GameRenderer(world, screenDimensions);
+
+        Gdx.input.setInputProcessor(new InputHandler(world));
+    }
+
+    public static Vector2 convertDimensions(Vector2 dims)
+    {
+        dims.x = dims.x*screenDimensions.x/Gdx.app.getGraphics().getWidth();
+        dims.y = dims.y*screenDimensions.y/Gdx.app.getGraphics().getHeight();
+        return dims;
     }
 
     @Override

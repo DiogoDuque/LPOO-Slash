@@ -11,22 +11,26 @@ import com.badlogic.gdx.physics.box2d.World;
  * Created by Diogo on 09-05-2016.
  */
 public class Slasher {
+    private Vector2 finger;
     private Vector2 position;
     private BodyDef bodyDef;
     private Body body;
-    private final static float radius = 2.5f;
+    private final static float radius = Ball.getRadius();
     private final static float velocity = 10;
 
 
     public Slasher(Vector2 pos) {
         body=null;
         bodyDef=null;
+        finger=null;
         position=pos;
     }
 
     public Vector2 getPosition() {return position;}
 
-    public float getRadius() {return velocity;}
+    public Vector2 getFinger() {return finger;}
+
+    public void setFinger(Vector2 newFinger) {finger=newFinger;}
 
     //usar quando iniciar o movimento do slasher
     private void startedMoving(World world)
@@ -48,6 +52,8 @@ public class Slasher {
         fixtureDef.restitution=1.0f;
         body.createFixture(fixtureDef);
     }
+
+    //moving
 
     //TODO //usar quando parar o movimento do slasher
     private void finishedMoving(World world)
