@@ -35,7 +35,6 @@ public class GameRenderer {
     public GameRenderer(GameWorld world, Vector2 dimensions) {
         myWorld = world;
         cam = new OrthographicCamera();
-        //cam.setToOrtho(true, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         cam.setToOrtho(true, dimensions.x, dimensions.y);
         gameArea = myWorld.getGameArea();
         slasher = myWorld.getSlasher();
