@@ -3,7 +3,6 @@ package com.lpoo.slashhelpers;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.lpoo.gameobjects.Slasher;
-import com.lpoo.gameworld.GameWorld;
 import com.lpoo.slash.GameScreen;
 
 /**
@@ -12,9 +11,9 @@ import com.lpoo.slash.GameScreen;
 public class InputHandler implements InputProcessor {
     private Slasher slasher;
 
-    public InputHandler(GameWorld world)
+    public InputHandler(Slasher slasher)
     {
-        this.slasher=world.getSlasher();
+        this.slasher=slasher;
     }
 
     @Override

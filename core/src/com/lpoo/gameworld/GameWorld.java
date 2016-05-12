@@ -23,7 +23,7 @@ public class GameWorld {
         world = new World(new Vector2(0, 0), false); //mundo
         Vector2 pt1=new Vector2(40,40),pt2=new Vector2(60,180),pt3=new Vector2(160,160),pt4=new Vector2(140,20);
         gameArea = new GameArea(pt1,pt2,pt3,pt4,world);
-        slasher = new Slasher(pt3);
+        slasher = new Slasher(pt4,this);
         balls = new ArrayList<Ball>();
         createBalls(3);
     }

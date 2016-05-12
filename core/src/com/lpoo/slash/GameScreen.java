@@ -14,7 +14,7 @@ import com.lpoo.slashhelpers.InputHandler;
 public class GameScreen implements Screen {
 
     static private Vector2 screenDimensions;
-    private GameWorld world;
+    private GameWorld gameWorld;
     private GameRenderer renderer;
     private float runTime;
 
@@ -22,12 +22,12 @@ public class GameScreen implements Screen {
         System.out.println("GameScreen::GameScreen() - screenWidth = " + Gdx.graphics.getWidth() +
                             ", screenHeight = " + Gdx.graphics.getHeight());
 
-        world = new GameWorld();
+        gameWorld = new GameWorld();
 
         screenDimensions = new Vector2(352,200);
-        renderer = new GameRenderer(world, screenDimensions);
+        renderer = new GameRenderer(gameWorld, screenDimensions);
 
-        Gdx.input.setInputProcessor(new InputHandler(world));
+        Gdx.input.setInputProcessor(new InputHandler(gameWorld.getSlasher()));
     }
 
     public static Vector2 convertDimensions(Vector2 dims)
@@ -40,7 +40,7 @@ public class GameScreen implements Screen {
     @Override
     public void render(float delta) {
         runTime += delta;
-        world.update(delta);
+        gameWorld.update(delta);
         renderer.render(runTime);
     }
 
