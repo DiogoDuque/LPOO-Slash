@@ -49,41 +49,40 @@ public class Slasher {
         {
             if(points[i]==position)
             {
-                sideB=points[(i+1)%4];
+                sideA=points[(i+1)%4];
                 center=points[(i+2)%4];
-                sideA=points[(i+3)%4];
+                sideB=points[(i+3)%4];
                 break;
             }
         }
 
         //find inclination of the line between position and finger
-        Function fingerFunc = new Function(position,finger);
+        Function fa = new Function(position,sideA);
+        Function fb = new Function(position,sideB);
 
-        float theta = fingerFunc.getTheta();
-        float beta = new Function(position,sideB).getTheta();
-        float alfa = new Function(position,sideA).getTheta();
-        float middleAngle = new Function(position,center).getTheta(); //angle of Shasler's opposite vertice
 
-        //compare inclinations to see if can be drawn inside the box
-        if(beta<theta && theta<alfa) { //se beta<theta<alfa
-            System.out.println("Slasher::setFinger() beta<theta<alfa");
-
-            if(theta<middleAngle)
-                this.finger = fingerFunc.intersect(new Function(sideB,center));
-            else this.finger = fingerFunc.intersect(new Function(sideA,center));
-
-        } else if (alfa<theta && theta<beta) { //se alfa<theta<beta
-            System.out.println("Slasher::setFinger() alfa<theta<beta");
-            if(theta<middleAngle)
-                this.finger = fingerFunc.intersect(new Function(sideA,center));
-            else this.finger = fingerFunc.intersect(new Function(sideB,center));
-
+        if(center.y<fa.getY(center.x)) {
+            if(center.y<fb.getY(center.x)) { //caso 1
+                if(finger.y<fa.getY(finger.x) && finger.y<fb.getY(finger.x))
+                    System.out.println("caso 1: true");
+                else System.out.println("caso 1: false");
+            } else { //caso 2
+                if(finger.y<fa.getY(finger.x) && finger.y>=fb.getY(finger.x))
+                    System.out.println("caso 2: true");
+                else System.out.println("caso 2: false");
+            }
         } else {
-            System.out.println("Slasher::setFinger() out of box");
-            this.finger=null;
+            if(center.y<fb.getY(center.x)) { //caso 3
+                if(finger.y>=fa.getY(finger.x) && finger.y<fb.getY(finger.x))
+                    System.out.println("caso 3: true");
+                else System.out.println("caso 3: false");
+            } else { //caso 4
+                if(finger.y>=fa.getY(finger.x) && finger.y>=fb.getY(finger.x))
+                    System.out.println("caso 4: true");
+                else System.out.println("caso 4: false");
+            }
         }
 
-        System.out.println("Slasher::setFinger() finger="+this.finger);
     }
 
     //usar quando iniciar o movimento do slasher TODO completar

@@ -8,14 +8,14 @@ import com.badlogic.gdx.physics.box2d.World;
 
 /**
  * Created with 4 vertices with this structure:
- * +-------------------------
- * |            |
- * |    (Pt1)   |   (Pt4)
- * |            |
- * |------------+-----------
- * |            |
- * |    (Pt2)   |   (Pt3)
- * |            |
+ * +-------------------------+--------
+ * |            |0           |
+ * |    (Pt1)   |   (Pt4)    |
+ * |0           |         250|
+ * |------------+------------+
+ * |            |(175,100)   |
+ * |    (Pt2)   |   (Pt3)    |
+ * |            |200         |
  * In order to create something that "ressembles" a box and to avoid more complex calculations,
  * the vertices must be created in different quadrants.
  */
@@ -30,6 +30,7 @@ public class GameArea {
         points[1]=p2;
         points[2]=p3;
         points[3]=p4;
+        checkAndCorrect();
         System.out.println("GameArea::GameArea() - GameArea has vertices: p1="+points[0]+", p2="+points[1]+", p3="+points[2]+", p4="+points[3]);
 
         for(int i=0; i<4; i++) {
@@ -50,6 +51,17 @@ public class GameArea {
             groundBody.setTransform(midPoint,(float)angle);
             groundBody.createFixture(groundBox, 0);
         }
+    }
+
+    private void checkAndCorrect()
+    {
+        //check if each is in their quadrant. if not, change positions
+
+        //check if points.x are all different
+        if(points[0].x==points[1].x)
+            points[0].x++;
+        if(points[2].x==points[3].x)
+            points[2].x--;
     }
 
     public Vector2[] getPoints() {return points;}

@@ -19,11 +19,11 @@ public class GameWorld {
     private ArrayList<Ball> balls;
 
     public GameWorld() {
-        //todos os objetos criados devem ter coordenadas entre (0,0) e (176,100), por razoes de scaling para o ecra
+        //todos os objetos criados devem ter coordenadas entre (0,0) e (250,200), por razoes de scaling para o ecra (352,200)
         world = new World(new Vector2(0, 0), false); //mundo
-        Vector2 pt1=new Vector2(40,40),pt2=new Vector2(60,180),pt3=new Vector2(160,160),pt4=new Vector2(140,20);
+        Vector2 pt1=new Vector2(25,30),pt2=new Vector2(30,175),pt3=new Vector2(225,170),pt4=new Vector2(220,25);
         gameArea = new GameArea(pt1,pt2,pt3,pt4,world);
-        slasher = new Slasher(pt4,this);
+        slasher = new Slasher(pt1,this);
         balls = new ArrayList<Ball>();
         createBalls(3);
     }

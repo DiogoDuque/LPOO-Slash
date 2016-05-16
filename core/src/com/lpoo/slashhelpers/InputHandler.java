@@ -18,14 +18,12 @@ public class InputHandler implements InputProcessor {
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        System.out.println("TouchUp: x="+screenX+", y="+screenY);
         slasher.setFinger(null); //send info to Slasher TODO EDIT
         return true;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        System.out.println("Dragging: x="+screenX+", y="+screenY);
         slasher.setFinger(GameScreen.convertDimensions(new Vector2(screenX,screenY))); //keep sending info to gameRenderer
         return true;
     }
