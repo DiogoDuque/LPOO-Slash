@@ -36,10 +36,10 @@ public class Slasher {
     }
 
     public void setFinger(Vector2 finger) {
+        this.finger=null;
         if(finger==null)
         {
             System.out.println("Slasher::setFinger() null finger");
-            this.finger=null;
             return;
         }
 
@@ -60,29 +60,41 @@ public class Slasher {
         Function fa = new Function(position,sideA);
         Function fb = new Function(position,sideB);
 
-
+        boolean validFinger=false;
         if(center.y<fa.getY(center.x)) {
             if(center.y<fb.getY(center.x)) { //caso 1
                 if(finger.y<fa.getY(finger.x) && finger.y<fb.getY(finger.x))
-                    System.out.println("caso 1: true");
+                    validFinger=true;
                 else System.out.println("caso 1: false");
             } else { //caso 2
                 if(finger.y<fa.getY(finger.x) && finger.y>=fb.getY(finger.x))
-                    System.out.println("caso 2: true");
+                    validFinger=true;
                 else System.out.println("caso 2: false");
             }
         } else {
             if(center.y<fb.getY(center.x)) { //caso 3
                 if(finger.y>=fa.getY(finger.x) && finger.y<fb.getY(finger.x))
-                    System.out.println("caso 3: true");
+                    validFinger=true;
                 else System.out.println("caso 3: false");
             } else { //caso 4
                 if(finger.y>=fa.getY(finger.x) && finger.y>=fb.getY(finger.x))
-                    System.out.println("caso 4: true");
+                    validFinger=true;
                 else System.out.println("caso 4: false");
             }
         }
-
+        if(!validFinger) //se nao estiver no espaco devido
+            return;
+        Function funcFinger = new Function(position, finger);
+        //corrigir a linha
+        Vector2 intersect1, intersect2;
+        intersect1 = funcFinger.intersect(new Function(center,sideA));
+        intersect2 = funcFinger.intersect(new Function(center,sideB));
+        float dist1, dist2;
+        dist1=(float)Math.sqrt(Math.pow(intersect1.x-position.x,2)+Math.pow(intersect1.y-position.y,2));
+        dist2=(float)Math.sqrt(Math.pow(intersect2.x-position.x,2)+Math.pow(intersect2.y-position.y,2));
+        if(dist1>dist2)
+            this.finger=intersect2;
+        else this.finger=intersect1;
     }
 
     //usar quando iniciar o movimento do slasher TODO completar

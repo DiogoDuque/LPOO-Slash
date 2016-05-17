@@ -36,11 +36,7 @@ public class Function {
     }
 
     /**
-     * Intersects both functions using Gauss' Elimination. 1*y1=m1*x1+b1, 1*y2=m2*x2+b2
-     *     |-     -|      |-  -|      |- -|
-     * A = | 1  m1 |  b = | b1 |  x = | y |
-     *     | 1  m2 |      | b2 |      | x |
-     *     |-     -|      |-  -|      |- -|
+     * Intersects the two functions and returns the point of intersection
      * @param f Function to intersect with
      * @return Point where both functions intersect
      */
