@@ -95,8 +95,17 @@ public class GameWorld {
                 points[i]=newPoint;
             else points[i]=oldPoints[i];
         }
+        Vector2 toDelete = gameArea.getToDelete();
         gameArea=new GameArea(points[0],points[1],points[2],points[3],world);
         slasher=new Slasher(newPoint,this);
+        //checkBalls(toDelete);
 
+    }
+
+    public void checkBalls(){
+
+        for(int i = 0 ; i <balls.size();i++){
+            //if(balls.get(i).getX()>)
+        }
     }
 }
