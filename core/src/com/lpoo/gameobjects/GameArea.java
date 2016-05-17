@@ -22,9 +22,11 @@ import com.badlogic.gdx.physics.box2d.World;
 public class GameArea {
 
     private Vector2[] points;
+    private Vector2 toDelete;
 
     public GameArea(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, World world)
     {
+        toDelete=null;
         points = new Vector2[4];
         points[0]=p1;
         points[1]=p2;
@@ -66,4 +68,7 @@ public class GameArea {
 
     public Vector2[] getPoints() {return points;}
 
+    public void setToDelete(Vector2 toDelete) {this.toDelete=toDelete;}
+
+    public Vector2 getToDelete() {return toDelete;}
 }

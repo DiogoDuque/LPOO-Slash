@@ -47,8 +47,8 @@ Temporary Items
 .apdisk
 
 #Project Directories (Added by Diogo Duque)
-.gradle
-.idea
-build
-android/build/
-core/build/
+.gradle\
+.idea\
+build\
+android\build\
+core\build\

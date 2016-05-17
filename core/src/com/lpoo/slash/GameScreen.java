@@ -27,7 +27,7 @@ public class GameScreen implements Screen {
         screenDimensions = new Vector2(352,200);
         renderer = new GameRenderer(gameWorld, screenDimensions);
 
-        Gdx.input.setInputProcessor(new InputHandler(gameWorld.getSlasher()));
+        Gdx.input.setInputProcessor(new InputHandler(gameWorld));
     }
 
     public static Vector2 convertDimensions(Vector2 dims)

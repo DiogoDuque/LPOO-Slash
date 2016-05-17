@@ -92,9 +92,13 @@ public class Slasher {
         float dist1, dist2;
         dist1=(float)Math.sqrt(Math.pow(intersect1.x-position.x,2)+Math.pow(intersect1.y-position.y,2));
         dist2=(float)Math.sqrt(Math.pow(intersect2.x-position.x,2)+Math.pow(intersect2.y-position.y,2));
-        if(dist1>dist2)
-            this.finger=intersect2;
-        else this.finger=intersect1;
+        if(dist1>dist2) {
+            this.finger = intersect2;
+            gameWorld.getGameArea().setToDelete(sideB);
+        } else {
+            this.finger=intersect1;
+            gameWorld.getGameArea().setToDelete(sideA);
+        }
     }
 
     //usar quando iniciar o movimento do slasher TODO completar

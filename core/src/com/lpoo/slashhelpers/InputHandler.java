@@ -2,29 +2,33 @@ package com.lpoo.slashhelpers;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
-import com.lpoo.gameobjects.Slasher;
+import com.lpoo.gameworld.GameWorld;
 import com.lpoo.slash.GameScreen;
 
 /**
  * Created by Diogo on 27-04-2016.
  */
 public class InputHandler implements InputProcessor {
-    private Slasher slasher;
+    private GameWorld gameWorld;
 
-    public InputHandler(Slasher slasher)
+    public InputHandler(GameWorld gameWorld)
     {
-        this.slasher=slasher;
+        this.gameWorld=gameWorld;
     }
 
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        slasher.setFinger(null); //send info to Slasher TODO EDIT
+        if(gameWorld.getSlasher().getFinger()!=null)
+        {
+            gameWorld.updateGameArea();
+        }
+        gameWorld.getSlasher().setFinger(null); //send info to Slasher TODO EDIT
         return true;
     }
 
     @Override
     public boolean touchDragged(int screenX, int screenY, int pointer) {
-        slasher.setFinger(GameScreen.convertDimensions(new Vector2(screenX,screenY))); //keep sending info to gameRenderer
+        gameWorld.getSlasher().setFinger(GameScreen.convertDimensions(new Vector2(screenX,screenY))); //keep sending info to gameRenderer
         return true;
     }
 

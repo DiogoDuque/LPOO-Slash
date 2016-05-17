@@ -36,9 +36,9 @@ public class GameRenderer {
         myWorld = world;
         cam = new OrthographicCamera();
         cam.setToOrtho(true, dimensions.x, dimensions.y);
-        gameArea = myWorld.getGameArea();
-        slasher = myWorld.getSlasher();
-        balls = myWorld.getBalls();
+        //gameArea = myWorld.getGameArea();
+        //slasher = myWorld.getSlasher();
+        //balls = myWorld.getBalls();
 
         batcher = new SpriteBatch();
         batcher.setProjectionMatrix(cam.combined); // Attach batcher to camera
@@ -64,7 +64,7 @@ public class GameRenderer {
 
         //Draw GameArea
         shapeRenderer.setColor(255 / 255.0f, 255 / 255.0f, 255 / 255.0f, 1);
-        Vector2[] points = gameArea.getPoints();
+        Vector2[] points = myWorld.getGameArea().getPoints();
         for(int i=0; i<points.length; i++) {
             Vector2 a = points[i];
             Vector2 b = points[i==points.length-1 ? 0 : i+1];
@@ -73,7 +73,8 @@ public class GameRenderer {
 
         //Draw Slasher
         shapeRenderer.setColor(255 / 255.0f, 255 / 255.0f, 0 / 255.0f, 1);
-        Vector2 slasherPos = slasher.getPosition(), fingerPos = slasher.getFinger();
+        Vector2 fingerPos = myWorld.getSlasher().getFinger();
+        Vector2 slasherPos = myWorld.getSlasher().getPosition();
         shapeRenderer.circle(slasherPos.x,slasherPos.y,Ball.getRadius());
         if(fingerPos!=null)
         {
@@ -85,14 +86,15 @@ public class GameRenderer {
 
         //Draw Balls
         shapeRenderer.setColor(255 / 255.0f, 255 / 255.0f, 255 / 255.0f, 1); //same color as gameArea
-        for(int i=0; i<balls.size(); i++)
-            shapeRenderer.circle(balls.get(i).getBody().getPosition().x, balls.get(i).getBody().getPosition().y, Ball.getRadius());
+        for(int i=0; i<myWorld.getBalls().size(); i++)
+            shapeRenderer.circle(myWorld.getBalls().get(i).getBody().getPosition().x,
+                                myWorld.getBalls().get(i).getBody().getPosition().y,
+                                Ball.getRadius());
 
         // End ShapeRenderer
         shapeRenderer.end();
 
         /*// Begin SpriteBatch
-        batcher.setProjectionMatrix(cam.combined);
-        debugMatrix = batcher.getProjectionMatrix().cpy().scale(resizeX(1),resizeY(1),1);*/
+        batcher.setProjectionMatrix(cam.combined);*/
     }
 }

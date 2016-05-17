@@ -24,16 +24,52 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="GameRenderer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameworld/GameRenderer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameScreen.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/slash/GameScreen.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+              <folding>
+                <element signature="method#convertDimensions#0;class#GameScreen#0" expanded="false" />
+                <element signature="method#resize#0;class#GameScreen#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="GameWorld.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameworld/GameWorld.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="82" selection-start-line="23" selection-start-column="82" selection-end-line="23" selection-end-column="82" />
+              <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;method#createBalls#0;class#GameWorld#0" expanded="false" />
                 <element signature="method#createBalls#0;class#GameWorld#0" expanded="false" />
+                <element signature="method#update#0;class#GameWorld#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InputHandler.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/slashhelpers/InputHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.84109586">
+              <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -42,34 +78,27 @@
         <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameobjects/GameArea.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#GameArea#0;class#GameArea#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Slasher.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Slasher.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameobjects/Slasher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.81369865">
-              <caret line="96" column="36" selection-start-line="96" selection-start-column="36" selection-end-line="96" selection-end-column="36" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#962#963#0" expanded="true" />
+                <element signature="e#991#992#0" expanded="true" />
                 <element signature="method#startedMoving#0;class#Slasher#0" expanded="false" />
                 <element signature="method#finishedMoving#0;class#Slasher#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Test1.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/test/java/Test1.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -1864,7 +1893,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="7309561962781" />
+        <entry key="$PROJECT_DIR$" value="7309564585744" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -2473,16 +2502,16 @@
         <option value="$PROJECT_DIR$/core/src/com/lpoo/gameobjects/Box.java" />
         <option value="$PROJECT_DIR$/core/src/com/lpoo/slashhelpers/AssetLoader.java" />
         <option value="$PROJECT_DIR$/core/src/com/lpoo/gameobjects/Ball.java" />
-        <option value="$PROJECT_DIR$/core/src/com/lpoo/gameworld/GameRenderer.java" />
-        <option value="$PROJECT_DIR$/core/src/com/lpoo/slash/GameScreen.java" />
-        <option value="$PROJECT_DIR$/core/src/com/lpoo/slashhelpers/InputHandler.java" />
-        <option value="$PROJECT_DIR$/core/src/com/lpoo/gameobjects/GameArea.java" />
         <option value="$PROJECT_DIR$/core/src/com/lpoo/slashhelpers/Function.java" />
         <option value="$PROJECT_DIR$/core/src/com/lpoo/tests/BallTest.java" />
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/core/src/test/java/Test1.java" />
-        <option value="$PROJECT_DIR$/core/src/com/lpoo/gameworld/GameWorld.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/core/src/com/lpoo/slash/GameScreen.java" />
         <option value="$PROJECT_DIR$/core/src/com/lpoo/gameobjects/Slasher.java" />
+        <option value="$PROJECT_DIR$/core/src/com/lpoo/gameobjects/GameArea.java" />
+        <option value="$PROJECT_DIR$/core/src/com/lpoo/gameworld/GameRenderer.java" />
+        <option value="$PROJECT_DIR$/core/src/com/lpoo/gameworld/GameWorld.java" />
+        <option value="$PROJECT_DIR$/core/src/com/lpoo/slashhelpers/InputHandler.java" />
       </list>
     </option>
   </component>
@@ -2552,8 +2581,26 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidSourceTypeNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Slash" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidModuleNode" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lpoo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="slashhelpers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2570,13 +2617,39 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidSourceTypeNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lpoo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Slash" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.NonAndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lpoo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gameworld" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="android.sdk-updates" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="device.picker.selection" value="S58301b2d384d" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/sdk1" />
@@ -2875,7 +2948,7 @@
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32764506" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24886535" sideWeight="0.5089058" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24886535" sideWeight="0.5089058" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
@@ -2955,6 +3028,7 @@
           <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#GameArea#0;class#GameArea#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3017,6 +3091,7 @@
             <element signature="imports" expanded="true" />
             <element signature="docComment;method#createBalls#0;class#GameWorld#0" expanded="false" />
             <element signature="method#createBalls#0;class#GameWorld#0" expanded="false" />
+            <element signature="method#update#0;class#GameWorld#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3079,6 +3154,7 @@
             <element signature="imports" expanded="true" />
             <element signature="docComment;method#createBalls#0;class#GameWorld#0" expanded="false" />
             <element signature="method#createBalls#0;class#GameWorld#0" expanded="false" />
+            <element signature="method#update#0;class#GameWorld#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3116,6 +3192,7 @@
             <element signature="imports" expanded="true" />
             <element signature="docComment;method#createBalls#0;class#GameWorld#0" expanded="false" />
             <element signature="method#createBalls#0;class#GameWorld#0" expanded="false" />
+            <element signature="method#update#0;class#GameWorld#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3308,25 +3385,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameworld/GameRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3561644">
-          <caret line="34" column="61" selection-start-line="34" selection-start-column="61" selection-end-line="34" selection-end-column="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#GameRenderer#0;class#GameRenderer#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/slashhelpers/InputHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="72" selection-start-line="25" selection-start-column="72" selection-end-line="25" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/slashhelpers/AssetLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.04657534">
@@ -3342,34 +3400,6 @@
           <folding>
             <element signature="method#Function#0;class#Function#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/slash/GameScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6739726">
-          <caret line="29" column="28" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="28" />
-          <folding>
-            <element signature="method#convertDimensions#0;class#GameScreen#0" expanded="false" />
-            <element signature="method#render#0;class#GameScreen#0" expanded="false" />
-            <element signature="method#resize#0;class#GameScreen#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/test/java/Test1.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.57260275">
-          <caret line="41" column="38" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3389,14 +3419,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameworld/GameWorld.java">
+    <entry file="file://$PROJECT_DIR$/core/src/test/java/Test1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.148148">
+          <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="82" selection-start-line="23" selection-start-column="82" selection-end-line="23" selection-end-column="82" />
+          <caret line="7" column="56" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameobjects/Slasher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="docComment;method#createBalls#0;class#GameWorld#0" expanded="false" />
-            <element signature="method#createBalls#0;class#GameWorld#0" expanded="false" />
+            <element signature="e#962#963#0" expanded="true" />
+            <element signature="e#991#992#0" expanded="true" />
+            <element signature="method#startedMoving#0;class#Slasher#0" expanded="false" />
+            <element signature="method#finishedMoving#0;class#Slasher#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameworld/GameRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/slash/GameScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding>
+            <element signature="method#convertDimensions#0;class#GameScreen#0" expanded="false" />
+            <element signature="method#resize#0;class#GameScreen#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3404,22 +3475,32 @@
     <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameobjects/GameArea.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#GameArea#0;class#GameArea#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameobjects/Slasher.java">
+    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameworld/GameWorld.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.81369865">
-          <caret line="96" column="36" selection-start-line="96" selection-start-column="36" selection-end-line="96" selection-end-column="36" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#startedMoving#0;class#Slasher#0" expanded="false" />
-            <element signature="method#finishedMoving#0;class#Slasher#0" expanded="false" />
+            <element signature="docComment;method#createBalls#0;class#GameWorld#0" expanded="false" />
+            <element signature="method#createBalls#0;class#GameWorld#0" expanded="false" />
+            <element signature="method#update#0;class#GameWorld#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/slashhelpers/InputHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.84109586">
+          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -21,11 +21,11 @@ public class GameWorld {
     public GameWorld() {
         //todos os objetos criados devem ter coordenadas entre (0,0) e (250,200), por razoes de scaling para o ecra (352,200)
         world = new World(new Vector2(0, 0), false); //mundo
-        Vector2 pt1=new Vector2(25,30),pt2=new Vector2(30,175),pt3=new Vector2(200,170),pt4=new Vector2(220,25);
+        Vector2 pt1=new Vector2(25,30),pt2=new Vector2(30,175),pt3=new Vector2(200,140),pt4=new Vector2(220,25);
         gameArea = new GameArea(pt1,pt2,pt3,pt4,world);
-        slasher = new Slasher(pt1,this);
+        slasher = new Slasher(pt3,this);
         balls = new ArrayList<Ball>();
-        createBalls(3);
+        createBalls(1);
     }
 
     /**
@@ -82,5 +82,21 @@ public class GameWorld {
 
     public ArrayList<Ball> getBalls() {
         return balls;
+    }
+
+    public void updateGameArea()
+    {
+        Vector2[] points = new Vector2[4];
+        Vector2 newPoint = new Vector2(slasher.getFinger());
+        Vector2[] oldPoints = gameArea.getPoints();
+        for(int i=0; i<4; i++)
+        {
+            if(gameArea.getToDelete()==oldPoints[i])
+                points[i]=newPoint;
+            else points[i]=oldPoints[i];
+        }
+        gameArea=new GameArea(points[0],points[1],points[2],points[3],world);
+        slasher=new Slasher(newPoint,this);
+
     }
 }
