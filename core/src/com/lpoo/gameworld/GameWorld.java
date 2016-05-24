@@ -102,6 +102,7 @@ public class GameWorld {
 
     }
 
+    //TODO check if the balls are still inside the gameArea
     public void checkBalls(){
 
         for(int i = 0 ; i <balls.size();i++){

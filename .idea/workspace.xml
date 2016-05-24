@@ -49,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameWorld.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GameWorld.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameworld/GameWorld.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4410959">
-              <caret line="100" column="10" selection-start-line="100" selection-start-column="10" selection-end-line="100" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="docComment;method#createBalls#0;class#GameWorld#0" expanded="false" />
@@ -64,24 +64,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InputHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/slashhelpers/InputHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameArea.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameArea.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameobjects/GameArea.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.9068493">
+              <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#GameArea#0;class#GameArea#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -91,7 +80,7 @@
         <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameobjects/Slasher.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
+              <caret line="37" column="43" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#962#963#0" expanded="true" />
@@ -2508,10 +2497,10 @@
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/core/src/com/lpoo/slash/GameScreen.java" />
         <option value="$PROJECT_DIR$/core/src/com/lpoo/gameobjects/Slasher.java" />
-        <option value="$PROJECT_DIR$/core/src/com/lpoo/gameobjects/GameArea.java" />
         <option value="$PROJECT_DIR$/core/src/com/lpoo/gameworld/GameRenderer.java" />
         <option value="$PROJECT_DIR$/core/src/com/lpoo/slashhelpers/InputHandler.java" />
         <option value="$PROJECT_DIR$/core/src/com/lpoo/gameworld/GameWorld.java" />
+        <option value="$PROJECT_DIR$/core/src/com/lpoo/gameobjects/GameArea.java" />
       </list>
     </option>
   </component>
@@ -2546,10 +2535,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2668,12 +2656,13 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="device.picker.selection" value="S58301b2d384d" />
+    <property name="device.picker.selection" value="Nexus_5_API_23_x86" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/sdk1" />
     <property name="android.project.structure.last.selected" value="Project" />
     <property name="android.project.structure.proportion" value="0.15" />
@@ -2976,7 +2965,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.5030257" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32935154" sideWeight="0.4969743" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32593855" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32423207" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32764506" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -3050,7 +3039,6 @@
           <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#GameArea#0;class#GameArea#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3059,17 +3047,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;method#Ball#0;class#Ball#0" expanded="false" />
-            <element signature="method#Ball#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#setRandomMovement#0;class#Ball#0" expanded="false" />
-            <element signature="method#setRandomMovement#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getX#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getY#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getRadius#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getBody#0;class#Ball#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3100,7 +3077,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#GameRenderer#0;class#GameRenderer#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3122,17 +3098,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="62" column="61" selection-start-line="62" selection-start-column="61" selection-end-line="62" selection-end-column="61" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;method#Ball#0;class#Ball#0" expanded="false" />
-            <element signature="method#Ball#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#setRandomMovement#0;class#Ball#0" expanded="false" />
-            <element signature="method#setRandomMovement#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getX#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getY#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getRadius#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getBody#0;class#Ball#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3163,7 +3128,6 @@
           <caret line="41" column="77" selection-start-line="41" selection-start-column="77" selection-end-line="41" selection-end-column="77" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#GameRenderer#0;class#GameRenderer#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3185,17 +3149,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;method#Ball#0;class#Ball#0" expanded="false" />
-            <element signature="method#Ball#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#setRandomMovement#0;class#Ball#0" expanded="false" />
-            <element signature="method#setRandomMovement#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getX#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getY#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getRadius#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getBody#0;class#Ball#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3223,17 +3176,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;method#Ball#0;class#Ball#0" expanded="false" />
-            <element signature="method#Ball#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#setRandomMovement#0;class#Ball#0" expanded="false" />
-            <element signature="method#setRandomMovement#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getX#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getY#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getRadius#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getBody#0;class#Ball#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3250,7 +3192,6 @@
           <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#GameRenderer#0;class#GameRenderer#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3385,17 +3326,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3780822">
           <caret line="15" column="28" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="docComment;method#Ball#0;class#Ball#0" expanded="false" />
-            <element signature="method#Ball#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#setRandomMovement#0;class#Ball#0" expanded="false" />
-            <element signature="method#setRandomMovement#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getX#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getY#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getRadius#0;class#Ball#0" expanded="false" />
-            <element signature="docComment;method#getBody#0;class#Ball#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3429,7 +3359,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38630137">
           <caret line="24" column="68" selection-start-line="24" selection-start-column="60" selection-end-line="24" selection-end-column="68" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3437,7 +3366,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3446,7 +3374,7 @@
         <state vertical-scroll-proportion="-3.148148">
           <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
           <folding>
-            <element signature="e#0#42#0" expanded="true" />
+            <element signature="docComment;class#Test1#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3455,21 +3383,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="7" column="56" selection-start-line="7" selection-start-column="56" selection-end-line="7" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameobjects/Slasher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#962#963#0" expanded="true" />
-            <element signature="e#991#992#0" expanded="true" />
-            <element signature="method#startedMoving#0;class#Slasher#0" expanded="false" />
-            <element signature="method#finishedMoving#0;class#Slasher#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3480,6 +3393,14 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/slashhelpers/InputHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.04657534">
+          <caret line="9" column="3" selection-start-line="9" selection-start-column="3" selection-end-line="9" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -3494,34 +3415,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameobjects/GameArea.java">
+    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameobjects/Slasher.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+          <caret line="37" column="43" selection-start-line="37" selection-start-column="43" selection-end-line="37" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#GameArea#0;class#GameArea#0" expanded="false" />
+            <element signature="e#962#963#0" expanded="true" />
+            <element signature="e#991#992#0" expanded="true" />
+            <element signature="method#startedMoving#0;class#Slasher#0" expanded="false" />
+            <element signature="method#finishedMoving#0;class#Slasher#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/slashhelpers/InputHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameworld/GameWorld.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4410959">
-          <caret line="100" column="10" selection-start-line="100" selection-start-column="10" selection-end-line="100" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="32" selection-start-line="23" selection-start-column="32" selection-end-line="23" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="docComment;method#createBalls#0;class#GameWorld#0" expanded="false" />
             <element signature="method#createBalls#0;class#GameWorld#0" expanded="false" />
             <element signature="method#update#0;class#GameWorld#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/core/src/com/lpoo/gameobjects/GameArea.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9068493">
+          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
