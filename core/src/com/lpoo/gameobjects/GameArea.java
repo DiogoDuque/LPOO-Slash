@@ -22,8 +22,8 @@ import com.badlogic.gdx.physics.box2d.World;
 public class GameArea {
 
     private Vector2[] points;
-    private Vector2 toDelete;
-    private Vector2 center = new Vector2(125,100);
+    private Vector2 toDelete; //vertice que sera apagado e substituido por outro depois do corte
+    private Vector2 center = new Vector2(125,100); //centro da zona onde é suposto a gameArea estar
 
     public GameArea(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, World world)
     {

@@ -14,8 +14,8 @@ import com.lpoo.slashhelpers.Function;
  */
 public class Slasher {
     private GameWorld gameWorld;
-    private Vector2 finger;
-    private Vector2 position;
+    private Vector2 finger; //posicao onde o slasher ficará se houver um corte (levantar do dedo para cortar a caixa)
+    private Vector2 position; //posicao atual do Slasher
     private BodyDef bodyDef;
     private Body body;
     private final static float radius = Ball.getRadius();
@@ -101,7 +101,7 @@ public class Slasher {
         }
     }
 
-    //usar quando iniciar o movimento do slasher TODO completar
+    //usar quando iniciar o movimento do slasher TODO
     private void startedMoving(World world)
     {
         //criar body
@@ -124,7 +124,9 @@ public class Slasher {
 
     //moving
 
-    //TODO usar quando parar o movimento do slasher
+    /**
+     * TODO usar quando parar o movimento do slasher
+     */
     private void finishedMoving(World world)
     {
         //dispose body and bodyDef TODO

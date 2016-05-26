@@ -84,6 +84,11 @@ public class GameWorld {
         return balls;
     }
 
+    /**
+     * TODO
+     * Called when the Slasher can (and will) cut the GameArea.
+     * Cuts the GameArea by recreating it and creating one more ball.
+     */
     public void updateGameArea()
     {
         Vector2[] points = new Vector2[4];
@@ -98,7 +103,7 @@ public class GameWorld {
         Vector2 toDelete = gameArea.getToDelete();
         gameArea=new GameArea(points[0],points[1],points[2],points[3],world);
         slasher=new Slasher(newPoint,this);
-        //checkBalls(toDelete);
+        //checkBalls();
 
     }
 
