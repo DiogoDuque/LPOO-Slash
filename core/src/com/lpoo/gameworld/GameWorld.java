@@ -1,5 +1,6 @@
 package com.lpoo.gameworld;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.lpoo.gameobjects.Ball;
@@ -103,15 +104,37 @@ public class GameWorld {
         Vector2 toDelete = gameArea.getToDelete();
         gameArea=new GameArea(points[0],points[1],points[2],points[3],world);
         slasher=new Slasher(newPoint,this);
-        //checkBalls();
+        checkBalls();
 
     }
 
     //TODO check if the balls are still inside the gameArea
     public void checkBalls(){
+        for (int i = 0; i < balls.size();i++) {
+            if (!pointInPolygon(4, gameArea.getPoints(), balls.get(i))){
+                Gdx.app.log("bola esta fora", "bola esta fora");
+            balls.remove(i);
+            createBalls(1);
+            System.out.println("GameWorld::createBalls() ");}
 
-        for(int i = 0 ; i <balls.size();i++){
-            //if(balls.get(i).getX()>)
         }
+
+    }
+
+    public boolean pointInPolygon(int polyCorners, Vector2[] points, Ball ball) {
+        int i, j = polyCorners - 1;
+        boolean oddNodes = false;
+
+        for (i = 0; i < polyCorners; i++) {
+            if ((points[i].y < ball.getY() && points[j].y >= ball.getY()
+                    || points[j].y < ball.getY() && points[i].y >= ball.getY())
+                    && (points[i].x <= ball.getX() || points[j].x <= ball.getX())) {
+                if (points[i].x + (ball.getY() - points[i].y) / (points[j].y - points[i].y) * (points[j].x - points[i].x) < ball.getX()) {
+                    oddNodes = !oddNodes;
+                }
+            }
+            j = i;
+        }
+return oddNodes;
     }
 }
