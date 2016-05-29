@@ -43,3 +43,12 @@ captures/
 
 ### Android Patch ###
 gen-external-apklibs
+
+
+
+
+
+*.bin
+*.json
+*.jar
+*.properties

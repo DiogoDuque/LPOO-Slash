@@ -41,6 +41,7 @@ project(":desktop") {
         compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
         testCompile 'junit:junit:4.12'
+        testCompile "org.mockito:mockito-core:1.9.5"
     }
 }
 
@@ -74,6 +75,9 @@ project(":core") {
         compile "com.hi5dev.box2d_pexml:box2d-pexml:0.0.1"
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
+        compile fileTree(dir: 'libs', include: '*.jar')
+
+        testCompile "junit:junit:4.12"
     }
 }
 
