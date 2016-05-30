@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="C:\Users\Utilizador\Desktop\LPOO\LPOO-Slash-master\android\src\main\shaders"/></dataSet><dataSet config="debug"><source path="C:\Users\Utilizador\Desktop\LPOO\LPOO-Slash-master\android\src\debug\shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="C:\Users\Diogo\AndroidStudioProjects\Slash\android\src\main\shaders"/></dataSet><dataSet config="debug"><source path="C:\Users\Diogo\AndroidStudioProjects\Slash\android\src\debug\shaders"/></dataSet></merger>
