@@ -1,10 +1,11 @@
+package com.lpoo.gameobjects;
+
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.lpoo.gameobjects.Ball;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by Diogo on 29-05-2016.
@@ -23,7 +24,7 @@ public class BallTest {
     }
 
     @Test
-    public void CreateBall()
+    public void testBallBasics()
     {
         ball = new Ball(x,y,world);
         assertSame(x,(int)ball.getX()); //xPosition

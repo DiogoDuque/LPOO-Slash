@@ -17,7 +17,7 @@ public class Function {
     }
 
 
-    protected float getM() {
+    public float getM() {
             return m;
         }
 

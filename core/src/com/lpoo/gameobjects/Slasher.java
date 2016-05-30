@@ -67,7 +67,7 @@ public class Slasher {
                     validFinger=true;
                 else System.out.println("caso 1: false");
             } else { //caso 2
-                if(finger.y<fa.getY(finger.x) && finger.y>=fb.getY(finger.x))
+                if(finger.y<fa.getY(finger.x) && finger.y>fb.getY(finger.x))
                     validFinger=true;
                 else System.out.println("caso 2: false");
             }
@@ -77,14 +77,17 @@ public class Slasher {
                     validFinger=true;
                 else System.out.println("caso 3: false");
             } else { //caso 4
-                if(finger.y>=fa.getY(finger.x) && finger.y>=fb.getY(finger.x))
+                if(finger.y>=fa.getY(finger.x) && finger.y>fb.getY(finger.x))
                     validFinger=true;
                 else System.out.println("caso 4: false");
             }
         }
         if(!validFinger) //se nao estiver no espaco devido
             return;
+
+        //TODO BUG IS HERE
         Function funcFinger = new Function(position, finger);
+        System.out.println("Slasher::getFinger() ang = " + Math.atan(funcFinger.getM()));
         //corrigir a linha
         Vector2 intersect1, intersect2;
         intersect1 = funcFinger.intersect(new Function(center,sideA));

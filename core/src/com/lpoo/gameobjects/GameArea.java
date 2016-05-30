@@ -66,7 +66,7 @@ public class GameArea {
     {
         int minDistance=20; //min distance to not require resizing
         //move+resize
-        /*for(int i=0; i<4; i++)
+        for(int i=0; i<4; i++)
         {
             Vector2 p1=points[i], p2=points[(i+1)%4];
             double distance = Math.sqrt(Math.pow(p1.x-p2.x,2)+Math.pow(p1.y-p2.y,2));
@@ -129,7 +129,7 @@ public class GameArea {
                             p2.y -= direction.y * (float) Math.sin(ang) * (minDistance / (2 * distance));
                         }
                 }
-        }*/
+        }
 
         //check if points.x are all different
         if(points[0].x==points[1].x)
