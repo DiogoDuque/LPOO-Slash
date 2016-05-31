@@ -113,9 +113,12 @@ public class GameWorld {
         for (int i = 0; i < balls.size();i++) {
             if (!pointInPolygon(4, gameArea.getPoints(), balls.get(i))){
                 Gdx.app.log("bola esta fora", "bola esta fora");
-            balls.remove(i);
-            createBalls(1);
-            System.out.println("GameWorld::createBalls() ");}
+                Ball ball = balls.get(i);
+                balls.remove(i);
+                ball.dispose();
+                createBalls(1);
+                System.out.println("GameWorld::createBalls() ");
+            }
 
         }
 

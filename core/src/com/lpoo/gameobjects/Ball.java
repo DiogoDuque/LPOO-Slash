@@ -80,4 +80,8 @@ public class Ball {
      */
     public Body getBody() {return body;}
 
+    public void dispose()
+    {
+        body.getWorld().destroyBody(body);
+    }
 }
