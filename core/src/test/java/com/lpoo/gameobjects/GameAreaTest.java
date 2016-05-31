@@ -29,4 +29,5 @@ public class GameAreaTest {
         assertNotEquals(pts[0].x,pts[1].x);
         assertNotEquals(pts[2].x,pts[3].x);
     }
+
 }
