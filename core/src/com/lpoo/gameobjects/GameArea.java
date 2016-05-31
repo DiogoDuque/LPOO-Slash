@@ -33,7 +33,7 @@ public class GameArea {
         points[1]=p2;
         points[2]=p3;
         points[3]=p4;
-        checkAndCorrect();
+        //checkAndCorrect();
         System.out.println("GameArea::GameArea() - GameArea has vertices: p1="+points[0]+", p2="+points[1]+", p3="+points[2]+", p4="+points[3]);
 
         for(int i=0; i<4; i++) {
