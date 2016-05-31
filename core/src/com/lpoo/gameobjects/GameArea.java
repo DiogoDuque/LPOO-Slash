@@ -24,10 +24,12 @@ public class GameArea {
     private Vector2[] points;
     private Vector2 toDelete; //vertice que sera apagado e substituido por outro depois do corte
     private Vector2 center = new Vector2(125,100); //centro da zona onde é suposto a gameArea estar
+    private Body[] bodies;
 
     public GameArea(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, World world)
     {
         toDelete=null;
+        bodies = new Body[4];
         points = new Vector2[4];
         points[0]=p1;
         points[1]=p2;
@@ -53,6 +55,7 @@ public class GameArea {
             groundBox.setAsBox((float)distancePTP/2, 1);
             groundBody.setTransform(midPoint,(float)angle);
             groundBody.createFixture(groundBox, 0);
+            bodies[i]=groundBody;
         }
     }
 
@@ -143,4 +146,13 @@ public class GameArea {
     public void setToDelete(Vector2 toDelete) {this.toDelete=toDelete;}
 
     public Vector2 getToDelete() {return toDelete;}
+
+    public void dispose()
+    {
+        for(int i=0; i<4; i++)
+        {
+            bodies[i].getWorld().destroyBody(bodies[i]);
+        }
+
+    }
 }

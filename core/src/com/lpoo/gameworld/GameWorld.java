@@ -102,6 +102,7 @@ public class GameWorld {
             else points[i]=oldPoints[i];
         }
         Vector2 toDelete = gameArea.getToDelete();
+        gameArea.dispose();
         gameArea=new GameArea(points[0],points[1],points[2],points[3],world);
         slasher=new Slasher(newPoint,this);
         checkBalls();
