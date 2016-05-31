@@ -2,5 +2,9 @@
     {
         "merged": "C:\\Users\\Utilizador\\Documents\\GitHub\\LPOO-Slash\\android\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_launcher.png",
         "source": "C:\\Users\\Utilizador\\Documents\\GitHub\\LPOO-Slash\\android\\res\\drawable-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Diogo\\AndroidStudioProjects\\Slash\\android\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\Diogo\\AndroidStudioProjects\\Slash\\android\\res\\drawable-mdpi\\ic_launcher.png"
     }
 ]

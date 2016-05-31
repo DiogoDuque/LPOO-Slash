@@ -45,9 +45,12 @@ captures/
 gen-external-apklibs
 
 
-
+.idea/
+android/build/
+core/build/
 
 
 *.bin
 *.json
 *.properties
+*.lock
