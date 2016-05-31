@@ -90,12 +90,15 @@ public class Slasher {
         System.out.println("Slasher::getFinger() ang = " + Math.atan(funcFinger.getM()));
         //corrigir a linha
         Vector2 intersect1, intersect2;
-        intersect1 = funcFinger.intersect(new Function(center,sideA));
-        intersect2 = funcFinger.intersect(new Function(center,sideB));
-        float dist1, dist2;
-        dist1=(float)Math.sqrt(Math.pow(intersect1.x-position.x,2)+Math.pow(intersect1.y-position.y,2));
-        dist2=(float)Math.sqrt(Math.pow(intersect2.x-position.x,2)+Math.pow(intersect2.y-position.y,2));
-        if(dist1>dist2) {
+        intersect1 = new Function(center,sideA).intersect(funcFinger);
+        intersect2 = new Function(center,sideB).intersect(funcFinger);
+        float dist1=0, dist2=0;
+        if(intersect1!=null && intersect2!=null)
+        {
+            dist1=(float)Math.sqrt(Math.pow(intersect1.x-position.x,2)+Math.pow(intersect1.y-position.y,2));
+            dist2=(float)Math.sqrt(Math.pow(intersect2.x-position.x,2)+Math.pow(intersect2.y-position.y,2));
+        }
+        if(dist1>dist2 || intersect1==null) {
             this.finger = intersect2;
             gameWorld.getGameArea().setToDelete(sideB);
         } else {
