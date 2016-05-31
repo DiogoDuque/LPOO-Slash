@@ -30,6 +30,21 @@ public class GameWorld {
     }
 
     /**
+     * Constructor used for debugging and JUnit4.
+     * @param world World object for physics.
+     * @param gameArea area where the balls will wander.
+     * @param slasher slasher for this gameArea.
+     */
+    public GameWorld(World world, GameArea gameArea, Slasher slasher)
+    {
+        this.world=world;
+        this.gameArea=gameArea;
+        this.slasher=slasher;
+        balls = new ArrayList<Ball>();
+        createBalls(1);
+    }
+
+    /**
      * Creates n new balls in random positions inside the gameArea.
      */
     private void createBalls(int n)
@@ -105,22 +120,30 @@ public class GameWorld {
         gameArea.dispose();
         gameArea=new GameArea(points[0],points[1],points[2],points[3],world);
         slasher=new Slasher(newPoint,this);
-        checkBalls();
+        int counter = checkBalls();
+        createBalls(counter+1);
     }
 
-    //TODO check if the balls are still inside the gameArea
-    public void checkBalls(){
+    /**
+     * Checks if the balls are still inside the gameArea.
+     * Each ball outside the gameArea will be deleted, and the counter will be incremented.
+     *
+     * @return number of balls that are out of the gameArea.
+     */
+    public int checkBalls(){
+        int counter=0;
         for (int i = 0; i < balls.size();i++) {
             if (!pointInPolygon(4, gameArea.getPoints(), balls.get(i))){
                 Gdx.app.log("bola esta fora", "bola esta fora");
                 Ball ball = balls.get(i);
                 balls.remove(i);
                 ball.dispose();
-                createBalls(1);
+                counter++;
                 System.out.println("GameWorld::createBalls() ");
             }
 
         }
+        return counter;
 
     }
 
