@@ -1,5 +1,6 @@
 package com.lpoo.gameobjects;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -7,6 +8,9 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.lpoo.gameworld.GameWorld;
 import com.lpoo.slashhelpers.Function;
+import com.lpoo.slashhelpers.Utilities;
+
+import java.util.ArrayList;
 
 /**
  * Created by Diogo on 09-05-2016.
@@ -17,7 +21,7 @@ public class Slasher {
     private Vector2 position; //posicao atual do Slasher
     private Body body, bodyPath;
     private final static float radius = Ball.getRadius();
-    private final static float velocity = 10;
+    private final static float velocity = 35;
 
     public Slasher(Vector2 pos, GameWorld gameWorld) {
         body=null;
@@ -42,10 +46,7 @@ public class Slasher {
             return;
         this.finger=null;
         if(finger==null)
-        {
-            System.out.println("Slasher::setFinger() null finger");
             return;
-        }
 
         Vector2[] points = gameWorld.getGameArea().getPoints();
         Vector2 sideB=null, center=null, sideA=null;
@@ -95,7 +96,6 @@ public class Slasher {
             return;
 
         Function funcFinger = new Function(position, finger);
-        System.out.println("Slasher::getFinger() ang = " + Math.atan(funcFinger.getM()));
         //correct the line drawn, so that it stops when intersects a gameArea's edge.
         Vector2 intersect1, intersect2;
         intersect1 = new Function(center,sideA).intersect(funcFinger);
@@ -125,8 +125,8 @@ public class Slasher {
 
         //criar bola
         BodyDef bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody;
-        bodyDef.position.set(position.x+2*direction.x,position.y+2*direction.y); //starts a bit ahead so doesnt instantly collide w/ gameArea
+        bodyDef.type = BodyDef.BodyType.KinematicBody;
+        bodyDef.position.set(position.x+direction.x,position.y+direction.y); //starts a bit ahead so doesnt instantly collide w/ gameArea
         bodyDef.linearVelocity.set(velocity*direction.x,velocity*direction.y); //def linearVelocity
         body = gameWorld.getWorld().createBody(bodyDef);
         PolygonShape dynamicBox = new PolygonShape();
@@ -147,14 +147,15 @@ public class Slasher {
 
     /**
      * Called as an animation of the Slasher
-     * @return true if the ball is moving and has not collided, false if collided.
+     * @return message indicating the status of slasher.
      */
-    public boolean isMoving()
+    public String isMoving()
     {
-        if(/**/false) //TODO Check if collision with contactListener
+        String message = checkCollisions();
+        if(message=="Game Over" || message=="Slasher End Reached")
         {
             finishedMoving();
-            return false;
+            return message;
         }
         //pre-calculations
         Vector2 midPoint = new Vector2((body.getPosition().x+position.x)/2,(body.getPosition().y+position.y)/2);
@@ -174,13 +175,13 @@ public class Slasher {
         bodyPath.setTransform(midPoint,(float)angle);
         bodyPath.createFixture(pathBox, 0);
 
-        return true;
+        return "OK";
     }
 
     /**
      * Stops Slasher's movement
      */
-    public void finishedMoving()
+    private void finishedMoving()
     {
         //dispose both
         gameWorld.getWorld().destroyBody(body);
@@ -189,6 +190,48 @@ public class Slasher {
         //point to null
         body=null;
         bodyPath=null;
+    }
+
+    private String checkCollisions()
+    {
+        //check with balls
+        ArrayList<Ball> balls=gameWorld.getBalls();
+        for(int i=0; i<balls.size(); i++)
+        {
+            Vector2 ball=balls.get(i).getBody().getPosition();
+            double distance=Utilities.distance(ball,body.getPosition()); //distance between the centers o slasher and ball
+            if(distance<Ball.getRadius()+radius)
+            {
+                Gdx.app.log("Slasher::checkCollisions","Game Over");
+                return "Game Over";
+            }
+        }
+
+        //check with gameArea
+        Vector2[] pts = gameWorld.getGameArea().getPoints();
+        Function[] functions = new Function[2];
+        for(int i=0; i<4; i++)
+        {
+            if(pts[i]==position)
+            {
+                functions[0]=new Function(pts[(i+1)%4],pts[(i+2)%4]);
+                functions[1]=new Function(pts[(i+2)%4],pts[(i+3)%4]);
+            }
+        }
+
+        for(int i=0; i<2; i++)
+        {
+            double distance1 = Math.abs(position.y-functions[i].getY(body.getPosition().x)),
+                    distance2 = Math.abs(position.x-functions[i].getX(body.getPosition().y));
+            double distance = Math.min(distance1,distance2);
+            if(distance < 50) {
+                Gdx.app.log("Slasher::checkCollisions","Slasher End Reached");
+                return "Slasher End Reached";
+            }
+        }
+
+        //Gdx.app.log("Slasher::checkCollisions","OK");
+        return "OK";
     }
 
     public void dispose()

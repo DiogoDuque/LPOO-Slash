@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.lpoo.slashhelpers.Utilities;
 
 /**
  * Created with 4 vertices with this structure:
@@ -43,7 +44,7 @@ public class GameArea {
             a=points[i];
             b=points[i==3 ? 0 : i+1];
 
-            double distancePTP = Math.sqrt(Math.pow((a.x-b.x),2)+Math.pow((a.y-b.y),2));
+            double distancePTP = Utilities.distance(a,b);
             Vector2 midPoint = new Vector2((a.x+b.x)/2, (a.y+b.y)/2);
             double angle = Math.atan((a.y-b.y)/(a.x-b.x));
 

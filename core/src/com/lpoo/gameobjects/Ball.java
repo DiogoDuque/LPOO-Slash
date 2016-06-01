@@ -16,7 +16,7 @@ public class Ball {
     private BodyDef bodyDef;
     private Body body;
     private final static float radius = 2.5f;
-    private final static float velocity = 20;
+    private final static float velocity = 25;
 
     /**
      * Constructor.
@@ -58,18 +58,6 @@ public class Ball {
 
     /**
      *
-     * @return x component of the ball's position.
-     */
-    public float getX() { return bodyDef.position.x; }
-
-    /**
-     *
-     * @return y component of the ball's position.
-     */
-    public float getY() { return bodyDef.position.y; }
-
-    /**
-     * The conversion is made using GameRenderer.resizeY().
      * @return ball's radius.
      */
     public static float getRadius() { return radius; }

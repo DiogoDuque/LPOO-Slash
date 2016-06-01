@@ -31,7 +31,7 @@ public class GameWorld {
         gameArea = new GameArea(pt1,pt2,pt3,pt4,world);
         slasher = new Slasher(pt1,this);
         balls = new ArrayList<Ball>();
-       createBalls(1);
+        createBalls(1);
     }
 
     /**
@@ -97,7 +97,7 @@ public class GameWorld {
             balls.get(i).getBody().applyTorque(0,true);
         if(slasherIsMoving)
         {
-            if(!slasher.isMoving())
+            if(slasher.isMoving()!="OK") //TODO make this more specific
             {
                 slasherIsMoving=false;
                 updateGameArea();

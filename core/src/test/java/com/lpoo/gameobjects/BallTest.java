@@ -27,8 +27,6 @@ public class BallTest {
     public void testBallBasics()
     {
         ball = new Ball(x,y,world);
-        assertSame(x,(int)ball.getX()); //xPosition
-        assertSame(y,(int)ball.getY()); //yPosition
         assertSame(x,(int)ball.getBody().getPosition().x); //xPosition
         assertSame(y,(int)ball.getBody().getPosition().y); //yPosition
         //for full coverage
