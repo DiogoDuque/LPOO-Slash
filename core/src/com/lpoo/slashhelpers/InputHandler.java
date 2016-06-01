@@ -19,9 +19,7 @@ public class InputHandler implements InputProcessor {
     @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if(gameWorld.getSlasher().getFinger()!=null)
-        {
-            gameWorld.updateGameArea();
-        }
+            gameWorld.startSlashMovement();
         gameWorld.getSlasher().setFinger(null); //send info to Slasher TODO EDIT
         return true;
     }

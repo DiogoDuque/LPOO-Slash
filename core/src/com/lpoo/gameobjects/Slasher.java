@@ -5,7 +5,6 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
 import com.lpoo.gameworld.GameWorld;
 import com.lpoo.slashhelpers.Function;
 
@@ -16,26 +15,31 @@ public class Slasher {
     private GameWorld gameWorld;
     private Vector2 finger; //posicao onde o slasher ficará se houver um corte (levantar do dedo para cortar a caixa)
     private Vector2 position; //posicao atual do Slasher
-    private BodyDef bodyDef;
-    private Body body;
+    private Body body, bodyPath;
     private final static float radius = Ball.getRadius();
     private final static float velocity = 10;
 
     public Slasher(Vector2 pos, GameWorld gameWorld) {
         body=null;
-        bodyDef=null;
+        bodyPath=null;
         finger=null;
         position=pos;
         this.gameWorld=gameWorld;
     }
 
-    public Vector2 getPosition() {return position;}
+    public Vector2 getPosition() {
+        return position;
+    }
+
+    public Vector2 getBodyPosition() {return body.getPosition();}
 
     public Vector2 getFinger() {
         return finger;
     }
 
     public void setFinger(Vector2 finger) {
+        if(body!=null)
+            return;
         this.finger=null;
         if(finger==null)
         {
@@ -56,39 +60,43 @@ public class Slasher {
             }
         }
 
-        //find inclination of the line between position and finger
+        /*   center
+     .       /|  .
+      .    /  | .       Now we will see if the finger's relative position is the same as the center, when compared to fa and fb.
+       . /    |.        Example: in this example, center is above fa and fb. So, finger should also be above those two.
+       A\    / B        The boundaries, for this example, "are continued" with dots, so that we can see them clearly.
+         \  /           Concluding, if the finger is under any of those lines, the Slasher line wouldn't be drawn.
+          \/
+          SLASHER
+         */
+
         Function fa = new Function(position,sideA);
         Function fb = new Function(position,sideB);
 
         boolean validFinger=false;
         if(center.y<fa.getY(center.x)) {
-            if(center.y<fb.getY(center.x)) { //caso 1
+            if(center.y<fb.getY(center.x)) { //center under fa and fb
                 if(finger.y<fa.getY(finger.x) && finger.y<fb.getY(finger.x))
                     validFinger=true;
-                else System.out.println("caso 1: false");
-            } else { //caso 2
+            } else { //center under fa and above fb
                 if(finger.y<fa.getY(finger.x) && finger.y>fb.getY(finger.x))
                     validFinger=true;
-                else System.out.println("caso 2: false");
             }
         } else {
-            if(center.y<fb.getY(center.x)) { //caso 3
+            if(center.y<fb.getY(center.x)) { //center above fa and under fb
                 if(finger.y>=fa.getY(finger.x) && finger.y<fb.getY(finger.x))
                     validFinger=true;
-                else System.out.println("caso 3: false");
-            } else { //caso 4
+            } else { //center above fa and fb
                 if(finger.y>=fa.getY(finger.x) && finger.y>fb.getY(finger.x))
                     validFinger=true;
-                else System.out.println("caso 4: false");
             }
         }
-        if(!validFinger) //se nao estiver no espaco devido
+        if(!validFinger) //if it's not in a valid place to draw the line
             return;
 
-        //TODO BUG IS HERE
         Function funcFinger = new Function(position, finger);
         System.out.println("Slasher::getFinger() ang = " + Math.atan(funcFinger.getM()));
-        //corrigir a linha
+        //correct the line drawn, so that it stops when intersects a gameArea's edge.
         Vector2 intersect1, intersect2;
         intersect1 = new Function(center,sideA).intersect(funcFinger);
         intersect2 = new Function(center,sideB).intersect(funcFinger);
@@ -107,38 +115,84 @@ public class Slasher {
         }
     }
 
-    //usar quando iniciar o movimento do slasher TODO
-    private void startedMoving(World world)
+    //usar quando iniciar o movimento do slasher
+    public void startedMoving()
     {
-        //criar body
-        bodyDef = new BodyDef();
-        bodyDef.type = BodyDef.BodyType.DynamicBody; //é dinamico (sofre acao de forcas)
-        bodyDef.position.set(position);
-        body = world.createBody(bodyDef);
+        Vector2 direction = new Vector2(finger.x-position.x,finger.y-position.y);
+        float norm = (float)Math.sqrt(Math.pow(direction.x,2)+Math.pow(direction.y,2));
+        direction.x/=norm; //unitary
+        direction.y/=norm; //unitary
 
-        //criar forma de caixa...
+        //criar bola
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.position.set(position.x+2*direction.x,position.y+2*direction.y); //starts a bit ahead so doesnt instantly collide w/ gameArea
+        bodyDef.linearVelocity.set(velocity*direction.x,velocity*direction.y); //def linearVelocity
+        body = gameWorld.getWorld().createBody(bodyDef);
         PolygonShape dynamicBox = new PolygonShape();
         dynamicBox.setAsBox(radius,radius);
-        //...e criar uma fixture atraves dessa forma
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = dynamicBox;
         fixtureDef.density = 1.0f;
-        fixtureDef.friction = 0.3f;
+        fixtureDef.friction = 0.0f;
         fixtureDef.restitution=1.0f;
         body.createFixture(fixtureDef);
+
+        //criar path
+        bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.position.set(new Vector2());
+        bodyPath = gameWorld.getWorld().createBody(bodyDef);
     }
 
-    //moving
+    /**
+     * Called as an animation of the Slasher
+     * @return true if the ball is moving and has not collided, false if collided.
+     */
+    public boolean isMoving()
+    {
+        if(/**/false) //TODO Check if collision with contactListener
+        {
+            finishedMoving();
+            return false;
+        }
+        //pre-calculations
+        Vector2 midPoint = new Vector2((body.getPosition().x+position.x)/2,(body.getPosition().y+position.y)/2);
+        double distancePTP = Math.sqrt(Math.pow((body.getPosition().x-position.x),2)+Math.pow((body.getPosition().y-position.y),2));
+        double angle = Math.atan((body.getPosition().y-position.y)/(body.getPosition().x-position.x));
+
+        //dispose path
+        gameWorld.getWorld().destroyBody(bodyPath);
+
+        //recreate path
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.StaticBody;
+        bodyDef.position.set(midPoint);
+        bodyPath = gameWorld.getWorld().createBody(bodyDef);
+        PolygonShape pathBox = new PolygonShape();
+        pathBox.setAsBox((float)distancePTP/2, 1);
+        bodyPath.setTransform(midPoint,(float)angle);
+        bodyPath.createFixture(pathBox, 0);
+
+        return true;
+    }
 
     /**
-     * TODO usar quando parar o movimento do slasher
+     * Stops Slasher's movement
      */
-    private void finishedMoving(World world)
+    public void finishedMoving()
     {
-        //dispose body and bodyDef TODO
+        //dispose both
+        gameWorld.getWorld().destroyBody(body);
+        gameWorld.getWorld().destroyBody(bodyPath);
 
         //point to null
         body=null;
-        bodyDef=null;
+        bodyPath=null;
+    }
+
+    public void dispose()
+    {
+        body.getWorld().destroyBody(body);
     }
 }

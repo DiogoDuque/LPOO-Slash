@@ -19,11 +19,15 @@ public class GameWorld {
     private GameArea gameArea;
     private Slasher slasher;
     private ArrayList<Ball> balls;
+    private boolean slasherIsMoving=false;
 
+    /**
+     * Default constructor.
+     */
     public GameWorld() {
         //todos os objetos criados devem ter coordenadas entre (0,0) e (250,200), por razoes de scaling para o ecra (352,200)
         world = new World(new Vector2(0, 0), false); //mundo
-        Vector2 pt1=new Vector2(50,150),pt2=new Vector2(30,175),pt3=new Vector2(200,140),pt4=new Vector2(220,25);
+        Vector2 pt1=new Vector2(50,50),pt2=new Vector2(30,175),pt3=new Vector2(200,140),pt4=new Vector2(220,25);
         gameArea = new GameArea(pt1,pt2,pt3,pt4,world);
         slasher = new Slasher(pt1,this);
         balls = new ArrayList<Ball>();
@@ -81,12 +85,24 @@ public class GameWorld {
         }
     }
 
+    /**
+     * Update function
+     * @param delta
+     */
     public void update(float delta) {
         world.step(1f/60f, 6, 2);
 
         //update balls
         for(int i=0; i<balls.size(); i++)
             balls.get(i).getBody().applyTorque(0,true);
+        if(slasherIsMoving)
+        {
+            if(!slasher.isMoving())
+            {
+                slasherIsMoving=false;
+                updateGameArea();
+            }
+        }
     }
 
     public World getWorld() {
@@ -100,6 +116,8 @@ public class GameWorld {
     public ArrayList<Ball> getBalls() {
         return balls;
     }
+
+    public boolean getSlasherIsMoving() {return slasherIsMoving;}
 
     /**
      * TODO
@@ -124,6 +142,10 @@ public class GameWorld {
             else points[i]=oldPoints[i];
         }
         Vector2 toDelete = gameArea.getToDelete();
+        //animation
+
+
+        //new objects
         gameArea.dispose();
         gameArea=new GameArea(points[0],points[1],points[2],points[3],world);
       //  pointsTriangle[0] = slasher.getPosition();
@@ -159,7 +181,7 @@ public class GameWorld {
 
     }
 
-    public boolean pointInPolygon( Vector2[] pointsTriangle, Ball ball) {
+    private boolean pointInPolygon( Vector2[] pointsTriangle, Ball ball) {
 
         Vector2 center = new Vector2();
         boolean b = true;
@@ -174,7 +196,8 @@ public class GameWorld {
         }
         return b;
 }
-    public boolean isBetween (Function f, Function edge, Vector2 center, Vector2 ballPoint){
+
+    private boolean isBetween (Function f, Function edge, Vector2 center, Vector2 ballPoint){
 
         Vector2 p = f.intersect(edge);
 
@@ -201,6 +224,10 @@ public class GameWorld {
         return false;
     }
 
-
+    public void startSlashMovement()
+    {
+        slasherIsMoving=true;
+        slasher.startedMoving();
+    }
 }
 

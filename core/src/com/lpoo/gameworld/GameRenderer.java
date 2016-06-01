@@ -76,12 +76,18 @@ public class GameRenderer {
         Vector2 fingerPos = myWorld.getSlasher().getFinger();
         Vector2 slasherPos = myWorld.getSlasher().getPosition();
         shapeRenderer.circle(slasherPos.x,slasherPos.y,Ball.getRadius());
-        if(fingerPos!=null)
+        if(myWorld.getSlasherIsMoving())
+        {
+            Vector2 tempSlasher = myWorld.getSlasher().getBodyPosition();
+            shapeRenderer.circle(tempSlasher.x,tempSlasher.y,Ball.getRadius());
+            shapeRenderer.line(slasherPos,tempSlasher);
+        }
+        else if(fingerPos!=null)
         {
             //draw future Slasher
             shapeRenderer.circle(fingerPos.x,fingerPos.y,Ball.getRadius());
             //draw line
-            shapeRenderer.line(slasherPos.x,slasherPos.y,fingerPos.x,fingerPos.y);
+            shapeRenderer.line(slasherPos,fingerPos);
         }
 
         //Draw Balls
