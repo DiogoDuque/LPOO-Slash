@@ -5,12 +5,11 @@ import com.lpoo.slashhelpers.AssetLoader;
 
 public class Slash extends Game {
 
-
     @Override
     public void create() {
         System.out.println("Slash Game Created!");
         AssetLoader.load();
-        setScreen(new GameScreen(this));
+        setScreen(new MenuScreen(this));
     }
 
     @Override

@@ -1,6 +1,9 @@
 package com.lpoo.slashhelpers;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector2;
+import com.lpoo.slash.MenuScreen;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,6 +24,7 @@ public final class Utilities {
     {
         return Math.sqrt(Math.pow(pt1.x-pt2.x,2)+Math.pow(pt1.y-pt2.y,2));
     }
+
     public static List<Vector2> getCircleLineIntersectionPoint(Vector2 pointA, Vector2 pointB, Vector2 center, float radius) {
         float baX = pointB.x - pointA.x;
         float baY = pointB.y - pointA.y;
@@ -51,5 +55,14 @@ public final class Utilities {
         Vector2 p2 = new Vector2(pointA.x - baX * abScalingFactor2, pointA.y
                 - baY * abScalingFactor2);
         return Arrays.asList(p1, p2);
+    }
+
+    public static void changeScreen(Game game, Screen newScreen)
+    {
+        Screen oldScreen = game.getScreen();
+
+        game.setScreen(newScreen);
+        if(oldScreen != null)
+            oldScreen.dispose();
     }
 }
