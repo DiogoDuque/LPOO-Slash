@@ -5,7 +5,11 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.lpoo.slashhelpers.Function;
 import com.lpoo.slashhelpers.Utilities;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created with 4 vertices with this structure:
@@ -37,7 +41,20 @@ public class GameArea {
         points[2]=p3;
         points[3]=p4;
         //checkAndCorrect();
-        System.out.println("GameArea::GameArea() - GameArea has vertices: p1="+points[0]+", p2="+points[1]+", p3="+points[2]+", p4="+points[3]);
+
+        float area =polygonArea();
+     //   System.out.println("GameArea::GameArea() - GameArea has vertices: p1="+points[0]+", p2="+points[1]+", p3="+points[2]+", p4="+points[3]+"area= "+area);
+      // Vector2 a1 = new Vector2(10,10);
+      // Vector2 b2 = new Vector2(4,4);
+       //Vector2 b3 = new Vector2(5,5);
+       //List<Vector2> x = Arrays.asList();
+       //x = Utilities.getCircleLineIntersectionPoint(a1, b2 ,a1,10);
+       //System.out.println("a = "+b3+" b= "+b2+" c "+a1+" pontos intersectados 1 "+x.get(0)+" pontos intersectados 2 "+x.get(1));
+
+
+
+
+
 
         for(int i=0; i<4; i++) {
             Vector2 a,b;
@@ -156,4 +173,19 @@ public class GameArea {
         }
 
     }
+
+
+
+    public float polygonArea()
+    {   int numPoints = 4;
+        float area = 0;         // Accumulates area in the loop
+        int j = numPoints-1;  // The last vertex is the 'previous' one to the first
+
+        for (int i=0; i<numPoints; i++)
+        { area = area +  (points[j].x+points[i].x) * (points[j].y-points[i].y);
+            j = i;  //j is previous vertex to i
+        }
+        return area/2;
+    }
+
 }

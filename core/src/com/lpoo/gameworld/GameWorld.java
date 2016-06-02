@@ -7,8 +7,11 @@ import com.lpoo.gameobjects.Ball;
 import com.lpoo.gameobjects.GameArea;
 import com.lpoo.gameobjects.Slasher;
 import com.lpoo.slashhelpers.Function;
+import com.lpoo.slashhelpers.Utilities;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -148,11 +151,13 @@ public class GameWorld {
         //new objects
         gameArea.dispose();
         gameArea=new GameArea(points[0],points[1],points[2],points[3],world);
+        if(!resize())
+        slasher=new Slasher(newPoint,this);
       //  pointsTriangle[0] = slasher.getPosition();
         //pointsTriangle[1] = toDelete;
        // pointsTriangle[2] = newPoint;
-        System.out.println("GameWorld::PointsTriangle() = p1"+pointsTriangle[0]+"     p2 "+pointsTriangle[1]+" p3"+pointsTriangle[2]);
-        slasher=new Slasher(newPoint,this);
+       // System.out.println("GameWorld::PointsTriangle() = p1"+pointsTriangle[0]+"     p2 "+pointsTriangle[1]+" p3"+pointsTriangle[2]);
+
         int counter = checkBalls(pointsTriangle);
         createBalls(counter+1);
     }
@@ -191,15 +196,16 @@ public class GameWorld {
         Function f = new Function(center, ballPoint);
         for(int i = 0;i<pointsTriangle.length;i++){
             Function edge = new Function(pointsTriangle[i], pointsTriangle[((i+1)%3)]);
-            if(isBetween(f,edge,center,ballPoint))
+            Vector2 p = f.intersect(edge);
+            if(isBetween(center, p, ballPoint))
                 b = false;
         }
         return b;
 }
 
-    private boolean isBetween (Function f, Function edge, Vector2 center, Vector2 ballPoint){
+    private boolean isBetween ( Vector2 center, Vector2 p, Vector2 ballPoint){
 
-        Vector2 p = f.intersect(edge);
+
 
         System.out.println("GameWorld::isBetween() center:"+ center + " p" + p + "ball" + ballPoint);
         if(p == null)
@@ -228,6 +234,45 @@ public class GameWorld {
     {
         slasherIsMoving=true;
         slasher.startedMoving();
+    }
+
+    public boolean resize(){
+        // if(polygonArea()>10000)
+        //      return;
+        //   while(polygonArea()<15000){
+        //Vector2 p1 = new Vector2(0,0);
+        List<Vector2> x = Arrays.asList(null,null);
+        int k= 0;
+        if (gameArea.polygonArea()<15000){
+            int i = 0;
+            while(gameArea.polygonArea()<18000) {
+
+                Function y = new Function(gameArea.getPoints()[i % 4], gameArea.getPoints()[(i + 2) % 4]);
+                Function y1 = new Function(gameArea.getPoints()[(i + 1) % 4], gameArea.getPoints()[(i + 3) % 4]);
+                Vector2 center = y.intersect(y1);
+                //   }
+
+                // Vector2 y2 = new Function(,points[0]+100);
+
+                x = Utilities.getCircleLineIntersectionPoint(gameArea.getPoints()[(i + 2) % 4], center, gameArea.getPoints()[i % 4], 10);
+                System.out.println("resize" + x.get(1));
+
+                if (isBetween(center, x.get(k), gameArea.getPoints()[i % 4])) {
+                    k = 1;
+                }
+                if (slasher.getPosition() == gameArea.getPoints()[i % 4]) {
+                    slasher = new Slasher(x.get(k), this);
+                }
+                gameArea.getPoints()[i%4] = x.get(k);
+                i++;
+            }
+            return true;
+        }
+
+
+
+        //existe um bug aqui  porque o x.
+        return false;
     }
 }
 
