@@ -3,6 +3,8 @@ package com.lpoo.slash;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 
+import static com.lpoo.slashhelpers.Utilities.changeScreen;
+
 /**
  * Created by Diogo on 02-06-2016.
  */
@@ -13,8 +15,9 @@ public class MenuScreen implements Screen {
     public MenuScreen(Game game)
     {
         this.game=game;
-        game.setScreen(new GameScreen(game));
     }
+
+    public void changeScreenToGame() {changeScreen(game, new GameScreen(game));}
 
     @Override
     public void render(float delta) {

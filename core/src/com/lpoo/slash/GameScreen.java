@@ -12,6 +12,8 @@ import com.lpoo.gameworld.GameRenderer;
 import com.lpoo.gameworld.GameWorld;
 import com.lpoo.slashhelpers.InputHandler;
 
+import static com.lpoo.slashhelpers.Utilities.changeScreen;
+
 public class GameScreen implements Screen {
 
     static private Vector2 screenDimensions;
@@ -24,6 +26,7 @@ public class GameScreen implements Screen {
         System.out.println("GameScreen::GameScreen() - screenWidth = " + Gdx.graphics.getWidth() +
                             ", screenHeight = " + Gdx.graphics.getHeight());
         this.game=game;
+        //changeScreen(game, this);
         gameWorld = new GameWorld();
 
         screenDimensions = new Vector2(352,200);
@@ -39,14 +42,13 @@ public class GameScreen implements Screen {
         return dims;
     }
 
-    public void changeScreenToMainMenu()
+    public void changeScreenToMenu()
     {
-        game.setScreen(new MenuScreen(game));
+        changeScreen(game, new MenuScreen(game));
     }
 
     @Override
     public void render(float delta) {
-        System.out.println("B");
         runTime += delta;
         gameWorld.update(delta);
         renderer.render(runTime);
