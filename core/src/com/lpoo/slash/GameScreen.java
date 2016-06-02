@@ -46,7 +46,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        System.out.println("B");
+      //  System.out.println("B");
         runTime += delta;
         gameWorld.update(delta);
         renderer.render(runTime);

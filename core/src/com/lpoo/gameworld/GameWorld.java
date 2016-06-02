@@ -153,6 +153,7 @@ public class GameWorld {
         gameArea=new GameArea(points[0],points[1],points[2],points[3],world);
         if(!resize())
         slasher=new Slasher(newPoint,this);
+        checkBounds();
       //  pointsTriangle[0] = slasher.getPosition();
         //pointsTriangle[1] = toDelete;
        // pointsTriangle[2] = newPoint;
@@ -243,9 +244,9 @@ public class GameWorld {
         //Vector2 p1 = new Vector2(0,0);
         List<Vector2> x = Arrays.asList(null,null);
         int k= 0;
-        if (gameArea.polygonArea()<15000){
+        if (gameArea.polygonArea()<10000){
             int i = 0;
-            while(gameArea.polygonArea()<18000) {
+            while(gameArea.polygonArea()<12000) {
 
                 Function y = new Function(gameArea.getPoints()[i % 4], gameArea.getPoints()[(i + 2) % 4]);
                 Function y1 = new Function(gameArea.getPoints()[(i + 1) % 4], gameArea.getPoints()[(i + 3) % 4]);
@@ -264,15 +265,28 @@ public class GameWorld {
                     slasher = new Slasher(x.get(k), this);
                 }
                 gameArea.getPoints()[i%4] = x.get(k);
+
+
                 i++;
             }
+
             return true;
         }
 
-
-
-        //existe um bug aqui  porque o x.
         return false;
+    }
+    public void checkBounds(){
+
+            for(int i = 0 ; i <gameArea.getPoints().length;i++){
+                if(gameArea.getPoints()[i].x <10)
+                    gameArea.getPoints()[i].x = 10;
+                if(gameArea.getPoints()[i].x >240)
+                    gameArea.getPoints()[i].x = 240;
+                if(gameArea.getPoints()[i].y <0)
+                    gameArea.getPoints()[i].y = 0;
+                if(gameArea.getPoints()[i].y >190)
+                    gameArea.getPoints()[i].y = 190;
+            }
     }
 }
 

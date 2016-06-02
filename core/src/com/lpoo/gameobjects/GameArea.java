@@ -43,7 +43,7 @@ public class GameArea {
         //checkAndCorrect();
 
         float area =polygonArea();
-     //   System.out.println("GameArea::GameArea() - GameArea has vertices: p1="+points[0]+", p2="+points[1]+", p3="+points[2]+", p4="+points[3]+"area= "+area);
+        System.out.println("GameArea::GameArea() - GameArea has vertices: p1="+points[0]+", p2="+points[1]+", p3="+points[2]+", p4="+points[3]+"area= "+area);
       // Vector2 a1 = new Vector2(10,10);
       // Vector2 b2 = new Vector2(4,4);
        //Vector2 b3 = new Vector2(5,5);
