@@ -52,5 +52,4 @@ core/build/
 
 *.bin
 *.json
-*.properties
 *.lock
