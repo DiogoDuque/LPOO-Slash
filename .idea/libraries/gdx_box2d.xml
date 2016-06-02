@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="gdx-box2d">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/core/libs/gdx-box2d.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
