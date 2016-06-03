@@ -222,8 +222,8 @@ public class Slasher {
 
         for(int i=0; i<2; i++) //checking slasher's proximity to the 2 functions
         {
-            double distance1 = Math.abs(position.y-functions[i].getY(body.getPosition().x)),
-                    distance2 = Math.abs(position.x-functions[i].getX(body.getPosition().y));
+            double distance1 = Math.abs(body.getPosition().y-functions[i].getY(body.getPosition().x)),
+                    distance2 = Math.abs(body.getPosition().x-functions[i].getX(body.getPosition().y));
             double distance = Math.min(distance1,distance2);
             if(distance < 2) {
                 Gdx.app.log("Slasher::checkCollisions","Slasher End Reached");
