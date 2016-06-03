@@ -41,6 +41,12 @@ public class Slasher {
         return finger;
     }
 
+    /**
+     * If the line passing in the slasher's position and the received finger can be drawn inside the gameArea,
+     * this.finger will keep the coordinates of the intersection between that line and a gameArea's edge;
+     * ff not, this.finger=null.
+     * @param finger Coordinates where the user's finger touched the screen.
+     */
     public void setFinger(Vector2 finger) {
         if(body!=null)
             return;
@@ -115,7 +121,9 @@ public class Slasher {
         }
     }
 
-    //usar quando iniciar o movimento do slasher
+    /**
+     * Used to start slasher's movement, including the creation of the bodyes.
+     */
     public void startedMoving()
     {
         Vector2 direction = new Vector2(finger.x-position.x,finger.y-position.y);
@@ -179,7 +187,7 @@ public class Slasher {
     }
 
     /**
-     * Stops Slasher's movement
+     * Stops Slasher's movement and deletes the bodies.
      */
     private void finishedMoving()
     {
@@ -192,6 +200,10 @@ public class Slasher {
         bodyPath=null;
     }
 
+    /**
+     * Check if the moving slasher collides with a gameArea line or a Ball.
+     * @return "Game Over" if collided with a ball, "Slasher End Reached" if collided with a line, "OK" otherwise.
+     */
     private String checkCollisions()
     {
         //check with balls
