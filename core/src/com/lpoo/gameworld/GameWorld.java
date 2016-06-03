@@ -29,6 +29,11 @@ public class GameWorld {
     private Slasher slasher;
     private ArrayList<Ball> balls;
     private boolean slasherIsMoving=false;
+    static int index;
+
+    public static void setIndex(int index) {
+        GameWorld.index = index;
+    }
 
     /**
      * Default constructor.
@@ -38,7 +43,7 @@ public class GameWorld {
         //todos os objetos criados devem ter coordenadas entre (0,0) e (250,200), por razoes de scaling para o ecra (352,200)
         world = new World(new Vector2(0, 0), false); //mundo
         Vector2 pt1=new Vector2(50,50),pt2=new Vector2(30,175),pt3=new Vector2(200,140),pt4=new Vector2(220,25);
-        gameArea = new GameArea(pt1,pt2,pt3,pt4,world);
+        gameArea = new GameArea(pt1,pt2,pt3,pt4,world,this);
         slasher = new Slasher(pt1,this);
         balls = new ArrayList<Ball>();
         createBalls(1);
@@ -127,6 +132,10 @@ public class GameWorld {
 
     public Slasher getSlasher() {return slasher;}
 
+    public void setSlasher(Slasher slasher) {
+        this.slasher = slasher;
+    }
+
     public ArrayList<Ball> getBalls() {
         return balls;
     }
@@ -146,14 +155,16 @@ public class GameWorld {
         pointsTriangle[0] = slasher.getPosition();
       //  pointsTriangle[1] = toDelete;
 
-        for(int i=0; i<4; i++)
+        index = -1;
+        for( int j=0; j<4; j++)
         {
-            if(gameArea.getToDelete()==oldPoints[i]){
-                points[i]=newPoint;
+            if(gameArea.getToDelete()==oldPoints[j]){
+                points[j]=newPoint;
+                index = j;
                 pointsTriangle[2] = newPoint;
                 pointsTriangle[1]=gameArea.getToDelete();
             }
-            else points[i]=oldPoints[i];
+            else points[j]=oldPoints[j];
         }
         Vector2 toDelete = gameArea.getToDelete();
         //animation
@@ -161,10 +172,12 @@ public class GameWorld {
 
         //new objects
         gameArea.dispose();
-        checkBounds(points);
-        gameArea=new GameArea(points[0],points[1],points[2],points[3],world);
+       // checkBounds(points);
+        slasher = new Slasher(newPoint, this);
+        gameArea=new GameArea(points[0],points[1],points[2],points[3],world, this);
         //if(!resize())
-        slasher=new Slasher(newPoint,this);
+       // checkBounds(points);
+    //   if(pointsTriangle[0] == slasher.getPosition())
       //  pointsTriangle[0] = slasher.getPosition();
         //pointsTriangle[1] = toDelete;
        // pointsTriangle[2] = newPoint;
@@ -215,7 +228,7 @@ public class GameWorld {
         return b;
 }
 
-    private boolean isBetween ( Vector2 center, Vector2 p, Vector2 ballPoint){
+    public static boolean isBetween ( Vector2 center, Vector2 p, Vector2 ballPoint){
 
 
 
@@ -248,44 +261,7 @@ public class GameWorld {
         slasher.startedMoving();
     }
 
-    public boolean resize(){
-        // if(polygonArea()>10000)
-        //      return;
-        //   while(polygonArea()<15000){
-        //Vector2 p1 = new Vector2(0,0);
-        List<Vector2> x = Arrays.asList(null,null);
-        int k= 0;
-        if (gameArea.polygonArea()<10000){
-            int i = 0;
-            while(gameArea.polygonArea()<12000) {
 
-                Function y = new Function(gameArea.getPoints()[i % 4], gameArea.getPoints()[(i + 2) % 4]);
-                Function y1 = new Function(gameArea.getPoints()[(i + 1) % 4], gameArea.getPoints()[(i + 3) % 4]);
-                Vector2 center = y.intersect(y1);
-                //   }
-
-                // Vector2 y2 = new Function(,points[0]+100);
-
-                x = Utilities.getCircleLineIntersectionPoint(gameArea.getPoints()[(i + 2) % 4], center, gameArea.getPoints()[i % 4], 10);
-                System.out.println("resize" + x.get(1));
-
-                if (isBetween(center, x.get(k), gameArea.getPoints()[i % 4])) {
-                    k = 1;
-                }
-                if (slasher.getPosition() == gameArea.getPoints()[i % 4]) {
-                    slasher = new Slasher(x.get(k), this);
-                }
-                gameArea.getPoints()[i%4] = x.get(k);
-
-
-                i++;
-            }
-
-            return true;
-        }
-
-        return false;
-    }
 
     public void checkBounds(Vector2[] points){
 

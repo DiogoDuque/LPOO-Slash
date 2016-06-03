@@ -5,11 +5,15 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+import com.lpoo.gameworld.GameWorld;
 import com.lpoo.slashhelpers.Function;
 import com.lpoo.slashhelpers.Utilities;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static com.lpoo.gameworld.GameWorld.isBetween;
+import static com.lpoo.gameworld.GameWorld.setIndex;
 
 /**
  * Created with 4 vertices with this structure:
@@ -30,8 +34,8 @@ public class GameArea {
     private Vector2 toDelete; //vertice que sera apagado e substituido por outro depois do corte
     private Vector2 center = new Vector2(125,100); //centro da zona onde é suposto a gameArea estar
     private Body[] bodies;
-
-    public GameArea(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, World world)
+    private GameWorld gameWorld;
+    public GameArea(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, World world, GameWorld gameWorld)
     {
         toDelete=null;
         bodies = new Body[4];
@@ -40,6 +44,7 @@ public class GameArea {
         points[1]=p2;
         points[2]=p3;
         points[3]=p4;
+        this.gameWorld=gameWorld;
         //checkAndCorrect();
 
         float area =polygonArea();
@@ -51,9 +56,9 @@ public class GameArea {
        //x = Utilities.getCircleLineIntersectionPoint(a1, b2 ,a1,10);
        //System.out.println("a = "+b3+" b= "+b2+" c "+a1+" pontos intersectados 1 "+x.get(0)+" pontos intersectados 2 "+x.get(1));
 
+        resize();
 
-
-
+        gameWorld.checkBounds(points);
 
 
         for(int i=0; i<4; i++) {
@@ -188,6 +193,45 @@ public class GameArea {
             j = i;  //j is previous vertex to i
         }
         return area/2;
+    }
+
+    public boolean resize(){
+        // if(polygonArea()>10000)
+        //      return;
+        //   while(polygonArea()<15000){
+        //Vector2 p1 = new Vector2(0,0);
+        List<Vector2> x = Arrays.asList(null,null);
+        int k= 0;
+        if (polygonArea()<10000){
+            int i = 0;
+            while(polygonArea()<12000) {
+
+                Function y = new Function(points[i % 4], points[(i + 2) % 4]);
+                Function y1 = new Function(points[(i + 1) % 4], points[(i + 3) % 4]);
+                Vector2 center = y.intersect(y1);
+                //   }
+
+                // Vector2 y2 = new Function(,points[0]+100);
+
+                x = Utilities.getCircleLineIntersectionPoint(points[(i + 2) % 4], center, points[i % 4], 10);
+                System.out.println("resize" + x.get(1));
+
+                if (isBetween(center, x.get(k),points[i % 4])) {
+                    k = 1;
+                }
+                if (gameWorld.getSlasher().getPosition() == points[i % 4]) {
+                    gameWorld.setSlasher(new Slasher(x.get(k), gameWorld));
+                }
+                points[i%4] = x.get(k);
+
+
+                i++;
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
 }

@@ -25,8 +25,8 @@ public class SlasherTest {
     @Test
     public void testFinger()
     {
-        Vector2 pt1=new Vector2(15,35),pt2=new Vector2(25,175),pt3=new Vector2(215,185),pt4=new Vector2(235,15);
-        gameArea = new GameArea(pt1,pt2,pt3,pt4,gameWorld.getWorld()); //gameArea ligeiramente obtusa (no angulo do vertice do slasher)
+       Vector2 pt1=new Vector2(15,35),pt2=new Vector2(25,175),pt3=new Vector2(215,185),pt4=new Vector2(235,15);
+        gameArea = new GameArea(pt1,pt2,pt3,pt4,gameWorld.getWorld(),gameWorld); //gameArea ligeiramente obtusa (no angulo do vertice do slasher)
         slasher=new Slasher(pt2,gameWorld);
         gameWorld=new GameWorld(world,gameArea,slasher);
 
