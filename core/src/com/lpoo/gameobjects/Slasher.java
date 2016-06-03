@@ -200,7 +200,7 @@ public class Slasher {
         {
             Vector2 ball=balls.get(i).getBody().getPosition();
             double distance=Utilities.distance(ball,body.getPosition()); //distance between the centers o slasher and ball
-            if(distance<2.6f*radius) //should be 2*radius, but as the bodies have a bit more radius, here we account for a bit more too
+            if(distance<2.8f*radius) //should be 2*radius, but as the bodies have a bit more radius, here we account for a bit more too
             {
                 Gdx.app.log("Slasher::checkCollisions","Game Over");
                 return "Game Over";

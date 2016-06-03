@@ -8,13 +8,9 @@ import com.lpoo.gameobjects.Ball;
 import com.lpoo.gameobjects.GameArea;
 import com.lpoo.gameobjects.Slasher;
 import com.lpoo.slash.GameOverScreen;
-import com.lpoo.slash.GameScreen;
 import com.lpoo.slashhelpers.Function;
-import com.lpoo.slashhelpers.Utilities;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 import static com.lpoo.slashhelpers.Utilities.changeScreen;
@@ -29,7 +25,7 @@ public class GameWorld {
     private Slasher slasher;
     private ArrayList<Ball> balls;
     private boolean slasherIsMoving=false;
-    static int index;
+    private static int index;
 
     public static void setIndex(int index) {
         GameWorld.index = index;
@@ -140,6 +136,10 @@ public class GameWorld {
         return balls;
     }
 
+    /**
+     *
+     * @return boolean slasherIsMoving.
+     */
     public boolean getSlasherIsMoving() {return slasherIsMoving;}
 
     /**
@@ -255,25 +255,68 @@ public class GameWorld {
         return false;
     }
 
+    /**
+     * Called when slash starts to move/cut the gameArea.
+     * Also sets slasherIsMoving to true.
+     */
     public void startSlashMovement()
     {
         slasherIsMoving=true;
         slasher.startedMoving();
     }
 
-
-
+    /**
+     * Changes the points (if needed) so that each of them is in his quadrant and not too close to the sides of the board.
+     * @param points points that will be used to create a gameArea.
+     */
     public void checkBounds(Vector2[] points){
 
             for(int i = 0 ; i <points.length;i++){
+
+                //checks 'x' border of screen
                 if(points[i].x <10)
                     points[i].x = 10;
-                if(points[i].x >240)
+                else if(points[i].x >240)
                     points[i].x = 240;
-                if(points[i].y <0)
-                    points[i].y = 0;
-                if(points[i].y >190)
+
+                //checks 'y' border of screen
+                if(points[i].y <10)
+                    points[i].y = 10;
+                else if(points[i].y >190)
                     points[i].y = 190;
+
+                //checks quadrants
+                switch(i)
+                {
+                    case 0: //1st quadrant - up left
+                        if(points[i].x>GameArea.center.x)
+                            points[i].x=GameArea.center.x;
+                        if(points[i].y>GameArea.center.y)
+                            points[i].y=GameArea.center.y;
+                        break;
+
+                    case 1: //2nd quadrant - down left
+                        if(points[i].x>GameArea.center.x)
+                            points[i].x=GameArea.center.x;
+                        if(points[i].y<GameArea.center.y)
+                            points[i].y=GameArea.center.y;
+                        break;
+
+                    case 2: //3rd quadrant - down right
+                        if(points[i].x<GameArea.center.x)
+                            points[i].x=GameArea.center.x;
+                        if(points[i].y<GameArea.center.y)
+                            points[i].y=GameArea.center.y;
+                        break;
+
+                    case 3: //4th quadrant - up right
+                        if(points[i].x<GameArea.center.x)
+                            points[i].x=GameArea.center.x;
+                        if(points[i].y>GameArea.center.y)
+                            points[i].y=GameArea.center.y;
+                        break;
+                }
+
             }
     }
 }
