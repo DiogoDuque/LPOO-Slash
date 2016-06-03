@@ -10,8 +10,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.lpoo.slashhelpers.InputHandler;
 import com.lpoo.slashhelpers.Utilities;
 
 /**
@@ -49,8 +47,27 @@ public class GameOverScreen implements Screen {
 
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-                Utilities.changeScreen(game, new GameScreen(game));
+                if(screenY>height*(3/4))
+                {
+                    System.out.println("AA");
+                    if(screenX<width/2)
+                        Utilities.changeScreen(game, new MenuScreen(game));
+                    else Utilities.changeScreen(game, new GameScreen(game));
+                }
+                Gdx.app.log("GameOverScreen::inputs","x="+screenX+", y="+screenY);
                 return true;
+            }
+
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                Gdx.app.log("GameOverScreen::inputs","down");
+                return false;
+            }
+
+            @Override
+            public boolean touchDragged(int screenX, int screenY, int pointer) {
+                Gdx.app.log("GameOverScreen::inputs","dragged");
+                return false;
             }
 
             @Override
@@ -65,16 +82,6 @@ public class GameOverScreen implements Screen {
 
             @Override
             public boolean keyTyped(char character) {
-                return false;
-            }
-
-            @Override
-            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-                return false;
-            }
-
-            @Override
-            public boolean touchDragged(int screenX, int screenY, int pointer) {
                 return false;
             }
 
@@ -103,7 +110,6 @@ public class GameOverScreen implements Screen {
 
         batch.draw(background, 0, 0, width, height);
         font.draw(batch, "Score: 35 <- temporary and static value", 40, 125);
-        font.draw(batch,"Touch screen to play again", 150,50);
 
         batch.end();
 
