@@ -161,6 +161,10 @@ public class GameArea {
 
     public Vector2[] getPoints() {return points;}
 
+    /**
+     *
+     * @param toDelete corner to delete after gameArea has been fully slashed
+     */
     public void setToDelete(Vector2 toDelete) {this.toDelete=toDelete;}
 
     public Vector2 getToDelete() {return toDelete;}
@@ -173,8 +177,6 @@ public class GameArea {
         }
 
     }
-
-
 
     public float polygonArea()
     {   int numPoints = 4;

@@ -16,7 +16,6 @@ import static com.lpoo.slashhelpers.Utilities.changeScreen;
 
 public class GameScreen implements Screen {
 
-    static private Vector2 screenDimensions;
     private Game game; //to change Screens
     private GameWorld gameWorld;
     private GameRenderer renderer;
@@ -27,18 +26,17 @@ public class GameScreen implements Screen {
                             ", screenHeight = " + Gdx.graphics.getHeight());
         this.game=game;
         //changeScreen(game, this);
-        gameWorld = new GameWorld();
+        gameWorld = new GameWorld(game);
 
-        screenDimensions = new Vector2(352,200);
-        renderer = new GameRenderer(gameWorld, screenDimensions);
+        renderer = new GameRenderer(gameWorld);
 
         Gdx.input.setInputProcessor(new InputHandler(gameWorld));
     }
 
     public static Vector2 convertDimensions(Vector2 dims)
     {
-        dims.x = dims.x*screenDimensions.x/Gdx.app.getGraphics().getWidth();
-        dims.y = dims.y*screenDimensions.y/Gdx.app.getGraphics().getHeight();
+        dims.x = dims.x*Slash.screenDimensions.x/Gdx.app.getGraphics().getWidth();
+        dims.y = dims.y*Slash.screenDimensions.y/Gdx.app.getGraphics().getHeight();
         return dims;
     }
 

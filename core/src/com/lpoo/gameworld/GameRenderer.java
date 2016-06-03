@@ -12,6 +12,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.lpoo.gameobjects.Ball;
 import com.lpoo.gameobjects.GameArea;
 import com.lpoo.gameobjects.Slasher;
+import com.lpoo.slash.Slash;
 
 import java.util.ArrayList;
 
@@ -32,10 +33,10 @@ public class GameRenderer {
     Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
 
-    public GameRenderer(GameWorld world, Vector2 dimensions) {
+    public GameRenderer(GameWorld world) {
         myWorld = world;
         cam = new OrthographicCamera();
-        cam.setToOrtho(true, dimensions.x, dimensions.y);
+        cam.setToOrtho(true, Slash.screenDimensions.x, Slash.screenDimensions.y);
         //gameArea = myWorld.getGameArea();
         //slasher = myWorld.getSlasher();
         //balls = myWorld.getBalls();

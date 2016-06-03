@@ -126,7 +126,7 @@ public class Slasher {
         //criar bola
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
-        bodyDef.position.set(position.x+direction.x,position.y+direction.y); //starts a bit ahead so doesnt instantly collide w/ gameArea
+        bodyDef.position.set(position.x,position.y); //starts a bit ahead so doesnt instantly collide w/ gameArea
         bodyDef.linearVelocity.set(velocity*direction.x,velocity*direction.y); //def linearVelocity
         body = gameWorld.getWorld().createBody(bodyDef);
         PolygonShape dynamicBox = new PolygonShape();
@@ -171,7 +171,7 @@ public class Slasher {
         bodyDef.position.set(midPoint);
         bodyPath = gameWorld.getWorld().createBody(bodyDef);
         PolygonShape pathBox = new PolygonShape();
-        pathBox.setAsBox((float)distancePTP/2, 1);
+        pathBox.setAsBox((float)distancePTP/2, 0.1f);
         bodyPath.setTransform(midPoint,(float)angle);
         bodyPath.createFixture(pathBox, 0);
 
@@ -200,7 +200,7 @@ public class Slasher {
         {
             Vector2 ball=balls.get(i).getBody().getPosition();
             double distance=Utilities.distance(ball,body.getPosition()); //distance between the centers o slasher and ball
-            if(distance<Ball.getRadius()+radius)
+            if(distance<2.6f*radius) //should be 2*radius, but as the bodies have a bit more radius, here we account for a bit more too
             {
                 Gdx.app.log("Slasher::checkCollisions","Game Over");
                 return "Game Over";
@@ -210,21 +210,22 @@ public class Slasher {
         //check with gameArea
         Vector2[] pts = gameWorld.getGameArea().getPoints();
         Function[] functions = new Function[2];
-        for(int i=0; i<4; i++)
+        for(int i=0; i<4; i++) //getting the slasher's opposite functions
         {
             if(pts[i]==position)
             {
                 functions[0]=new Function(pts[(i+1)%4],pts[(i+2)%4]);
                 functions[1]=new Function(pts[(i+2)%4],pts[(i+3)%4]);
+                break;
             }
         }
 
-        for(int i=0; i<2; i++)
+        for(int i=0; i<2; i++) //checking slasher's proximity to the 2 functions
         {
             double distance1 = Math.abs(position.y-functions[i].getY(body.getPosition().x)),
                     distance2 = Math.abs(position.x-functions[i].getX(body.getPosition().y));
             double distance = Math.min(distance1,distance2);
-            if(distance < 50) {
+            if(distance < 2) {
                 Gdx.app.log("Slasher::checkCollisions","Slasher End Reached");
                 return "Slasher End Reached";
             }

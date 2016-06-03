@@ -1,11 +1,14 @@
 package com.lpoo.gameworld;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.lpoo.gameobjects.Ball;
 import com.lpoo.gameobjects.GameArea;
 import com.lpoo.gameobjects.Slasher;
+import com.lpoo.slash.GameOverScreen;
+import com.lpoo.slash.GameScreen;
 import com.lpoo.slashhelpers.Function;
 import com.lpoo.slashhelpers.Utilities;
 
@@ -14,10 +17,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import static com.lpoo.slashhelpers.Utilities.changeScreen;
+
 /**
  * Created by Diogo on 26-04-2016.
  */
 public class GameWorld {
+    private Game game;
     private World world;
     private GameArea gameArea;
     private Slasher slasher;
@@ -27,7 +33,8 @@ public class GameWorld {
     /**
      * Default constructor.
      */
-    public GameWorld() {
+    public GameWorld(Game game) {
+        this.game=game;
         //todos os objetos criados devem ter coordenadas entre (0,0) e (250,200), por razoes de scaling para o ecra (352,200)
         world = new World(new Vector2(0, 0), false); //mundo
         Vector2 pt1=new Vector2(50,50),pt2=new Vector2(30,175),pt3=new Vector2(200,140),pt4=new Vector2(220,25);
@@ -38,7 +45,7 @@ public class GameWorld {
     }
 
     /**
-     * Constructor used for debugging and JUnit4.
+     * Constructor used for JUnit4.
      * @param world World object for physics.
      * @param gameArea area where the balls will wander.
      * @param slasher slasher for this gameArea.
@@ -100,10 +107,14 @@ public class GameWorld {
             balls.get(i).getBody().applyTorque(0,true);
         if(slasherIsMoving)
         {
-            if(slasher.isMoving()!="OK") //TODO make this more specific
+            String message=slasher.isMoving();
+            if(message=="Slasher End Reached")
             {
                 slasherIsMoving=false;
                 updateGameArea();
+            } else if(message=="Game Over") {
+                slasherIsMoving=false;
+                changeScreen(game, new GameOverScreen(game));
             }
         }
     }
@@ -123,15 +134,14 @@ public class GameWorld {
     public boolean getSlasherIsMoving() {return slasherIsMoving;}
 
     /**
-     * TODO
      * Called when the Slasher can (and will) cut the GameArea.
      * Cuts the GameArea by recreating it and creating one more ball.
      */
     public void updateGameArea()
     {
         Vector2[] points = new Vector2[4];
-        Vector2 newPoint = new Vector2(slasher.getFinger());
         Vector2[] oldPoints = gameArea.getPoints();
+        Vector2 newPoint = new Vector2(slasher.getFinger());
         Vector2[] pointsTriangle = new Vector2[3];
         pointsTriangle[0] = slasher.getPosition();
       //  pointsTriangle[1] = toDelete;
@@ -141,7 +151,8 @@ public class GameWorld {
             if(gameArea.getToDelete()==oldPoints[i]){
                 points[i]=newPoint;
                 pointsTriangle[2] = newPoint;
-                pointsTriangle[1]=gameArea.getToDelete();}
+                pointsTriangle[1]=gameArea.getToDelete();
+            }
             else points[i]=oldPoints[i];
         }
         Vector2 toDelete = gameArea.getToDelete();
@@ -150,10 +161,10 @@ public class GameWorld {
 
         //new objects
         gameArea.dispose();
+        checkBounds(points);
         gameArea=new GameArea(points[0],points[1],points[2],points[3],world);
-        if(!resize())
+        //if(!resize())
         slasher=new Slasher(newPoint,this);
-        checkBounds();
       //  pointsTriangle[0] = slasher.getPosition();
         //pointsTriangle[1] = toDelete;
        // pointsTriangle[2] = newPoint;
@@ -275,17 +286,18 @@ public class GameWorld {
 
         return false;
     }
-    public void checkBounds(){
 
-            for(int i = 0 ; i <gameArea.getPoints().length;i++){
-                if(gameArea.getPoints()[i].x <10)
-                    gameArea.getPoints()[i].x = 10;
-                if(gameArea.getPoints()[i].x >240)
-                    gameArea.getPoints()[i].x = 240;
-                if(gameArea.getPoints()[i].y <0)
-                    gameArea.getPoints()[i].y = 0;
-                if(gameArea.getPoints()[i].y >190)
-                    gameArea.getPoints()[i].y = 190;
+    public void checkBounds(Vector2[] points){
+
+            for(int i = 0 ; i <points.length;i++){
+                if(points[i].x <10)
+                    points[i].x = 10;
+                if(points[i].x >240)
+                    points[i].x = 240;
+                if(points[i].y <0)
+                    points[i].y = 0;
+                if(points[i].y >190)
+                    points[i].y = 190;
             }
     }
 }
