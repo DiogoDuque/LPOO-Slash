@@ -1,55 +1,148 @@
 package com.lpoo.slash;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-
-import static com.lpoo.slashhelpers.Utilities.changeScreen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.lpoo.slashhelpers.Utilities;
 
 /**
- * Created by Diogo on 02-06-2016.
+ * Created by Diogo Duque on 03/06/2016.
  */
 public class MenuScreen implements Screen {
 
     private Game game;
+    private float width, height;
+    private OrthographicCamera cam;
+    private BitmapFont font;
+    private SpriteBatch batch;
+    Sprite background;
 
     public MenuScreen(Game game)
     {
         this.game=game;
+        cam = new OrthographicCamera();
+        width=Slash.screenDimensions.x*1.2f;
+        height=Slash.screenDimensions.y*1.2f;
+        cam.setToOrtho(false,width,height);
+        font = new BitmapFont();
+        font.getData().setScale(0.7f,0.7f);
+        batch=new SpriteBatch();
+        background=new Sprite(new Texture("menu/background.png"));
+        implementTouchDetector();
     }
 
-    public void changeScreenToGame() {changeScreen(game, new GameScreen(game));}
+    /**
+     * used to detect input 'TouchUp', and when detected it will change screen.
+     */
+    private void implementTouchDetector()
+    {
+        Gdx.input.setInputProcessor(new InputProcessor() {
+
+            @Override
+            public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+                if(screenY>244 && screenY<333)
+                {
+                    System.out.println("AA");
+                    if(screenX> 40 && screenX<417)
+                        Utilities.changeScreen(game, new GameScreen(game));
+                    else if( screenX> 417 && screenX<755)
+                        Utilities.changeScreen(game, new GameOverScreen(game));
+                }
+                Gdx.app.log("MenuScreen::inputs","x="+screenX+", y="+screenY);
+                return true;
+            }
+
+            @Override
+            public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+                Gdx.app.log("MenuScreen::inputs","down");
+                return false;
+            }
+
+            @Override
+            public boolean touchDragged(int screenX, int screenY, int pointer) {
+                Gdx.app.log("MenuScreen::inputs","dragged");
+                return false;
+            }
+
+            @Override
+            public boolean keyDown(int keycode) {
+                return false;
+            }
+
+            @Override
+            public boolean keyUp(int keycode) {
+                return false;
+            }
+
+            @Override
+            public boolean keyTyped(char character) {
+                return false;
+            }
+
+            @Override
+            public boolean mouseMoved(int screenX, int screenY) {
+                return false;
+            }
+
+            @Override
+            public boolean scrolled(int amount) {
+                return false;
+            }
+        });
+    }
 
     @Override
     public void render(float delta) {
-    }
+        cam.update();
 
-    @Override
-    public void resize(int width, int height) {
-        System.out.println("MenuScreen - resize called");
+        // Fill the entire screen with black, to prevent potential flickering.
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        batch.setProjectionMatrix(cam.combined); //or your matrix to draw GAME WORLD, not UI
+        batch.begin();
+
+        batch.draw(background, 0, 0, width, height);
+      //  font.draw(batch, "Score: 35 <- temporary and static value", 40, 125);
+
+        batch.end();
+
     }
 
     @Override
     public void show() {
-        System.out.println("MenuScreen - show called");
+
     }
 
     @Override
-    public void hide() {
-        System.out.println("MenuScreen - hide called");
+    public void resize(int width, int height) {
+
     }
 
     @Override
     public void pause() {
-        System.out.println("MenuScreen - pause called");
+
     }
 
     @Override
     public void resume() {
-        System.out.println("MenuScreen - resume called");
+
+    }
+
+    @Override
+    public void hide() {
+
     }
 
     @Override
     public void dispose() {
-        // Leave blank
+
     }
 }

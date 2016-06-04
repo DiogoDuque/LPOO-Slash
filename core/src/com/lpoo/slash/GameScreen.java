@@ -23,7 +23,7 @@ public class GameScreen implements Screen {
 
     public GameScreen(Game game) {
         System.out.println("GameScreen::GameScreen() - screenWidth = " + Gdx.graphics.getWidth() +
-                            ", screenHeight = " + Gdx.graphics.getHeight());
+                ", screenHeight = " + Gdx.graphics.getHeight());
         this.game=game;
         //changeScreen(game, this);
         gameWorld = new GameWorld(game);
