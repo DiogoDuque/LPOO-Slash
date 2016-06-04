@@ -25,11 +25,11 @@ public class GameWorld {
     private Slasher slasher;
     private ArrayList<Ball> balls;
     private boolean slasherIsMoving=false;
-    private static int index;
 
-    public static void setIndex(int index) {
-        GameWorld.index = index;
-    }
+
+    public static int score;
+
+
 
     /**
      * Default constructor.
@@ -43,6 +43,7 @@ public class GameWorld {
         slasher = new Slasher(pt1,this);
         balls = new ArrayList<Ball>();
         createBalls(1);
+        score = 0;
     }
 
     /**
@@ -58,6 +59,7 @@ public class GameWorld {
         this.slasher=slasher;
         balls = new ArrayList<Ball>();
         createBalls(1);
+        score = 0;
     }
 
     /**
@@ -88,8 +90,8 @@ public class GameWorld {
                 yMax=pt2.y;
             else yMax=pt3.y;
 
-            float x=(xMax-xMin)*rand.nextFloat()+xMin;
-            float y=(yMax-yMin)*rand.nextFloat()+yMin;
+            float x=(xMax-xMin)*rand.nextFloat()/2+xMin;
+            float y=(yMax-yMin)*rand.nextFloat()/2+yMin;
 
             balls.add(new Ball(x, y, world));
             System.out.println("GameWorld::createBalls() - Ball created at ("+x+","+y+")");
@@ -113,6 +115,7 @@ public class GameWorld {
             {
                 slasherIsMoving=false;
                 updateGameArea();
+
             } else if(message=="Game Over") {
                 slasherIsMoving=false;
                 changeScreen(game, new GameOverScreen(game));
@@ -135,6 +138,15 @@ public class GameWorld {
     public ArrayList<Ball> getBalls() {
         return balls;
     }
+    public static int getScore() {
+        return score;
+    }
+
+
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     /**
      *
@@ -155,12 +167,10 @@ public class GameWorld {
         pointsTriangle[0] = slasher.getPosition();
       //  pointsTriangle[1] = toDelete;
 
-        index = -1;
         for( int j=0; j<4; j++)
         {
             if(gameArea.getToDelete()==oldPoints[j]){
                 points[j]=newPoint;
-                index = j;
                 pointsTriangle[2] = newPoint;
                 pointsTriangle[1]=gameArea.getToDelete();
             }
@@ -174,7 +184,11 @@ public class GameWorld {
         gameArea.dispose();
        // checkBounds(points);
         slasher = new Slasher(newPoint, this);
+
         gameArea=new GameArea(points[0],points[1],points[2],points[3],world, this);
+        int counter = checkBalls(pointsTriangle);
+        createBalls(counter+1);
+        score += counter;
         //if(!resize())
        // checkBounds(points);
     //   if(pointsTriangle[0] == slasher.getPosition())
@@ -183,8 +197,7 @@ public class GameWorld {
        // pointsTriangle[2] = newPoint;
        // System.out.println("GameWorld::PointsTriangle() = p1"+pointsTriangle[0]+"     p2 "+pointsTriangle[1]+" p3"+pointsTriangle[2]);
 
-        int counter = checkBalls(pointsTriangle);
-        createBalls(counter+1);
+
     }
 
     /**
@@ -317,7 +330,16 @@ public class GameWorld {
                         break;
                 }
 
+
             }
+        for (int i = 0;i<points.length;i++){
+            if(points[i%4].x == points[(i+1)%4].x){
+                points[i].x++;
+            }
+            if(points[i%4].y == points[(i+1)%4].y){
+                points[i].y++;
+            }
+        }
     }
 }
 

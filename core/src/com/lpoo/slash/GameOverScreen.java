@@ -12,6 +12,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.lpoo.slashhelpers.Utilities;
 
+import static com.lpoo.gameworld.GameWorld.getScore;
+
 /**
  * Created by Diogo Duque on 03/06/2016.
  */
@@ -109,7 +111,8 @@ public class GameOverScreen implements Screen {
         batch.begin();
 
         batch.draw(background, 0, 0, width, height);
-        font.draw(batch, "Score: 35 <- temporary and static value", 40, 125);
+        String scoreText = "SCORE :"+getScore();
+        font.draw(batch, scoreText, 40, 125);
 
         batch.end();
 

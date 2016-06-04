@@ -135,7 +135,7 @@ public class Slasher {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.KinematicBody;
         bodyDef.position.set(position.x,position.y); //starts a bit ahead so doesnt instantly collide w/ gameArea
-        bodyDef.linearVelocity.set(velocity*direction.x,velocity*direction.y); //def linearVelocity
+        bodyDef.linearVelocity.set(1.5f*velocity*direction.x,1.5f*velocity*direction.y); //def linearVelocity
         body = gameWorld.getWorld().createBody(bodyDef);
         PolygonShape dynamicBox = new PolygonShape();
         dynamicBox.setAsBox(radius,radius);
