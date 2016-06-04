@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -12,6 +13,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.lpoo.slashhelpers.Utilities;
+
+import static com.lpoo.gameworld.GameWorld.getHighscore;
 
 /**
  * Created by Diogo Duque on 03/06/2016.
@@ -56,13 +59,10 @@ public class MenuScreen implements Screen {
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
                 Vector2 finger = convertDimensions(new Vector2(screenX,screenY));
-                if(finger.y>123 && finger.y<168)
-                {
+                if(finger.y>123 && finger.y<168) {
                     System.out.println("AA");
-                    if(finger.x> 25 && finger.x<211)
+                    if (finger.x > 25 && finger.x < 398)
                         Utilities.changeScreen(game, new GameScreen(game));
-                    else if( finger.x> 211 && finger.x<398)
-                        Utilities.changeScreen(game, new GameOverScreen(game));
                 }
                 Gdx.app.log("MenuScreen::inputs","x="+finger.x+", y="+finger.y);
                 return true;
@@ -117,12 +117,13 @@ public class MenuScreen implements Screen {
 
         batch.setProjectionMatrix(cam.combined); //or your matrix to draw GAME WORLD, not UI
         batch.begin();
+        font.setColor(Color.YELLOW);
 
         batch.draw(background, 0, 0, width, height);
-      //  font.draw(batch, "Score: 35 <- temporary and static value", 40, 125);
-
+        String highScore = " HIGHSCORE : "+ getHighscore();
+        //  font.draw(batch, "Score: 35 <- temporary and static value", 40, 125);
+        font.draw(batch, highScore,175, 50);
         batch.end();
-
     }
 
     @Override

@@ -26,7 +26,7 @@ public class GameWorld {
     private ArrayList<Ball> balls;
     private boolean slasherIsMoving=false;
 
-
+    public static int highscore = 0;
     public static int score;
 
 
@@ -118,6 +118,8 @@ public class GameWorld {
 
             } else if(message=="Game Over") {
                 slasherIsMoving=false;
+                if (score > highscore)
+                    highscore = score;
                 changeScreen(game, new GameOverScreen(game));
             }
         }
@@ -142,7 +144,13 @@ public class GameWorld {
         return score;
     }
 
+    public static int getHighscore() {
+        return highscore;
+    }
 
+    public static void setHighscore(int highscore) {
+        GameWorld.highscore = highscore;
+    }
 
     public void setScore(int score) {
         this.score = score;
@@ -165,7 +173,7 @@ public class GameWorld {
         Vector2 newPoint = new Vector2(slasher.getFinger());
         Vector2[] pointsTriangle = new Vector2[3];
         pointsTriangle[0] = slasher.getPosition();
-      //  pointsTriangle[1] = toDelete;
+        //  pointsTriangle[1] = toDelete;
 
         for( int j=0; j<4; j++)
         {
@@ -182,7 +190,7 @@ public class GameWorld {
 
         //new objects
         gameArea.dispose();
-       // checkBounds(points);
+        // checkBounds(points);
         slasher = new Slasher(newPoint, this);
 
         gameArea=new GameArea(points[0],points[1],points[2],points[3],world, this);
@@ -190,12 +198,12 @@ public class GameWorld {
         createBalls(counter+1);
         score += counter;
         //if(!resize())
-       // checkBounds(points);
-    //   if(pointsTriangle[0] == slasher.getPosition())
-      //  pointsTriangle[0] = slasher.getPosition();
+        // checkBounds(points);
+        //   if(pointsTriangle[0] == slasher.getPosition())
+        //  pointsTriangle[0] = slasher.getPosition();
         //pointsTriangle[1] = toDelete;
-       // pointsTriangle[2] = newPoint;
-       // System.out.println("GameWorld::PointsTriangle() = p1"+pointsTriangle[0]+"     p2 "+pointsTriangle[1]+" p3"+pointsTriangle[2]);
+        // pointsTriangle[2] = newPoint;
+        // System.out.println("GameWorld::PointsTriangle() = p1"+pointsTriangle[0]+"     p2 "+pointsTriangle[1]+" p3"+pointsTriangle[2]);
 
 
     }
@@ -207,14 +215,14 @@ public class GameWorld {
      * @return number of balls that are out of the gameArea.
      */
     public int checkBalls(Vector2[] pointsTriangle){
-       int counter=0;
+        int counter=0;
         for (int i = 0; i < balls.size();i++) {
             if (pointInPolygon( pointsTriangle, balls.get(i))){
                 Gdx.app.log("bola esta fora", "bola esta fora");
                 Ball ball = balls.get(i);
                 balls.remove(i);
                 ball.dispose();
-               counter++;
+                counter++;
                 //createBalls(1);
                 System.out.println("GameWorld::createBalls() ");
             }
@@ -239,7 +247,7 @@ public class GameWorld {
                 b = false;
         }
         return b;
-}
+    }
 
     public static boolean isBetween ( Vector2 center, Vector2 p, Vector2 ballPoint){
 
@@ -248,9 +256,9 @@ public class GameWorld {
         System.out.println("GameWorld::isBetween() center:"+ center + " p" + p + "ball" + ballPoint);
         if(p == null)
             return false;
-      //  if ((p.x >= center.x && p.x <= ballPoint.x) || (p.x <= center.x && p.x >= ballPoint.x))
+        //  if ((p.x >= center.x && p.x <= ballPoint.x) || (p.x <= center.x && p.x >= ballPoint.x))
         //    if ((p.y >= center.y && p.y <= ballPoint.y) ||(p.y <= center.y && p.y >= ballPoint.y))
-          //      return true;
+        //      return true;
         if ((p.x > center.x )&& (p.x < ballPoint.x)){
             if ((p.y > center.y) && (p.y < ballPoint.y))
                 return true;
@@ -284,54 +292,54 @@ public class GameWorld {
      */
     public void checkBounds(Vector2[] points){
 
-            for(int i = 0 ; i <points.length;i++){
+        for(int i = 0 ; i <points.length;i++){
 
-                //checks 'x' border of screen
-                if(points[i].x <10)
-                    points[i].x = 10;
-                else if(points[i].x >240)
-                    points[i].x = 240;
+            //checks 'x' border of screen
+            if(points[i].x <10)
+                points[i].x = 10;
+            else if(points[i].x >240)
+                points[i].x = 240;
 
-                //checks 'y' border of screen
-                if(points[i].y <10)
-                    points[i].y = 10;
-                else if(points[i].y >190)
-                    points[i].y = 190;
+            //checks 'y' border of screen
+            if(points[i].y <10)
+                points[i].y = 10;
+            else if(points[i].y >190)
+                points[i].y = 190;
 
-                //checks quadrants
-                switch(i)
-                {
-                    case 0: //1st quadrant - up left
-                        if(points[i].x>GameArea.center.x)
-                            points[i].x=GameArea.center.x;
-                        if(points[i].y>GameArea.center.y)
-                            points[i].y=GameArea.center.y;
-                        break;
+            //checks quadrants
+            switch(i)
+            {
+                case 0: //1st quadrant - up left
+                    if(points[i].x>GameArea.center.x)
+                        points[i].x=GameArea.center.x;
+                    if(points[i].y>GameArea.center.y)
+                        points[i].y=GameArea.center.y;
+                    break;
 
-                    case 1: //2nd quadrant - down left
-                        if(points[i].x>GameArea.center.x)
-                            points[i].x=GameArea.center.x;
-                        if(points[i].y<GameArea.center.y)
-                            points[i].y=GameArea.center.y;
-                        break;
+                case 1: //2nd quadrant - down left
+                    if(points[i].x>GameArea.center.x)
+                        points[i].x=GameArea.center.x;
+                    if(points[i].y<GameArea.center.y)
+                        points[i].y=GameArea.center.y;
+                    break;
 
-                    case 2: //3rd quadrant - down right
-                        if(points[i].x<GameArea.center.x)
-                            points[i].x=GameArea.center.x;
-                        if(points[i].y<GameArea.center.y)
-                            points[i].y=GameArea.center.y;
-                        break;
+                case 2: //3rd quadrant - down right
+                    if(points[i].x<GameArea.center.x)
+                        points[i].x=GameArea.center.x;
+                    if(points[i].y<GameArea.center.y)
+                        points[i].y=GameArea.center.y;
+                    break;
 
-                    case 3: //4th quadrant - up right
-                        if(points[i].x<GameArea.center.x)
-                            points[i].x=GameArea.center.x;
-                        if(points[i].y>GameArea.center.y)
-                            points[i].y=GameArea.center.y;
-                        break;
-                }
-
-
+                case 3: //4th quadrant - up right
+                    if(points[i].x<GameArea.center.x)
+                        points[i].x=GameArea.center.x;
+                    if(points[i].y>GameArea.center.y)
+                        points[i].y=GameArea.center.y;
+                    break;
             }
+
+
+        }
         for (int i = 0;i<points.length;i++){
             if(points[i%4].x == points[(i+1)%4].x){
                 points[i].x++;

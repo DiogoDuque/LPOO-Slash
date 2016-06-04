@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.lpoo.slashhelpers.Utilities;
 
+import static com.lpoo.gameworld.GameWorld.getHighscore;
 import static com.lpoo.gameworld.GameWorld.getScore;
 
 /**
@@ -119,8 +121,13 @@ public class GameOverScreen implements Screen {
         batch.begin();
 
         batch.draw(background, 0, 0, width, height);
+        font.setColor(Color.YELLOW);
+        String highScore = "NEW HIGHSCORE !! "+ getHighscore();
         String scoreText = "SCORE :"+getScore();
-        font.draw(batch, scoreText, 40, 125);
+
+        if(getScore() == getHighscore())
+            font.draw(batch, highScore, 150, 150);
+        else font.draw(batch, scoreText, 150, 150);
 
         batch.end();
 
