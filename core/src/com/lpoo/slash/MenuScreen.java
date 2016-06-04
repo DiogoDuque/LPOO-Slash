@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.lpoo.slashhelpers.Utilities;
 
 /**
@@ -22,7 +23,7 @@ public class MenuScreen implements Screen {
     private OrthographicCamera cam;
     private BitmapFont font;
     private SpriteBatch batch;
-    Sprite background;
+    private Sprite background;
 
     public MenuScreen(Game game)
     {
@@ -38,6 +39,13 @@ public class MenuScreen implements Screen {
         implementTouchDetector();
     }
 
+    private Vector2 convertDimensions(Vector2 dims)
+    {
+        dims.x = dims.x*width/Gdx.app.getGraphics().getWidth();
+        dims.y = dims.y*height/Gdx.app.getGraphics().getHeight();
+        return dims;
+    }
+
     /**
      * used to detect input 'TouchUp', and when detected it will change screen.
      */
@@ -47,15 +55,16 @@ public class MenuScreen implements Screen {
 
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-                if(screenY>244 && screenY<333)
+                Vector2 finger = convertDimensions(new Vector2(screenX,screenY));
+                if(finger.y>123 && finger.y<168)
                 {
                     System.out.println("AA");
-                    if(screenX> 40 && screenX<417)
+                    if(finger.x> 25 && finger.x<211)
                         Utilities.changeScreen(game, new GameScreen(game));
-                    else if( screenX> 417 && screenX<755)
+                    else if( finger.x> 211 && finger.x<398)
                         Utilities.changeScreen(game, new GameOverScreen(game));
                 }
-                Gdx.app.log("MenuScreen::inputs","x="+screenX+", y="+screenY);
+                Gdx.app.log("MenuScreen::inputs","x="+finger.x+", y="+finger.y);
                 return true;
             }
 

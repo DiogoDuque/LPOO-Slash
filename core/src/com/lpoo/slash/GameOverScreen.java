@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.lpoo.slashhelpers.Utilities;
 
 import static com.lpoo.gameworld.GameWorld.getScore;
@@ -24,7 +25,7 @@ public class GameOverScreen implements Screen {
     private OrthographicCamera cam;
     private BitmapFont font;
     private SpriteBatch batch;
-    Sprite background;
+    private Sprite background;
 
     public GameOverScreen(Game game)
     {
@@ -40,6 +41,13 @@ public class GameOverScreen implements Screen {
         implementTouchDetector();
     }
 
+    private Vector2 convertDimensions(Vector2 dims)
+    {
+        dims.x = dims.x*width/Gdx.app.getGraphics().getWidth();
+        dims.y = dims.y*height/Gdx.app.getGraphics().getHeight();
+        return dims;
+    }
+
     /**
      * used to detect input 'TouchUp', and when detected it will change screen.
      */
@@ -49,14 +57,14 @@ public class GameOverScreen implements Screen {
 
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-                if(screenY>height*(3/4))
+                Vector2 finger = convertDimensions(new Vector2(screenX,screenY));
+                if(finger.y>180)
                 {
-                    System.out.println("AA");
-                    if(screenX<width/2)
+                    if(finger.x<211)
                         Utilities.changeScreen(game, new MenuScreen(game));
                     else Utilities.changeScreen(game, new GameScreen(game));
                 }
-                Gdx.app.log("GameOverScreen::inputs","x="+screenX+", y="+screenY);
+                Gdx.app.log("GameOverScreen::inputs","x="+finger.x+", y="+finger.y);
                 return true;
             }
 
