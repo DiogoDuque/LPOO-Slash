@@ -19,7 +19,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -42,7 +41,16 @@ public class GameWorld {
 
     public int highscore=0;
     public int score;
-    private long startTime;
+
+    /**
+     * Time in milisseconds at which the current gameArea was created.
+     */
+    private long gameAreaCreationTime;
+    /**
+     * The limit of seconds (counting from the gameArea creation) until which a slasher can be started. After that, game is over.
+     */
+    private int timerLimit;
+    private int timer;
     private static final String filename="highscore.txt";
 
 
@@ -62,7 +70,8 @@ public class GameWorld {
         createBalls(1);
         score = 0;
         highscore=readScoreFile();
-        startTime=new Date().getTime();
+        timerLimit=10;
+        gameAreaCreationTime=new Date().getTime();
     }
 
     /**
@@ -80,7 +89,8 @@ public class GameWorld {
         createBalls(1);
         score = 0;
         highscore=0;
-        startTime=new Date().getTime();
+        timerLimit=10;
+        gameAreaCreationTime =new Date().getTime();
     }
 
     /**
@@ -148,6 +158,7 @@ public class GameWorld {
             {
                 slasherIsMoving=false;
                 updateGameArea();
+                gameAreaCreationTime=new Date().getTime(); //reset timer
                 if(score>=redirecter.scoreLimit && redirecter==null)
                     redirecter=new Redirecter(gameArea.getPoints());
 
@@ -159,6 +170,15 @@ public class GameWorld {
                 changeScreen(game, new GameOverScreen(game, score));
             }
         }
+        else updateTimer();
+        if(timer<=0)
+        {
+            if (score > highscore)
+                highscore = score;
+            updateScoreFile();
+            changeScreen(game, new GameOverScreen(game, score));
+        }
+
     }
 
     public World getWorld() {
@@ -194,8 +214,12 @@ public class GameWorld {
         this.highscore = highscore;
     }
 
+    /**
+     *
+     * @return timer in seconds.
+     */
     public long getTimer() {
-        return (new Date().getTime()-startTime)/1000;
+        return timer;
     }
 
     /**
@@ -215,7 +239,6 @@ public class GameWorld {
         Vector2 newPoint = new Vector2(slasher.getFinger());
         Vector2[] pointsTriangle = new Vector2[3];
         pointsTriangle[0] = slasher.getPosition();
-        //  pointsTriangle[1] = toDelete;
 
         for( int j=0; j<4; j++)
         {
@@ -227,29 +250,18 @@ public class GameWorld {
             }
             else points[j]=oldPoints[j];
         }
-        Vector2 toDelete = gameArea.getToDelete();
-        //animation
-
 
         //new objects
         gameArea.dispose();
-        // checkBounds(points);
         slasher = new Slasher(newPoint, this);
         int counter = checkBalls(pointsTriangle);
 
-
         gameArea=new GameArea(points[0],points[1],points[2],points[3],world, this);
         createBalls(counter+1);
-        if(redirecter!=null)
+
+        if(redirecter!=null) //generates the redirecter if it is already in use
             redirecter=new Redirecter(gameArea.getPoints());
         score += counter;
-        //if(!resize())
-        // checkBounds(points);
-        //   if(pointsTriangle[0] == slasher.getPosition())
-        //  pointsTriangle[0] = slasher.getPosition();
-        //pointsTriangle[1] = toDelete;
-        // pointsTriangle[2] = newPoint;
-        // System.out.println("GameWorld::PointsTriangle() = p1"+pointsTriangle[0]+"     p2 "+pointsTriangle[1]+" p3"+pointsTriangle[2]);
 
 
     }
@@ -430,12 +442,19 @@ public class GameWorld {
                 file.createNewFile();
             output = new BufferedWriter(new FileWriter(file.getAbsoluteFile()));
             output.write(highscore);
-            System.out.println("Score file updated with success in "+Slash.getFilesDir()+" - "+file.getAbsoluteFile());
+            System.out.println("Score file updated with success in " + Slash.getFilesDir() + " - " + file.getAbsoluteFile());
             if (output != null)
                 output.close();
         } catch ( IOException e ) {
             e.printStackTrace();
         }
+    }
+
+    private void updateTimer()
+    {
+        long currTime=new Date().getTime();
+        int diff=(int)(currTime-gameAreaCreationTime)/1000;
+        timer=timerLimit-diff;
     }
 }
 

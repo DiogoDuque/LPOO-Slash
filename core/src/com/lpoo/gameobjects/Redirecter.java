@@ -19,7 +19,7 @@ public class Redirecter {
      * If GameWorld.score is bigger than or equal to scoreLimit, a redirecter will appear in the GameArea.
      */
     public final static int scoreLimit = 5;
-    public final static float radius = 2*Ball.getRadius();
+    public final static float radius = 5;
 
     /**
      * Constructor.
