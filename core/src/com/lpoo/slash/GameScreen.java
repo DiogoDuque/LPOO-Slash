@@ -7,14 +7,11 @@ package com.lpoo.slash;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.math.Vector2;
 import com.lpoo.gameworld.GameRenderer;
 import com.lpoo.gameworld.GameWorld;
 import com.lpoo.slashhelpers.InputHandler;
 
-import static com.lpoo.slashhelpers.Utilities.changeScreen;
-
-public class GameScreen implements Screen {
+public class GameScreen extends Resizer implements Screen {
 
     private Game game; //to change Screens
     private GameWorld gameWorld;
@@ -22,6 +19,7 @@ public class GameScreen implements Screen {
     private float runTime;
 
     public GameScreen(Game game) {
+        super(1);
         System.out.println("GameScreen::GameScreen() - screenWidth = " + Gdx.graphics.getWidth() +
                 ", screenHeight = " + Gdx.graphics.getHeight());
         this.game=game;
@@ -30,19 +28,7 @@ public class GameScreen implements Screen {
 
         renderer = new GameRenderer(gameWorld);
 
-        Gdx.input.setInputProcessor(new InputHandler(gameWorld));
-    }
-
-    public static Vector2 convertDimensions(Vector2 dims)
-    {
-        dims.x = dims.x*Slash.screenDimensions.x/Gdx.app.getGraphics().getWidth();
-        dims.y = dims.y*Slash.screenDimensions.y/Gdx.app.getGraphics().getHeight();
-        return dims;
-    }
-
-    public void changeScreenToMenu()
-    {
-        changeScreen(game, new MenuScreen(game));
+        Gdx.input.setInputProcessor(new InputHandler(gameWorld, this));
     }
 
     @Override

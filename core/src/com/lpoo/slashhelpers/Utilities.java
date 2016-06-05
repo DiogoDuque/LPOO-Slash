@@ -3,7 +3,6 @@ package com.lpoo.slashhelpers;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.math.Vector2;
-import com.lpoo.slash.MenuScreen;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -11,13 +10,15 @@ import java.util.List;
 
 /**
  * Created by Diogo on 01-06-2016.
+ * Contains several utilities for various purposes.
+ * Design Pattern: Facade
  */
 public final class Utilities {
 
     /**
      *
-     * @param pt1
-     * @param pt2
+     * @param pt1 one point
+     * @param pt2 another point
      * @return Euclidian distance between the two points.
      */
     public static double distance(Vector2 pt1, Vector2 pt2)
@@ -57,6 +58,11 @@ public final class Utilities {
         return Arrays.asList(p1, p2);
     }
 
+    /**
+     * Changes the current screen on Game to the newScreen.
+     * @param game Game on which to set a new Screen
+     * @param newScreen new Screen
+     */
     public static void changeScreen(Game game, Screen newScreen)
     {
         Screen oldScreen = game.getScreen();

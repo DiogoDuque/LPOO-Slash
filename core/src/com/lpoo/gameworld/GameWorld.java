@@ -17,6 +17,8 @@ import static com.lpoo.slashhelpers.Utilities.changeScreen;
 
 /**
  * Created by Diogo on 26-04-2016.
+ * Keeps all the information about the objects currently on the World.
+ * Design Pattern: MVC - Model component (Other components: GameRenderer and InputHandler)
  */
 public class GameWorld {
     private Game game;

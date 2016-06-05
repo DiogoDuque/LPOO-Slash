@@ -20,10 +20,9 @@ import static com.lpoo.gameworld.GameWorld.getScore;
 /**
  * Created by Diogo Duque on 03/06/2016.
  */
-public class GameOverScreen implements Screen {
+public class GameOverScreen extends Resizer implements Screen {
 
     private Game game;
-    private float width, height;
     private OrthographicCamera cam;
     private BitmapFont font;
     private SpriteBatch batch;
@@ -31,10 +30,9 @@ public class GameOverScreen implements Screen {
 
     public GameOverScreen(Game game)
     {
+        super(1.2f);
         this.game=game;
         cam = new OrthographicCamera();
-        width=Slash.screenDimensions.x*1.2f;
-        height=Slash.screenDimensions.y*1.2f;
         cam.setToOrtho(false,width,height);
         font = new BitmapFont();
         font.getData().setScale(0.7f,0.7f);
@@ -43,12 +41,6 @@ public class GameOverScreen implements Screen {
         implementTouchDetector();
     }
 
-    private Vector2 convertDimensions(Vector2 dims)
-    {
-        dims.x = dims.x*width/Gdx.app.getGraphics().getWidth();
-        dims.y = dims.y*height/Gdx.app.getGraphics().getHeight();
-        return dims;
-    }
 
     /**
      * used to detect input 'TouchUp', and when detected it will change screen.

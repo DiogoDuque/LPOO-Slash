@@ -1,12 +1,11 @@
 package com.lpoo.slashhelpers;
 
 import com.badlogic.gdx.math.Vector2;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by Diogo on 10-05-2016.
+ * Creates a function of type: y=m*x+b. Can also detect intersections.
+ * Design Pattern: Facade
  */
 public class Function {
 

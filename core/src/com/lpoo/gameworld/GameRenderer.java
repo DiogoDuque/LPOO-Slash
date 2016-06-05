@@ -10,14 +10,12 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.lpoo.gameobjects.Ball;
-import com.lpoo.gameobjects.GameArea;
-import com.lpoo.gameobjects.Slasher;
 import com.lpoo.slash.Slash;
-
-import java.util.ArrayList;
 
 /**
  * Created by Diogo on 26-04-2016.
+ * Renders everything in gameWorld to the screen.
+ * Design Pattern: MVC - View component (Other components: InputHandler and GameWorld)
  */
 public class GameRenderer {
 
@@ -25,21 +23,18 @@ public class GameRenderer {
     private ShapeRenderer shapeRenderer;
     private SpriteBatch batcher;
 
-    private GameWorld myWorld;
-    private GameArea gameArea;
-    private Slasher slasher;
-    private ArrayList<Ball> balls;
+    private GameWorld gameWorld;
 
     Box2DDebugRenderer debugRenderer;
     Matrix4 debugMatrix;
 
     public GameRenderer(GameWorld world) {
-        myWorld = world;
+        gameWorld = world;
         cam = new OrthographicCamera();
         cam.setToOrtho(true, Slash.screenDimensions.x, Slash.screenDimensions.y);
-        //gameArea = myWorld.getGameArea();
-        //slasher = myWorld.getSlasher();
-        //balls = myWorld.getBalls();
+        //gameArea = gameWorld.getGameArea();
+        //slasher = gameWorld.getSlasher();
+        //balls = gameWorld.getBalls();
 
         batcher = new SpriteBatch();
         batcher.setProjectionMatrix(cam.combined); // Attach batcher to camera
@@ -65,7 +60,7 @@ public class GameRenderer {
 
         //Draw GameArea
         shapeRenderer.setColor(255 / 255.0f, 255 / 255.0f, 255 / 255.0f, 1);
-        Vector2[] points = myWorld.getGameArea().getPoints();
+        Vector2[] points = gameWorld.getGameArea().getPoints();
         for(int i=0; i<points.length; i++) {
             Vector2 a = points[i];
             Vector2 b = points[i==points.length-1 ? 0 : i+1];
@@ -74,12 +69,12 @@ public class GameRenderer {
 
         //Draw Slasher
         shapeRenderer.setColor(255 / 255.0f, 255 / 255.0f, 0 / 255.0f, 1);
-        Vector2 fingerPos = myWorld.getSlasher().getFinger();
-        Vector2 slasherPos = myWorld.getSlasher().getPosition();
+        Vector2 fingerPos = gameWorld.getSlasher().getFinger();
+        Vector2 slasherPos = gameWorld.getSlasher().getPosition();
         shapeRenderer.circle(slasherPos.x,slasherPos.y,Ball.getRadius());
-        if(myWorld.getSlasherIsMoving())
+        if(gameWorld.getSlasherIsMoving())
         {
-            Vector2 tempSlasher = myWorld.getSlasher().getBodyPosition();
+            Vector2 tempSlasher = gameWorld.getSlasher().getBodyPosition();
             shapeRenderer.circle(tempSlasher.x,tempSlasher.y,Ball.getRadius());
             shapeRenderer.line(slasherPos,tempSlasher);
         }
@@ -93,9 +88,9 @@ public class GameRenderer {
 
         //Draw Balls
         shapeRenderer.setColor(255 / 255.0f, 255 / 255.0f, 255 / 255.0f, 1); //same color as gameArea
-        for(int i=0; i<myWorld.getBalls().size(); i++)
-            shapeRenderer.circle(myWorld.getBalls().get(i).getBody().getPosition().x,
-                                myWorld.getBalls().get(i).getBody().getPosition().y,
+        for(int i = 0; i< gameWorld.getBalls().size(); i++)
+            shapeRenderer.circle(gameWorld.getBalls().get(i).getBody().getPosition().x,
+                                gameWorld.getBalls().get(i).getBody().getPosition().y,
                                 Ball.getRadius());
 
         // End ShapeRenderer

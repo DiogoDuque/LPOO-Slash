@@ -19,34 +19,44 @@ import static com.lpoo.gameworld.GameWorld.getHighscore;
 /**
  * Created by Diogo Duque on 03/06/2016.
  */
-public class MenuScreen implements Screen {
+public class MenuScreen extends Resizer implements Screen {
 
+    /**
+     * Can be used to change screens.
+     */
     private Game game;
-    private float width, height;
+    /**
+     * The camera used in this Screen.
+     */
     private OrthographicCamera cam;
+    /**
+     * Used for writing in the screen.
+     */
     private BitmapFont font;
+    /**
+     * Batch to draw images and write information.
+     */
     private SpriteBatch batch;
+    /**
+     * Sprite with this Screen's backgroud.
+     */
     private Sprite background;
 
+    /**
+     * Constructor.
+     * @param game
+     */
     public MenuScreen(Game game)
     {
+        super(1.2f);
         this.game=game;
         cam = new OrthographicCamera();
-        width=Slash.screenDimensions.x*1.2f;
-        height=Slash.screenDimensions.y*1.2f;
-        cam.setToOrtho(false,width,height);
+        cam.setToOrtho(false,width,height); //width e height are from Resizer
         font = new BitmapFont();
         font.getData().setScale(0.7f,0.7f);
         batch=new SpriteBatch();
         background=new Sprite(new Texture("menu/background.png"));
         implementTouchDetector();
-    }
-
-    private Vector2 convertDimensions(Vector2 dims)
-    {
-        dims.x = dims.x*width/Gdx.app.getGraphics().getWidth();
-        dims.y = dims.y*height/Gdx.app.getGraphics().getHeight();
-        return dims;
     }
 
     /**
@@ -60,7 +70,6 @@ public class MenuScreen implements Screen {
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
                 Vector2 finger = convertDimensions(new Vector2(screenX,screenY));
                 if(finger.y>123 && finger.y<168) {
-                    System.out.println("AA");
                     if (finger.x > 25 && finger.x < 398)
                         Utilities.changeScreen(game, new GameScreen(game));
                 }
@@ -70,13 +79,11 @@ public class MenuScreen implements Screen {
 
             @Override
             public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-                Gdx.app.log("MenuScreen::inputs","down");
                 return false;
             }
 
             @Override
             public boolean touchDragged(int screenX, int screenY, int pointer) {
-                Gdx.app.log("MenuScreen::inputs","dragged");
                 return false;
             }
 
