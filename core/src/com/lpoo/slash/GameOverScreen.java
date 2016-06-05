@@ -12,10 +12,9 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.lpoo.gameworld.GameWorld;
 import com.lpoo.slashhelpers.Utilities;
 
-import static com.lpoo.gameworld.GameWorld.getHighscore;
-import static com.lpoo.gameworld.GameWorld.getScore;
 
 /**
  * Created by Diogo Duque on 03/06/2016.
@@ -27,8 +26,10 @@ public class GameOverScreen extends Resizer implements Screen {
     private BitmapFont font;
     private SpriteBatch batch;
     private Sprite background;
+    private int score;
+    private int highscore;
 
-    public GameOverScreen(Game game)
+    public GameOverScreen(Game game, int currentScore)
     {
         super(1.2f);
         this.game=game;
@@ -38,6 +39,8 @@ public class GameOverScreen extends Resizer implements Screen {
         font.getData().setScale(0.7f,0.7f);
         batch=new SpriteBatch();
         background=new Sprite(new Texture("gameover/background.png"));
+        score=currentScore;
+        highscore=GameWorld.readScoreFile();
         implementTouchDetector();
     }
 
@@ -58,7 +61,7 @@ public class GameOverScreen extends Resizer implements Screen {
                         Utilities.changeScreen(game, new MenuScreen(game));
                     else Utilities.changeScreen(game, new GameScreen(game));
                 }
-                Gdx.app.log("GameOverScreen::inputs","x="+finger.x+", y="+finger.y);
+                Gdx.app.log("GameOverScreen::inputs", "x=" + finger.x + ", y=" + finger.y);
                 return true;
             }
 
@@ -114,12 +117,16 @@ public class GameOverScreen extends Resizer implements Screen {
 
         batch.draw(background, 0, 0, width, height);
         font.setColor(Color.YELLOW);
-        String highScore = "NEW HIGHSCORE !! "+ getHighscore();
-        String scoreText = "SCORE :"+getScore();
+        String newHighscoreText = "NEW HIGHSCORE !! "+ highscore;
+        String scoreText = "SCORE: "+score;
+        String highscoreText = "HIGHSCORE: "+highscore;
 
-        if(getScore() == getHighscore())
-            font.draw(batch, highScore, 150, 150);
-        else font.draw(batch, scoreText, 150, 150);
+        if(score == highscore)
+            font.draw(batch, newHighscoreText, 150, 150);
+        else {
+            font.draw(batch, scoreText, 150, 150);
+            font.draw(batch, highscoreText, 150, 120);
+        }
 
         batch.end();
 

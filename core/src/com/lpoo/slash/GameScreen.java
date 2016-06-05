@@ -16,9 +16,6 @@ import com.lpoo.gameworld.GameRenderer;
 import com.lpoo.gameworld.GameWorld;
 import com.lpoo.slashhelpers.InputHandler;
 
-import static com.lpoo.gameworld.GameWorld.getHighscore;
-import static com.lpoo.gameworld.GameWorld.getScore;
-
 public class GameScreen extends Resizer implements Screen {
 
     private Game game; //to change Screens
@@ -32,12 +29,9 @@ public class GameScreen extends Resizer implements Screen {
         System.out.println("GameScreen::GameScreen() - screenWidth = " + Gdx.graphics.getWidth() +
                 ", screenHeight = " + Gdx.graphics.getHeight());
         this.game=game;
-        //changeScreen(game, this);
         gameWorld = new GameWorld(game);
 
-
-        renderer = new GameRenderer(gameWorld);
-
+        renderer = new GameRenderer(gameWorld,this);
 
         Gdx.input.setInputProcessor(new InputHandler(gameWorld, this));
     }

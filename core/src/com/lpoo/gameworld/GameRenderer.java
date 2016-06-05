@@ -12,10 +12,9 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.lpoo.gameobjects.Ball;
+import com.lpoo.slash.GameScreen;
 import com.lpoo.slash.Slash;
 
-import static com.lpoo.gameworld.GameWorld.getScore;
-import static com.lpoo.gameworld.GameWorld.getTimer;
 
 /**
  * Created by Diogo on 26-04-2016.
@@ -30,35 +29,23 @@ public class GameRenderer {
 
     private GameWorld gameWorld;
     private BitmapFont font;
-    private BitmapFont font2;
 
 
-    Box2DDebugRenderer debugRenderer;
-    Matrix4 debugMatrix;
-    private String scoreText;
-    private String timer;
-
-    public GameRenderer(GameWorld world) {
+    public GameRenderer(GameWorld world, GameScreen screen) {
         gameWorld = world;
         cam = new OrthographicCamera();
 
-        cam.setToOrtho(true, Slash.screenDimensions.x, Slash.screenDimensions.y);
-        //gameArea = gameWorld.getGameArea();
-        //slasher = gameWorld.getSlasher();
-        //balls = gameWorld.getBalls();
+        cam.setToOrtho(true, screen.width, screen.height);
         font = new BitmapFont();
-        font.getData().setScale(0.7f,0.7f);
-        font2 = new BitmapFont();
-        font2.getData().setScale(0.7f,0.7f);
+        font.getData().setScale(0.7f,-0.7f);
         batcher = new SpriteBatch();
-       // batcher.setProjectionMatrix(cam.combined); // Attach batcher to camera
         shapeRenderer = new ShapeRenderer();
         shapeRenderer.setProjectionMatrix(cam.combined);
 
-        debugRenderer = new Box2DDebugRenderer();
     }
 
     public void render(float runTime) {
+        batcher.setProjectionMatrix(cam.combined);
         cam.update();
 
         // Fill the entire screen with black, to prevent potential flickering.
@@ -110,21 +97,16 @@ public class GameRenderer {
         // End ShapeRenderer
         shapeRenderer.end();
 
-        /*// Begin SpriteBatch
-        batcher.setProjectionMatrix(cam.combined);*/
-        //cam.update();
-
-        cam.setToOrtho(false, Slash.screenDimensions.x, Slash.screenDimensions.y);
-        batcher.setProjectionMatrix(cam.combined); //or your matrix to draw GAME WORLD, not UI
         batcher.begin();
-        font2.setColor(Color.YELLOW);
         font.setColor(Color.YELLOW);
 
-        scoreText = "SCORE :"+getScore();
-        timer = "TIME :"+ getTimer();
+        String highScoreText = "HIGHSCORE: "+gameWorld.getHighscore();
+        String scoreText = "SCORE: "+gameWorld.getScore();
+        String timer = "TIME: "+ gameWorld.getTimer();
 
-        font.draw(batcher, scoreText, 300, 150);
-        font2.draw(batcher,timer,300, 100);
+        font.draw(batcher,highScoreText,260,50);
+        font.draw(batcher, scoreText, 260, 100);
+        font.draw(batcher,timer,260, 150);
 
 
         batcher.end();

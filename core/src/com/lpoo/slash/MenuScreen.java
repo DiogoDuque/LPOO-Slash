@@ -12,9 +12,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.lpoo.gameworld.GameWorld;
 import com.lpoo.slashhelpers.Utilities;
-
-import static com.lpoo.gameworld.GameWorld.getHighscore;
 
 /**
  * Created by Diogo Duque on 03/06/2016.
@@ -68,12 +67,12 @@ public class MenuScreen extends Resizer implements Screen {
 
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-                Vector2 finger = convertDimensions(new Vector2(screenX,screenY));
-                if(finger.y>123 && finger.y<168) {
+                Vector2 finger = convertDimensions(new Vector2(screenX, screenY));
+                if (finger.y > 123 && finger.y < 168) {
                     if (finger.x > 25 && finger.x < 398)
                         Utilities.changeScreen(game, new GameScreen(game));
                 }
-                Gdx.app.log("MenuScreen::inputs","x="+finger.x+", y="+finger.y);
+                Gdx.app.log("MenuScreen::inputs", "x=" + finger.x + ", y=" + finger.y);
                 return true;
             }
 
@@ -127,8 +126,7 @@ public class MenuScreen extends Resizer implements Screen {
         font.setColor(Color.YELLOW);
 
         batch.draw(background, 0, 0, width, height);
-        String highScore = " HIGHSCORE : "+ getHighscore();
-        //  font.draw(batch, "Score: 35 <- temporary and static value", 40, 125);
+        String highScore = " HIGHSCORE : "+ GameWorld.readScoreFile();
         font.draw(batch, highScore,175, 50);
         batch.end();
     }

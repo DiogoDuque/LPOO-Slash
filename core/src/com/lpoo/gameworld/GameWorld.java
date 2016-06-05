@@ -8,9 +8,19 @@ import com.lpoo.gameobjects.Ball;
 import com.lpoo.gameobjects.GameArea;
 import com.lpoo.gameobjects.Slasher;
 import com.lpoo.slash.GameOverScreen;
+import com.lpoo.slash.Slash;
 import com.lpoo.slashhelpers.Function;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 import static com.lpoo.slashhelpers.Utilities.changeScreen;
@@ -28,9 +38,10 @@ public class GameWorld {
     private ArrayList<Ball> balls;
     private boolean slasherIsMoving=false;
 
-    public static int highscore = 0;
-    public static int score;
-    public static int timer= 7;
+    public int highscore=0;
+    public int score;
+    private long startTime;
+    private static final String filename="highscore.txt";
 
 
 
@@ -48,6 +59,8 @@ public class GameWorld {
         balls = new ArrayList<Ball>();
         createBalls(1);
         score = 0;
+        highscore=readScoreFile();
+        startTime=new Date().getTime();
     }
 
     /**
@@ -64,6 +77,8 @@ public class GameWorld {
         balls = new ArrayList<Ball>();
         createBalls(1);
         score = 0;
+        highscore=0;
+        startTime=new Date().getTime();
     }
 
     /**
@@ -119,6 +134,8 @@ public class GameWorld {
         //update balls
         for(int i=0; i<balls.size(); i++)
             balls.get(i).getBody().applyTorque(0,true);
+
+        //update slasher
         if(slasherIsMoving)
         {
             String message=slasher.isMoving();
@@ -131,7 +148,8 @@ public class GameWorld {
                 slasherIsMoving=false;
                 if (score > highscore)
                     highscore = score;
-                changeScreen(game, new GameOverScreen(game));
+                updateScoreFile();
+                changeScreen(game, new GameOverScreen(game, score));
             }
         }
     }
@@ -151,28 +169,20 @@ public class GameWorld {
     public ArrayList<Ball> getBalls() {
         return balls;
     }
-    public static int getScore() {
+    public int getScore() {
         return score;
     }
 
-    public static int getHighscore() {
+    public int getHighscore() {
         return highscore;
     }
 
-    public static void setHighscore(int highscore) {
-        GameWorld.highscore = highscore;
+    public void setHighscore(int highscore) {
+        this.highscore = highscore;
     }
 
-    public static int getTimer() {
-        return timer;
-    }
-
-    public static void setTimer(int timer) {
-        GameWorld.timer = timer;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
+    public long getTimer() {
+        return (new Date().getTime()-startTime)/1000;
     }
 
     /**
@@ -238,7 +248,7 @@ public class GameWorld {
         int counter=0;
 
         for (int i = 0; i <balls.size();i++) {
-            if (pointInPolygon( pointsTriangle, balls.get(i))){
+            if (pointInPolygon(pointsTriangle, balls.get(i))){
                 Gdx.app.log("bola esta fora", "bola esta fora");
                 Ball ball = balls.get(i);
                 balls.remove(i);
@@ -369,6 +379,45 @@ public class GameWorld {
             if(points[i%4].y == points[(i+1)%4].y){
                 points[i].y++;
             }
+        }
+    }
+
+    /**
+     * Attemps to read the file with the high score and return it.
+     * @return number in the file; 0 if file does not exist.
+     */
+    public static int readScoreFile()
+    {
+        BufferedReader reader = null;
+        int highscore=0;
+        try {
+            File file = new File(Slash.getFilesDir()+"/"+"example.txt");
+            reader = new BufferedReader(new FileReader(file.getAbsoluteFile()));
+            highscore=reader.read();
+            reader.close();
+
+        } catch (FileNotFoundException e) {
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return highscore;
+    }
+
+    private void updateScoreFile()
+    {
+        BufferedWriter output = null;
+        try {
+            File file = new File(Slash.getFilesDir()+"/"+"example.txt");
+            if(!file.exists())
+                file.createNewFile();
+            output = new BufferedWriter(new FileWriter(file.getAbsoluteFile()));
+            output.write(highscore);
+            System.out.println("Score file updated with success in "+Slash.getFilesDir()+" - "+file.getAbsoluteFile());
+            if (output != null)
+                output.close();
+        } catch ( IOException e ) {
+            e.printStackTrace();
         }
     }
 }
