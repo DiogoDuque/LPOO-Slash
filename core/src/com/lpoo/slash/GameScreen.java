@@ -26,8 +26,8 @@ public class GameScreen extends Resizer implements Screen {
 
     public GameScreen(Game game) {
         super(1);
-        System.out.println("GameScreen::GameScreen() - screenWidth = " + Gdx.graphics.getWidth() +
-                ", screenHeight = " + Gdx.graphics.getHeight());
+        System.out.println("GameScreen::GameScreen() - screenWidth = " + width +
+                ", screenHeight = " + height);
         this.game=game;
         gameWorld = new GameWorld(game);
 

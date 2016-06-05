@@ -28,8 +28,7 @@ public class Ball {
         //criar body
         bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody; //é dinamico (sofre acao de forcas)
-        bodyDef.position.set(new Vector2(xPos,yPos));
-        setRandomMovement();
+        bodyDef.position.set(new Vector2(xPos, yPos));
         body = world.createBody(bodyDef);
 
         //criar forma de caixa...
@@ -42,18 +41,19 @@ public class Ball {
         fixtureDef.friction = 0.0f;
         fixtureDef.restitution=1.0f;
         body.createFixture(fixtureDef);
+        setRandomMovement();
 
     }
 
     /**
      * Will set the ball with a linearVelocity of 'velocity' in a random direction
      */
-    private void setRandomMovement()
+    protected void setRandomMovement()
     {
         Random rand = new Random();
         double rad = 2*Math.PI*rand.nextFloat();
         float x=(float)Math.cos(rad), y=(float)Math.sin(rad);
-        bodyDef.linearVelocity.set(velocity*x,velocity*y);
+        body.setLinearVelocity(velocity*x,velocity*y);
     }
 
     /**

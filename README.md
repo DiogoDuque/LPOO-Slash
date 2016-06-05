@@ -1,6 +1,6 @@
 # Slash
 
-## **Android Launcher** -> The activity where everything is launched.
+### **Android Launcher** -> The activity where everything is launched.
 
 ## Packages and Classes Structure (from core project)
 
@@ -24,6 +24,7 @@ These are the objects we actually see during our game.
 * **Ball** -> Ball that wanders around.
 * **GameArea** -> "Box" with balls and slasher inside.
 * **Slasher** -> The yellow ball that cuts the GameArea to create a new one.
+* **Redirecter** -> Purple box that appears when a certain score is reached. It changes nearby ball's movement direction.
 
 
 ### Package **slashhelpers**

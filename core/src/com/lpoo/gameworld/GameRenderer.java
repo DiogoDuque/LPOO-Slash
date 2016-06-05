@@ -8,12 +8,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.lpoo.gameobjects.Ball;
+import com.lpoo.gameobjects.Redirecter;
 import com.lpoo.slash.GameScreen;
-import com.lpoo.slash.Slash;
 
 
 /**
@@ -66,6 +64,14 @@ public class GameRenderer {
             Vector2 a = points[i];
             Vector2 b = points[i==points.length-1 ? 0 : i+1];
             shapeRenderer.line(a.x,a.y,b.x,b.y);
+        }
+
+        //Draw Redirecter
+        Redirecter redirecter = gameWorld.getRedirecter();
+        if(redirecter!=null)
+        {
+            shapeRenderer.setColor(100/255f,0,1,1);
+            shapeRenderer.circle(redirecter.getPosition().x,redirecter.getPosition().y,redirecter.radius);
         }
 
         //Draw Slasher

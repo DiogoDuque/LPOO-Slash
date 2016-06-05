@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.lpoo.gameobjects.Ball;
 import com.lpoo.gameobjects.GameArea;
+import com.lpoo.gameobjects.Redirecter;
 import com.lpoo.gameobjects.Slasher;
 import com.lpoo.slash.GameOverScreen;
 import com.lpoo.slash.Slash;
@@ -36,6 +37,7 @@ public class GameWorld {
     private GameArea gameArea;
     private Slasher slasher;
     private ArrayList<Ball> balls;
+    private Redirecter redirecter=null;
     private boolean slasherIsMoving=false;
 
     public int highscore=0;
@@ -132,8 +134,11 @@ public class GameWorld {
         world.step(1f/60f, 6, 2);
 
         //update balls
-        for(int i=0; i<balls.size(); i++)
-            balls.get(i).getBody().applyTorque(0,true);
+        for(int i=0; i<balls.size(); i++) {
+            balls.get(i).getBody().applyTorque(0, true);
+            if(redirecter!=null)
+                redirecter.attemptMoveBall(balls.get(i));
+        }
 
         //update slasher
         if(slasherIsMoving)
@@ -143,6 +148,8 @@ public class GameWorld {
             {
                 slasherIsMoving=false;
                 updateGameArea();
+                if(score>=redirecter.scoreLimit && redirecter==null)
+                    redirecter=new Redirecter(gameArea.getPoints());
 
             } else if(message=="Game Over") {
                 slasherIsMoving=false;
@@ -169,6 +176,12 @@ public class GameWorld {
     public ArrayList<Ball> getBalls() {
         return balls;
     }
+
+    public Redirecter getRedirecter()
+    {
+        return redirecter;
+    }
+
     public int getScore() {
         return score;
     }
@@ -226,6 +239,8 @@ public class GameWorld {
 
         gameArea=new GameArea(points[0],points[1],points[2],points[3],world, this);
         createBalls(counter+1);
+        if(redirecter!=null)
+            redirecter=new Redirecter(gameArea.getPoints());
         score += counter;
         //if(!resize())
         // checkBounds(points);
