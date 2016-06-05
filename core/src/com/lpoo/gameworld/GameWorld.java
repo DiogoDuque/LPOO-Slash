@@ -223,6 +223,7 @@ public class GameWorld {
                 points[j]=newPoint;
                 pointsTriangle[2] = newPoint;
                 pointsTriangle[1]=gameArea.getToDelete();
+                score++;
             }
             else points[j]=oldPoints[j];
         }
@@ -262,7 +263,7 @@ public class GameWorld {
     public int checkBalls(Vector2[] pointsTriangle){
         int counter=0;
 
-        for (int i = 0; i <balls.size();i++) {
+        for (int i = balls.size()-1; i >= 0;i--) {
             if (pointInPolygon(pointsTriangle, balls.get(i))){
                 Gdx.app.log("bola esta fora", "bola esta fora");
                 Ball ball = balls.get(i);
@@ -270,10 +271,11 @@ public class GameWorld {
                 ball.dispose();
                 counter++;
                 //createBalls(1);
-                System.out.println("GameWorld::createBalls() ");
-            }
-
+                System.out.println("GameWorld::numero de bolas checadas"+balls.size());
+                System.out.println("GameWorld::createBalls() ");}
         }
+
+
         return counter;
 
     }

@@ -121,13 +121,17 @@ public class GameArea {
         int k= 0;
         if (polygonArea()<10000){
             int i = 0;
+            Vector2 center = new Vector2(0,0) ;
             while(polygonArea()<18000) {
 
                 Function y = new Function(points[i % 4], points[(i + 2) % 4]);
                 Function y1 = new Function(points[(i + 1) % 4], points[(i + 3) % 4]);
-                Vector2 center = y.intersect(y1);
-                //   }
-
+                Vector2 center1 = y.intersect(y1);
+                //   }p
+                System.out.println("GameWorld::getcircle pointA:"+ points[i % 4] + " p0" + points[(i+1) % 4] + " p1" + points[(i+1) % 4] + " p2 " + points[(i+2) % 4]+ " p3"+  points[(i+3) % 4]);
+                if(center1 != null){
+                    center = center1;
+                }
                 // Vector2 y2 = new Function(,points[0]+100);
 
                 x = Utilities.getCircleLineIntersectionPoint(points[(i + 2) % 4], center, points[i % 4], 10);
