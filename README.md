@@ -1,27 +1,34 @@
 # Slash
 
-## Packages and Classes Structure
+## **Android Launcher** -> The activity where everything is launched.
+
+## Packages and Classes Structure (from core project)
 
 ### Package **slash**
-Package used for generic stuff.
-* **Slash** -> Activity where it all starts.
-* **GameScreen** -> Class accessed only by *Slash*. Handles typical Activity stuff.
+Package for screens and anything related to them.
+* **Slash** -> Class where the default screen is launched.
+* **Resizer** -> Abstract class to handle the camera's dimensions in each of the Screens.
+* **MenuScreen** -> Default screen when opening the app.
+* **GameScreen** -> Screen where the game is played.
+* **GameOverScreen** -> Screen shown if the game ends.
 
 
 ### Package **gameworld**
-This is the package where the main part of the game logic is handled.
+This is the package where the general part of the game logic is handled and handled.
 * **GameRenderer** -> Handles the rendering.
-* **GameWorld** -> Handles the physics simulation.
+* **GameWorld** -> Handles the physics simulation and game logic.
 
 
 ### Package **gameobjects**
 These are the objects we actually see during our game.
-* **Ball** -> ball that wanders around.
-* **GameArea** -> box with all balls.
+* **Ball** -> Ball that wanders around.
+* **GameArea** -> "Box" with balls and slasher inside.
+* **Slasher** -> The yellow ball that cuts the GameArea to create a new one.
 
 
 ### Package **slashhelpers**
 This package contains the helpers.
-* **AssetLoader** -> for loading possible assets, such as textures and sprites.
-* **InputHandler** -> for being able to receive inputs.
-* **Function** -> for using functions (y=m*x+b).
+* **AssetLoader** -> For loading possible assets, such as textures and sprites.
+* **InputHandler** -> For being able to receive inputs.
+* **Function** -> For using functions (y=m*x+b).
+* **Utilities** -> Containts several miscellaneous methods.

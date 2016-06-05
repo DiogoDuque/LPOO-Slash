@@ -6,7 +6,8 @@ import com.lpoo.slash.Slash;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new Slash(), config);
+		//DESKTOP IS NOT USED!!
+		//LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		//new LwjglApplication(new Slash(), config);
 	}
 }
