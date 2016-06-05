@@ -7,9 +7,17 @@ package com.lpoo.slash;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.lpoo.gameworld.GameRenderer;
 import com.lpoo.gameworld.GameWorld;
 import com.lpoo.slashhelpers.InputHandler;
+
+import static com.lpoo.gameworld.GameWorld.getHighscore;
+import static com.lpoo.gameworld.GameWorld.getScore;
 
 public class GameScreen extends Resizer implements Screen {
 
@@ -17,6 +25,7 @@ public class GameScreen extends Resizer implements Screen {
     private GameWorld gameWorld;
     private GameRenderer renderer;
     private float runTime;
+
 
     public GameScreen(Game game) {
         super(1);
@@ -26,7 +35,9 @@ public class GameScreen extends Resizer implements Screen {
         //changeScreen(game, this);
         gameWorld = new GameWorld(game);
 
+
         renderer = new GameRenderer(gameWorld);
+
 
         Gdx.input.setInputProcessor(new InputHandler(gameWorld, this));
     }

@@ -21,7 +21,7 @@ public class Slasher {
     private Vector2 position; //posicao atual do Slasher
     private Body body, bodyPath;
     private final static float radius = Ball.getRadius();
-    private final static float velocity = 45;
+    private final static float velocity = 60;
 
     public Slasher(Vector2 pos, GameWorld gameWorld) {
         body=null;

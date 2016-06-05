@@ -30,6 +30,8 @@ public class GameWorld {
 
     public static int highscore = 0;
     public static int score;
+    public static int timer= 7;
+
 
 
 
@@ -72,6 +74,12 @@ public class GameWorld {
         Random rand = new Random();
         Vector2[] pts = gameArea.getPoints();
         Vector2 pt1=pts[0],pt2=pts[1],pt3=pts[2],pt4=pts[3];
+
+        Function y2 = new Function(pts[0], pts[2]);
+        Function y1 = new Function(pts[1], pts[3]);
+        Vector2 center = y2.intersect(y1);
+
+
         for(int i=0; i<n; i++)
         {
             float xMin,xMax,yMin,yMax;
@@ -92,7 +100,8 @@ public class GameWorld {
                 yMax=pt2.y;
             else yMax=pt3.y;
 
-            float x=(xMax-xMin)*rand.nextFloat()/2+xMin;
+
+            float x=center.x;
             float y=(yMax-yMin)*rand.nextFloat()/2+yMin;
 
             balls.add(new Ball(x, y, world));
@@ -154,6 +163,14 @@ public class GameWorld {
         GameWorld.highscore = highscore;
     }
 
+    public static int getTimer() {
+        return timer;
+    }
+
+    public static void setTimer(int timer) {
+        GameWorld.timer = timer;
+    }
+
     public void setScore(int score) {
         this.score = score;
     }
@@ -194,9 +211,10 @@ public class GameWorld {
         gameArea.dispose();
         // checkBounds(points);
         slasher = new Slasher(newPoint, this);
+        int counter = checkBalls(pointsTriangle);
+
 
         gameArea=new GameArea(points[0],points[1],points[2],points[3],world, this);
-        int counter = checkBalls(pointsTriangle);
         createBalls(counter+1);
         score += counter;
         //if(!resize())
@@ -218,7 +236,8 @@ public class GameWorld {
      */
     public int checkBalls(Vector2[] pointsTriangle){
         int counter=0;
-        for (int i = 0; i < balls.size();i++) {
+
+        for (int i = 0; i <balls.size();i++) {
             if (pointInPolygon( pointsTriangle, balls.get(i))){
                 Gdx.app.log("bola esta fora", "bola esta fora");
                 Ball ball = balls.get(i);
@@ -245,6 +264,7 @@ public class GameWorld {
         for(int i = 0;i<pointsTriangle.length;i++){
             Function edge = new Function(pointsTriangle[i], pointsTriangle[((i+1)%3)]);
             Vector2 p = f.intersect(edge);
+
             if(isBetween(center, p, ballPoint))
                 b = false;
         }
@@ -261,17 +281,17 @@ public class GameWorld {
         //  if ((p.x >= center.x && p.x <= ballPoint.x) || (p.x <= center.x && p.x >= ballPoint.x))
         //    if ((p.y >= center.y && p.y <= ballPoint.y) ||(p.y <= center.y && p.y >= ballPoint.y))
         //      return true;
-        if ((p.x > center.x )&& (p.x < ballPoint.x)){
-            if ((p.y > center.y) && (p.y < ballPoint.y))
+        if ((p.x >= center.x )&& (p.x <= ballPoint.x)){
+            if ((p.y >= center.y) && (p.y <= ballPoint.y))
                 return true;
-            else if ((p.y < center.y) &&( p.y > ballPoint.y))
+            else if ((p.y <= center.y) &&( p.y >= ballPoint.y))
                 return true;
             else return false;
         }
-        if ((p.x < center.x) && (p.x > ballPoint.x)){
-            if ((p.y > center.y) && (p.y < ballPoint.y))
+        if ((p.x <= center.x) && (p.x >= ballPoint.x)){
+            if ((p.y >= center.y) && (p.y <= ballPoint.y))
                 return true;
-            else if ((p.y < center.y) &&( p.y > ballPoint.y))
+            else if ((p.y <= center.y) &&( p.y >= ballPoint.y))
                 return true;
             else return false;
         }

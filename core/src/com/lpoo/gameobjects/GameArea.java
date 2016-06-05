@@ -121,7 +121,7 @@ public class GameArea {
         int k= 0;
         if (polygonArea()<10000){
             int i = 0;
-            while(polygonArea()<12000) {
+            while(polygonArea()<18000) {
 
                 Function y = new Function(points[i % 4], points[(i + 2) % 4]);
                 Function y1 = new Function(points[(i + 1) % 4], points[(i + 3) % 4]);
