@@ -29,7 +29,6 @@ These are the objects we actually see during our game.
 
 ### Package **slashhelpers**
 This package contains the helpers.
-* **AssetLoader** -> For loading possible assets, such as textures and sprites.
-* **InputHandler** -> For being able to receive inputs.
+* **InputHandler** -> For being able to receive inputs (used only on GameScreen)
 * **Function** -> For using functions (y=m*x+b).
 * **Utilities** -> Containts several miscellaneous methods.
