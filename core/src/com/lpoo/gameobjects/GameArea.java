@@ -4,7 +4,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
-import com.badlogic.gdx.physics.box2d.World;
 import com.lpoo.gameworld.GameWorld;
 import com.lpoo.slashhelpers.Function;
 import com.lpoo.slashhelpers.Utilities;
@@ -12,7 +11,6 @@ import com.lpoo.slashhelpers.Utilities;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.lpoo.gameworld.GameWorld.isBetween;
 
 /**
  * Created with 4 vertices with this structure:
@@ -34,7 +32,7 @@ public class GameArea {
     public static final Vector2 center = new Vector2(125,100); //centro da zona onde é suposto a gameArea estar
     private Body[] bodies;
     private GameWorld gameWorld;
-    public GameArea(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, World world, GameWorld gameWorld)
+    public GameArea(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, GameWorld gameWorld)
     {
         toDelete=null;
         bodies = new Body[4];
@@ -48,16 +46,10 @@ public class GameArea {
 
         float area =polygonArea();
         System.out.println("GameArea::GameArea() - GameArea has vertices: p1="+points[0]+", p2="+points[1]+", p3="+points[2]+", p4="+points[3]+"area= "+area);
-      // Vector2 a1 = new Vector2(10,10);
-      // Vector2 b2 = new Vector2(4,4);
-       //Vector2 b3 = new Vector2(5,5);
-       //List<Vector2> x = Arrays.asList();
-       //x = Utilities.getCircleLineIntersectionPoint(a1, b2 ,a1,10);
-       //System.out.println("a = "+b3+" b= "+b2+" c "+a1+" pontos intersectados 1 "+x.get(0)+" pontos intersectados 2 "+x.get(1));
 
         resize();
 
-        gameWorld.checkBounds(points);
+        Utilities.checkBounds(points);
 
 
         for(int i=0; i<4; i++) {
@@ -72,7 +64,7 @@ public class GameArea {
             BodyDef bodyDef = new BodyDef();
             bodyDef.type = BodyDef.BodyType.StaticBody;
             bodyDef.position.set(midPoint.x, midPoint.y);
-            Body groundBody = world.createBody(bodyDef);
+            Body groundBody = gameWorld.getWorld().createBody(bodyDef);
             PolygonShape groundBox = new PolygonShape();
             groundBox.setAsBox((float)distancePTP/2, 1);
             groundBody.setTransform(midPoint,(float)angle);
@@ -89,7 +81,9 @@ public class GameArea {
      */
     public void setToDelete(Vector2 toDelete) {this.toDelete=toDelete;}
 
-    public Vector2 getToDelete() {return toDelete;}
+    public Vector2 getToDelete() {
+        return toDelete;
+    }
 
     public void dispose()
     {
@@ -100,7 +94,7 @@ public class GameArea {
 
     }
 
-    public float polygonArea()
+    private float polygonArea()
     {   int numPoints = 4;
         float area = 0;         // Accumulates area in the loop
         int j = numPoints-1;  // The last vertex is the 'previous' one to the first
@@ -112,7 +106,7 @@ public class GameArea {
         return area/2;
     }
 
-    public boolean resize(){
+    private boolean resize(){
         // if(polygonArea()>10000)
         //      return;
         //   while(polygonArea()<15000){
@@ -137,7 +131,7 @@ public class GameArea {
                 x = Utilities.getCircleLineIntersectionPoint(points[(i + 2) % 4], center, points[i % 4], 10);
                 System.out.println("resize" + x.get(1));
 
-                if (isBetween(center, x.get(k),points[i % 4])) {
+                if (Utilities.isBetween(center, x.get(k),points[i % 4])) {
                     k = 1;
                 }
                 if (gameWorld.getSlasher().getPosition() == points[i % 4]) {

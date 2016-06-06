@@ -15,10 +15,12 @@ public class Slash extends Game {
     {
         filesDir=fileDir;
     }
-
     public static File getFilesDir() {
         return filesDir;
     }
+
+    public Slash()
+    {}
 
     @Override
     public void create() {
