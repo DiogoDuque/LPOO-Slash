@@ -2,6 +2,7 @@ package com.lpoo.gameworld;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.lpoo.gameobjects.Ball;
@@ -38,6 +39,7 @@ public class GameWorld {
     private ArrayList<Ball> balls;
     private Redirecter redirecter=null;
     private boolean slasherIsMoving=false;
+    private Music music;
 
     public int highscore=0;
     public int score;
@@ -72,6 +74,10 @@ public class GameWorld {
         highscore=readScoreFile();
         timerLimit=10;
         gameAreaCreationTime=new Date().getTime();
+        music = Gdx.audio.newMusic(Gdx.files.internal("music.mp3"));
+        music.setLooping(true);
+        music.setVolume(0.3f);
+        music.play();
     }
 
     /**
@@ -167,6 +173,7 @@ public class GameWorld {
                 if (score > highscore)
                     highscore = score;
                 updateScoreFile();
+                music.pause();
                 changeScreen(game, new GameOverScreen(game, score));
             }
         }
@@ -177,6 +184,7 @@ public class GameWorld {
                 highscore = score;
             updateScoreFile();
             changeScreen(game, new GameOverScreen(game, score));
+            music.pause();
         }
 
     }
@@ -212,6 +220,14 @@ public class GameWorld {
 
     public void setHighscore(int highscore) {
         this.highscore = highscore;
+    }
+
+    public Music getMusic() {
+        return music;
+    }
+
+    public void setMusic(Music music) {
+        this.music = music;
     }
 
     /**

@@ -2,7 +2,7 @@ package com.lpoo.slash;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.math.Vector2;
-import com.lpoo.slashhelpers.AssetLoader;
+
 
 import java.io.File;
 
@@ -23,13 +23,13 @@ public class Slash extends Game {
     @Override
     public void create() {
         System.out.println("Slash Game Created!");
-        AssetLoader.load();
+
         setScreen(new MenuScreen(this));
     }
 
     @Override
     public void dispose() {
         super.dispose();
-        AssetLoader.dispose();
+
     }
 }
