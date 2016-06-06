@@ -56,9 +56,6 @@ public class GameWorld {
     private int timer;
     private static final String filename="highscore.txt";
 
-
-
-
     /**
      * Default constructor.
      */

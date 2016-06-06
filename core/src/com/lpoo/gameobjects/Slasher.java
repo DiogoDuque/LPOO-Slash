@@ -14,15 +14,46 @@ import java.util.ArrayList;
 
 /**
  * Created by Diogo on 09-05-2016.
+ *
+ * The slasher is responsible for slashing the gameArea, so as to create a new GameArea.
+ * However, if this moving slasher hits a ball, the game is over.
  */
 public class Slasher {
+
+    /**
+     * GameWorld where all gameobjects are contained.
+     */
     private GameWorld gameWorld;
-    private Vector2 finger; //posicao onde o slasher ficará se houver um corte (levantar do dedo para cortar a caixa)
-    private Vector2 position; //posicao atual do Slasher
-    private Body body, bodyPath;
+    /**
+     * Position where the slasher line intersects the gameArea if there is such, else is null.
+     */
+    private Vector2 finger;
+    /**
+     * Position of the corner where slasher was at the start.
+     */
+    private Vector2 position;
+    /**
+     * If slasher is moving, it is the body of the moving slasher.
+     */
+    private Body body;
+    /**
+     * If the slasher is moving, it is the body of the yellow line following it.
+     */
+    private Body bodyPath;
+    /**
+     * Radius of the slasher.
+     */
     private final static float radius = Ball.getRadius();
+    /**
+     * Slasher's velocity when moving.
+     */
     private final static float velocity = 60;
 
+    /**
+     * Default constructor.
+     * @param pos position where it will appear when not moving. In the same position, there is a gameArea corner.
+     * @param gameWorld GameWorld where all gameobjects are contained.
+     */
     public Slasher(Vector2 pos, GameWorld gameWorld) {
         body=null;
         bodyPath=null;
@@ -31,12 +62,26 @@ public class Slasher {
         this.gameWorld=gameWorld;
     }
 
+    /**
+     *
+     * @return position
+     */
     public Vector2 getPosition() {
         return position;
     }
 
-    public Vector2 getBodyPosition() {return body.getPosition();}
+    /**
+     *
+     * @return body's position in case body exists. Null otherwise.
+     */
+    public Vector2 getBodyPosition() {
+        return body==null ? null : body.getPosition();
+    }
 
+    /**
+     *
+     * @return finger.
+     */
     public Vector2 getFinger() {
         return finger;
     }
@@ -122,7 +167,7 @@ public class Slasher {
     }
 
     /**
-     * Used to start slasher's movement, including the creation of the bodyes.
+     * Used to start slasher's movement, including the creation of the bodies.
      */
     public void startedMoving()
     {
@@ -214,7 +259,6 @@ public class Slasher {
             double distance=Utilities.distance(ball,body.getPosition()); //distance between the centers o slasher and ball
             if(distance<2.8f*radius) //should be 2*radius, but as the bodies have a bit more radius, here we account for a bit more too
             {
-                Gdx.app.log("Slasher::checkCollisions","Game Over");
                 return "Game Over";
             }
         }
@@ -238,17 +282,11 @@ public class Slasher {
                     distance2 = Math.abs(body.getPosition().x-functions[i].getX(body.getPosition().y));
             double distance = Math.min(distance1,distance2);
             if(distance < 2) {
-                Gdx.app.log("Slasher::checkCollisions","Slasher End Reached");
                 return "Slasher End Reached";
             }
         }
 
-        //Gdx.app.log("Slasher::checkCollisions","OK");
         return "OK";
     }
 
-    public void dispose()
-    {
-        body.getWorld().destroyBody(body);
-    }
 }

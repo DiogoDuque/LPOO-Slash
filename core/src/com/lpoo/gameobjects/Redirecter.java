@@ -7,17 +7,23 @@ import java.util.Random;
 
 /**
  * Created by Diogo Duque on 05/06/2016.
+ *
+ * A body-less spot that appears later on the gameArea, and changes the direction of the balls that are within its reach.
+ * The balls can become temporarily "trapped" changing direction inside the redirecter, or can bounce right off.
  */
 public class Redirecter {
 
     /**
-     * The redirecter position.
+     * The redirecter's position.
      */
     private Vector2 position;
     /**
      * If GameWorld.score is bigger than or equal to scoreLimit, a redirecter will appear in the GameArea.
      */
     public final static int scoreLimit = 5;
+    /**
+     * Radius of the Redirecter.
+     */
     public final static float radius = 5;
 
     /**
@@ -34,6 +40,10 @@ public class Redirecter {
         this.position = new Vector2(xMin+(xMax-xMin)*rand.nextFloat(),yMin+(yMax-yMin)*rand.nextFloat());
     }
 
+    /**
+     * If the ball received is withing reach of the redirecter, it will instantly have it's direction changed.
+     * @param ball ball to be analyzed.
+     */
     public void attemptMoveBall(Ball ball)
     {
         double distance = Utilities.distance(ball.getBody().getPosition(),position);
@@ -43,6 +53,10 @@ public class Redirecter {
         ball.setRandomMovement();
     }
 
+    /**
+     *
+     * @return position.
+     */
     public Vector2 getPosition() {
         return position;
     }

@@ -13,6 +13,8 @@ import java.util.List;
 
 
 /**
+ * The GameArea is the "box" that contains all the balls within, and which slasher will attempt to cut.
+ *
  * Created with 4 vertices with this structure:
  * +-------------------------+--------
  * |            |0           |
@@ -27,11 +29,27 @@ import java.util.List;
  */
 public class GameArea {
 
+    /**
+     * The four points that make this gameArea.
+     */
     private Vector2[] points;
-    private Vector2 toDelete; //vertice que sera apagado e substituido por outro depois do corte
-    public static final Vector2 center = new Vector2(125,100); //centro da zona onde é suposto a gameArea estar
+    /**
+     * gameArea point that will be deleted due to a slash.
+     */
+    private Vector2 toDelete;
+    /**
+     * center of the zone where the gameArea is supposed to be within.
+     */
+    public static final Vector2 center = new Vector2(125,100);
+    /**
+     * Bodies of the 4 edges of the gameArea.
+     */
     private Body[] bodies;
+    /**
+     * GameWorld containing all the gameobjects.
+     */
     private GameWorld gameWorld;
+
     public GameArea(Vector2 p1, Vector2 p2, Vector2 p3, Vector2 p4, GameWorld gameWorld)
     {
         toDelete=null;
@@ -73,6 +91,10 @@ public class GameArea {
         }
     }
 
+    /**
+     *
+     * @return points.
+     */
     public Vector2[] getPoints() {return points;}
 
     /**
@@ -81,10 +103,17 @@ public class GameArea {
      */
     public void setToDelete(Vector2 toDelete) {this.toDelete=toDelete;}
 
+    /**
+     *
+     * @return toDelete
+     */
     public Vector2 getToDelete() {
         return toDelete;
     }
 
+    /**
+     * Destroys all the bodies that were part of this gameArea.
+     */
     public void dispose()
     {
         for(int i=0; i<4; i++)
@@ -94,6 +123,10 @@ public class GameArea {
 
     }
 
+    /**
+     *
+     * @return area of the polygon made by the gameArea's 4 points.
+     */
     private float polygonArea()
     {   int numPoints = 4;
         float area = 0;         // Accumulates area in the loop
@@ -106,11 +139,12 @@ public class GameArea {
         return area/2;
     }
 
-    private boolean resize(){
-        // if(polygonArea()>10000)
-        //      return;
-        //   while(polygonArea()<15000){
-        //Vector2 p1 = new Vector2(0,0);
+    /**
+     * Resizes the gameArea in case its dimensions are too small.
+     * @return true if dimensions were resized, false if resizing was not needed.
+     */
+    private boolean resize()
+    {
         List<Vector2> x = Arrays.asList(null,null);
         int k= 0;
         if (polygonArea()<10000){
@@ -126,7 +160,6 @@ public class GameArea {
                 if(center1 != null){
                     center = center1;
                 }
-                // Vector2 y2 = new Function(,points[0]+100);
 
                 x = Utilities.getCircleLineIntersectionPoint(points[(i + 2) % 4], center, points[i % 4], 10);
                 System.out.println("resize" + x.get(1));

@@ -11,11 +11,21 @@ import java.util.Random;
 
 /**
  * Created by Diogo on 26-04-2016.
+ *
+ * Represents a ball inside the gameArea.
  */
 public class Ball {
-    private BodyDef bodyDef;
+    /**
+     * Ball's body on World.
+     */
     private Body body;
+    /**
+     * Ball's radius.
+     */
     private final static float radius = 2.5f;
+    /**
+     * Ball's starting velocity.
+     */
     private final static float velocity = 25;
 
     /**
@@ -26,7 +36,7 @@ public class Ball {
      */
     public Ball(float xPos, float yPos, World world) {
         //criar body
-        bodyDef = new BodyDef();
+        BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody; //é dinamico (sofre acao de forcas)
         bodyDef.position.set(new Vector2(xPos, yPos));
         body = world.createBody(bodyDef);
@@ -68,6 +78,9 @@ public class Ball {
      */
     public Body getBody() {return body;}
 
+    /**
+     * Destroys this ball's body on the World.
+     */
     public void dispose()
     {
         body.getWorld().destroyBody(body);
