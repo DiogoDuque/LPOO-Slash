@@ -264,6 +264,15 @@ public class GameWorld {
 
     /**
      *
+     * @param redirecter new Redirecter
+     */
+     public void setRedirecter(Redirecter redirecter)
+     {
+         this.redirecter=redirecter;
+     }
+    
+    /**
+     *
      * @return redirecter
      */
     public Redirecter getRedirecter()

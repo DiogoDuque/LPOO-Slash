@@ -172,7 +172,7 @@ public class GameScreen extends Resizer implements Screen {
 
     private void connectSocket() {
         try{
-            socket = IO.socket("http://172.30.20.211:15069");
+            socket = IO.socket("http://localhost:15069");
             socket.connect();
             //System.out.println("PINTOOOOu");
         }catch(Exception e){

@@ -10,7 +10,6 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		//DESKTOP IS NOT USED!!
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-        System.setProperty("org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true");
 		new LwjglApplication(new Slash(getFilesDir()), config);
 	}
 }
