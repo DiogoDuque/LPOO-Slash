@@ -11,6 +11,7 @@ Package for screens and anything related to them.
 * **MenuScreen** -> Default screen when opening the app.
 * **GameScreen** -> Screen where the game is played.
 * **GameOverScreen** -> Screen shown if the game ends.
+* **EasterEggScreen** -> Screen containing the hidden animation.
 
 
 ### Package **gameworld**

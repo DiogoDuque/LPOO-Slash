@@ -33,16 +33,47 @@ import static com.lpoo.slashhelpers.Utilities.changeScreen;
  * Design Pattern: MVC - Model component (Other components: GameRenderer and InputHandler)
  */
 public class GameWorld {
+
+    /**
+     * Game used for changing screen
+     */
     private Game game;
+    /**
+     * World containing all object's bodies
+     */
     private World world;
+    /**
+     * The "box" containing all balls
+     */
     private GameArea gameArea;
+    /**
+     * Responsible for slashing the gameArea
+     */
     private Slasher slasher;
+    /**
+     * ArrayList with all the balls
+     */
     private ArrayList<Ball> balls;
+    /**
+     * Redirecter, when it exists
+     */
     private Redirecter redirecter=null;
+    /**
+     * boolean for knowing if the slasher is moving/slashing or not
+     */
     private boolean slasherIsMoving=false;
+    /**
+     * music running in the backgroud
+     */
     private Music music;
 
+    /**
+     * highest score achieved
+     */
     public int highscore=0;
+    /**
+     * current score
+     */
     public int score;
 
     /**
@@ -53,7 +84,13 @@ public class GameWorld {
      * The limit of seconds (counting from the gameArea creation) until which a slasher can be started. After that, game is over.
      */
     private int timerLimit;
+    /**
+     * how much time left to game over
+     */
     private int timer;
+    /**
+     * name of the file containing the highest score
+     */
     private static final String filename="highscore.txt";
 
     /**
@@ -189,35 +226,71 @@ public class GameWorld {
 
     }
 
+    /**
+     *
+     * @return world
+     */
     public World getWorld() {
         return world;
     }
 
+    /**
+     *
+     * @return gameArea
+     */
     public GameArea getGameArea() {return gameArea;}
 
+    /**
+     *
+     * @return slasher
+     */
     public Slasher getSlasher() {return slasher;}
 
+    /**
+     *
+     * @param slasher new Slasher
+     */
     public void setSlasher(Slasher slasher) {
         this.slasher = slasher;
     }
 
+    /**
+     *
+     * @return array of balls
+     */
     public ArrayList<Ball> getBalls() {
         return balls;
     }
 
+    /**
+     *
+     * @return redirecter
+     */
     public Redirecter getRedirecter()
     {
         return redirecter;
     }
 
+    /**
+     *
+     * @return current score
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     *
+     * @return highscore
+     */
     public int getHighscore() {
         return highscore;
     }
 
+    /**
+     *
+     * @return music
+     */
     public Music getMusic() {
         return music;
     }
@@ -332,6 +405,9 @@ public class GameWorld {
         return highscore;
     }
 
+    /**
+     * writes the current highscore to the the file
+     */
     private void updateScoreFile()
     {
         BufferedWriter output = null;
@@ -349,6 +425,9 @@ public class GameWorld {
         }
     }
 
+    /**
+     * updates/decreases the timer
+     */
     private void updateTimer()
     {
         long currTime=new Date().getTime();

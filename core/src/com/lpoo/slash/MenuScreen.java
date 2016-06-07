@@ -15,6 +15,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.lpoo.gameworld.GameWorld;
 import com.lpoo.slashhelpers.Utilities;
 
+import java.util.ArrayList;
+
 /**
  * Created by Diogo Duque on 03/06/2016.
  */
@@ -65,13 +67,28 @@ public class MenuScreen extends Resizer implements Screen {
     {
         Gdx.input.setInputProcessor(new InputProcessor() {
 
+            ArrayList<Vector2> last2Touches = new ArrayList<Vector2>();
+
             @Override
             public boolean touchUp(int screenX, int screenY, int pointer, int button) {
                 Vector2 finger = convertDimensions(new Vector2(screenX, screenY));
                 if (finger.y > 123 && finger.y < 168) {
                     if (finger.x > 25 && finger.x < 398)
                         Utilities.changeScreen(game, new GameScreen(game));
+                } else {
+                    if(last2Touches.isEmpty()) //size=0
+                        last2Touches.add(new Vector2(finger));
+                    else if(last2Touches.get(last2Touches.size()-1).x < finger.x) //one more step towards easter egg
+                    {
+                        if(last2Touches.size()==2)
+                            Utilities.changeScreen(game,new EasterEggScreen(game)); //changeScreen
+                        else last2Touches.add(finger); //add touch
+                    } else { //wrong move towards easter egg
+                        last2Touches=new ArrayList<Vector2>();
+                        last2Touches.add(finger);
+                    }
                 }
+
                 Gdx.app.log("MenuScreen::inputs", "x=" + finger.x + ", y=" + finger.y);
                 return true;
             }
