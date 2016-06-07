@@ -9,10 +9,24 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class Function {
 
+    /**
+     * slope
+     */
     private float m;
+    /**
+     * height
+     */
     private float b;
+    /**
+     * minimum and maximum x and y
+     */
     private Vector2 min = new Vector2(), max = new Vector2();
 
+    /**
+     * Constructor
+     * @param pt1 one point
+     * @param pt2 another point
+     */
     public Function(Vector2 pt1, Vector2 pt2) {
         m = (pt1.y - pt2.y) / (pt1.x - pt2.x);
         b = pt1.y - m * pt1.x;
@@ -34,19 +48,36 @@ public class Function {
         }
     }
 
-
+    /**
+     *
+     * @return m
+     */
     public float getM() {
         return m;
     }
 
+    /**
+     *
+     * @return b
+     */
     protected float getB() {
         return b;
     }
 
+    /**
+     *
+     * @param x
+     * @return y(x)
+     */
     public float getY(float x) {
         return m * x + b;
     }
 
+    /**
+     *
+     * @param y
+     * @return x(y)
+     */
     public float getX(float y) {
         return (y - b) / m;
     }
